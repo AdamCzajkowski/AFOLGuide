@@ -3,4 +3,9 @@
     <string name="tab_title_my">My sets</string>
     <string name="tab_title_search">Search</string>
     <string name="tab_title_wishlist">My wish list</string>
+    <string name="lego_image_desc">lego image</string>
+    <string name="number_text">No.</string>
+    <string name="name_set_cardview">Name</string>
+    <string name="release_year_cardview_text">Release year</string>
+    <string name="pieces_cardView_title">Pieces</string>
 </resources>

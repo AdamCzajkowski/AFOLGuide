@@ -1,4 +1,4 @@
-package com.example.mysets.ui.main
+package com.example.mysets.view.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
