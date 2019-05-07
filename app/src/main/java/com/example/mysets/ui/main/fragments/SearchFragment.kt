@@ -21,9 +21,6 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.support.kodein
 import org.kodein.di.generic.instance
 
-/**
- * A placeholder fragment containing a simple view.
- */
 class SearchFragment : Fragment(), KodeinAware {
     override val kodein: Kodein by kodein()
 
