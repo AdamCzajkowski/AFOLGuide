@@ -25,14 +25,6 @@ import org.kodein.di.generic.instance
  * A placeholder fragment containing a simple view.
  */
 class SearchFragment : Fragment(), KodeinAware {
-
-    companion object {
-        @JvmStatic
-        fun newInstance(): SearchFragment {
-            return SearchFragment()
-        }
-    }
-
     override val kodein: Kodein by kodein()
 
     private val searchLegoViewModelFactory: SearchLegoViewModelFactory by instance()

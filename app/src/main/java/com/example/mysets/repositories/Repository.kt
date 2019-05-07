@@ -3,6 +3,7 @@ package com.example.mysets.repositories
 import com.example.mysets.database.my.sets.MySetsDatabase
 import com.example.mysets.database.wishlist.WishlistDatabase
 import com.example.mysets.extension.safeApi
+import com.example.mysets.models.LegoSet
 import com.example.mysets.network.LegoApiService
 
 class Repository(
@@ -18,4 +19,8 @@ class Repository(
     fun getMySets() = mySetsDatabase.mySetsDao().getAll()
 
     fun getWishlist() = wishlistDatabase.wishlistDao().getAll()
+
+    fun addToMySets(legoSet: LegoSet) = mySetsDatabase.mySetsDao().insert(legoSet)
+
+    fun addToWishlist(legoSet: LegoSet) = wishlistDatabase.wishlistDao().insert(legoSet)
 }
