@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mysets.R
 import com.example.mysets.models.LegoSet
+import com.example.mysets.ui.main.DetailActivity
 import com.example.mysets.ui.main.LegoRecyclerViewAdapter
 import com.example.mysets.view.model.searchViewModel.SearchLegoViewModel
 import com.example.mysets.view.model.searchViewModel.SearchLegoViewModelFactory
@@ -79,7 +80,7 @@ class SearchFragment : Fragment(), KodeinAware {
     }
 
     private fun singleItemClickedReaction(legoSet: LegoSet) {
-        Toast.makeText(context, legoSet.set_num, Toast.LENGTH_LONG).show()
+        startDetailActivity(legoSet)
     }
 
     private fun startSearching(view: View) {
@@ -150,5 +151,9 @@ class SearchFragment : Fragment(), KodeinAware {
         val inputMethodManager =
             context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view!!.windowToken, 0)
+    }
+
+    private fun startDetailActivity(legoSet: LegoSet) {
+        startActivity(DetailActivity.getIntent(context!!, legoSet))
     }
 }

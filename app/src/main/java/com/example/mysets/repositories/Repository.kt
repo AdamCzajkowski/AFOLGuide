@@ -26,4 +26,8 @@ class Repository(
     fun addToMySets(legoSet: LegoSet) = mySetsDatabase.mySetsDao().insert(legoSet)
 
     fun addToWishlist(legoSet: LegoSet) = wishlistDatabase.wishlistDao().insert(legoSet)
+
+    fun removeFromMySets(legoSet: LegoSet) = mySetsDatabase.mySetsDao().delete(legoSet)
+
+    fun removeFromWishlist(legoSet: LegoSet) = wishlistDatabase.wishlistDao().delete(legoSet)
 }

@@ -7,6 +7,7 @@ import com.example.mysets.database.my.sets.MySetsDatabase
 import com.example.mysets.database.wishlist.WishlistDatabase
 import com.example.mysets.network.LegoApiService
 import com.example.mysets.repositories.Repository
+import com.example.mysets.view.model.detailViewModel.DetailViewModel
 import com.example.mysets.view.model.mySetsViewModel.MySetsViewModel
 import com.example.mysets.view.model.mySetsViewModel.MySetsViewModelFactory
 import com.example.mysets.view.model.searchViewModel.SearchLegoViewModel
@@ -76,6 +77,7 @@ class MyApplication : Application(), KodeinAware {
 
         bind() from singleton { GsonConverterFactory.create() }
         bind() from singleton { CoroutineCallAdapterFactory() }
+        bind() from provider { DetailViewModel(instance()) }
         bind() from provider { MySetsViewModel(instance()) }
         bind() from provider { WishlistViewModel(instance()) }
         bind() from provider { SearchLegoViewModel(instance()) }
