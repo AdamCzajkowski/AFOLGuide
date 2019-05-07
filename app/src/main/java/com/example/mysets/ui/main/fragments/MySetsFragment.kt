@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,12 +41,18 @@ class MySetsFragment : Fragment(), KodeinAware {
         initializeLegoViewModel()
         initializeRecyclerView(rv_my_sets_id)
         getAllMySets()
+        legoRecyclerViewAdapter.selectedItem = {singleItemClickedReaction(it)
+        }
         super.onViewCreated(view, savedInstanceState)
     }
 
     private fun initializeLegoViewModel() {
         mySetsViewModel =
             ViewModelProviders.of(this, mySetsViewModelFactory).get(MySetsViewModel::class.java)
+    }
+
+    private fun singleItemClickedReaction(legoSet: LegoSet) {
+        Toast.makeText(context, legoSet.set_num, Toast.LENGTH_LONG).show()
     }
 
     private fun initializeRecyclerView(recyclerView: RecyclerView) {

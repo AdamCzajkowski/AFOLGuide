@@ -15,8 +15,9 @@ class LegoRecyclerViewAdapter: RecyclerView.Adapter<LegoRecyclerViewAdapter.View
 
     private val listOfLegoSet = mutableListOf<LegoSet>()
 
+    var selectedItem: ((LegoSet) -> Unit)? = null
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        //val view = viewGroup.inflate().inflate(R.layout.single_lego_set, viewGroup, false)
         val inflater = LayoutInflater.from(viewGroup.context)
         val binding = SingleLegoSetBinding.inflate(inflater, viewGroup, false)
         return ViewHolder(binding)
@@ -24,10 +25,19 @@ class LegoRecyclerViewAdapter: RecyclerView.Adapter<LegoRecyclerViewAdapter.View
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindView(listOfLegoSet[position])
+
+        holder.itemView.setOnClickListener {
+            selectedItem?.invoke(listOfLegoSet[position])
+        }
     }
 
     override fun getItemCount(): Int {
         return listOfLegoSet.size
+    }
+
+    fun clearList() {
+        listOfLegoSet.clear()
+        notifyDataSetChanged()
     }
 
     fun swapList(list: MutableList<LegoSet>) {

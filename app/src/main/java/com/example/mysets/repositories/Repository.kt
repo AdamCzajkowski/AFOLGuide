@@ -14,6 +14,9 @@ class Repository(
     suspend fun getLegoSetByNumber(setNumber: String) =
         safeApi { legoApiService.getSetByNumber(setNumber).await() }
 
+    suspend fun getLegoBySearch(searchQuery: String, pageSize: Int) =
+        safeApi { legoApiService.getLegoBySearch(searchQuery, pageSize).await() }
+
     suspend fun getSampleLegoSet() = safeApi { legoApiService.getSampleLegoSet().await() }
 
     fun getMySets() = mySetsDatabase.mySetsDao().getAll()
