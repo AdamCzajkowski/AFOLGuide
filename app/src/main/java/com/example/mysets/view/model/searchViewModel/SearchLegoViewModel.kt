@@ -1,4 +1,4 @@
-package com.example.mysets.view.model
+package com.example.mysets.view.model.searchViewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -13,7 +13,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class LegoViewModel(private val repository: Repository) : ViewModel() {
+class SearchLegoViewModel(private val repository: Repository) : ViewModel() {
     private val job = Job()
     private val coroutineContext: CoroutineContext get() = job + Dispatchers.Default
     private val scope = CoroutineScope(coroutineContext)
@@ -25,7 +25,6 @@ class LegoViewModel(private val repository: Repository) : ViewModel() {
     init {
         startFetchLegoSet()
     }
-
 
     fun startFetchLegoSet() {
         startFetchSampleLegoSet()

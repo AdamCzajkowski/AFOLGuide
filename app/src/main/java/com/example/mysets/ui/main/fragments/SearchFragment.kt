@@ -9,14 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mysets.R
 import com.example.mysets.models.LegoSet
-import com.example.mysets.network.Result
 import com.example.mysets.ui.main.LegoRecyclerViewAdapter
-import com.example.mysets.view.model.LegoViewModel
-import com.example.mysets.view.model.LegoViewModelFactory
-import com.example.mysets.view.model.PageViewModel
-import kotlinx.android.synthetic.main.fragment_lego_sets.*
+import com.example.mysets.view.model.searchViewModel.SearchLegoViewModel
+import com.example.mysets.view.model.searchViewModel.SearchLegoViewModelFactory
+import kotlinx.android.synthetic.main.fragment_search.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.support.kodein
@@ -25,77 +24,73 @@ import org.kodein.di.generic.instance
 /**
  * A placeholder fragment containing a simple view.
  */
-class PlaceholderFragment : Fragment(), KodeinAware {
+class SearchFragment : Fragment(), KodeinAware {
 
     companion object {
         @JvmStatic
-        fun newInstance(): PlaceholderFragment {
-            return PlaceholderFragment()
+        fun newInstance(): SearchFragment {
+            return SearchFragment()
         }
     }
 
     override val kodein: Kodein by kodein()
 
-    private val legoViewModelFactory: LegoViewModelFactory by instance()
+    private val searchLegoViewModelFactory: SearchLegoViewModelFactory by instance()
 
-    private lateinit var legoViewModel: LegoViewModel
+    private lateinit var searchLegoViewModel: SearchLegoViewModel
     private lateinit var legoRecyclerViewAdapter: LegoRecyclerViewAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_lego_sets, container, false)
+        val root = inflater.inflate(R.layout.fragment_search, container, false)
         initializeLegoViewModel()
-        //getSuccessRespond(root)
-        //getLego()
-        //Log.i("test", "ccccccc")
+
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initializeRecyclerView()
+        initializeRecyclerView(rv_search_id)
         getSuccessRespond(view)
         getErrorRespond(view)
         getExceptionRespond(view)
+        mockLego()
         super.onViewCreated(view, savedInstanceState)
     }
 
     private fun initializeLegoViewModel() {
-        legoViewModel =
-            ViewModelProviders.of(this, legoViewModelFactory).get(LegoViewModel::class.java)
+        searchLegoViewModel =
+            ViewModelProviders.of(this, searchLegoViewModelFactory).get(SearchLegoViewModel::class.java)
     }
 
-    private fun initializeRecyclerView() {
+    private fun initializeRecyclerView(recyclerView: RecyclerView) {
         legoRecyclerViewAdapter = LegoRecyclerViewAdapter()
-        rv_lego_sets_id.layoutManager = LinearLayoutManager(context)
-        rv_lego_sets_id.adapter = legoRecyclerViewAdapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = legoRecyclerViewAdapter
     }
 
     private fun getSuccessRespond(view: View) {
-        legoViewModel.getLegoSuccess().observe(this, Observer {
+        searchLegoViewModel.getLegoSuccess().observe(this, Observer {
             Log.i("test", "success")
         })
     }
 
     private fun getErrorRespond(view: View) {
-        legoViewModel.getLegoError().observe(this, Observer {
+        searchLegoViewModel.getLegoError().observe(this, Observer {
             Log.i("test", "error")
         })
     }
 
     private fun getExceptionRespond(view: View) {
-        legoViewModel.getLegoException().observe(this, Observer {
+        searchLegoViewModel.getLegoException().observe(this, Observer {
             Log.i("test", "exception")
         })
     }
 
-    private fun getLego() {
+    private fun mockLego() {
         val lego1 = LegoSet(
+            1,
             "44444",
             "title",
             2000,

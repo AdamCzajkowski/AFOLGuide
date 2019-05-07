@@ -10,6 +10,6 @@ interface LegoApiService {
     @GET ("sets/{set_num}?")
     fun getSetByNumber(@Path("set_num") setNumber: String): Deferred<Response<LegoSet>>
 
-    @GET ("sets/8421/")
+    @GET ("sets/8421-1/")
     fun getSampleLegoSet(): Deferred<Response<LegoSet>>
 }
