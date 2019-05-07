@@ -1,8 +1,14 @@
 package com.example.mysets.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity
 data class LegoSet(
+    @SerializedName("id")
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
     @SerializedName("set_num")
     val set_num: String,
     @SerializedName("name")
