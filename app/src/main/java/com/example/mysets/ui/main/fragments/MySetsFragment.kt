@@ -13,10 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mysets.R
 import com.example.mysets.models.LegoSet
+import com.example.mysets.ui.main.DetailActivity
 import com.example.mysets.ui.main.LegoRecyclerViewAdapter
 import com.example.mysets.view.model.mySetsViewModel.MySetsViewModel
 import com.example.mysets.view.model.mySetsViewModel.MySetsViewModelFactory
 import kotlinx.android.synthetic.main.fragment_my_sets.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.support.kodein
@@ -40,10 +44,17 @@ class MySetsFragment : Fragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initializeLegoViewModel()
         initializeRecyclerView(rv_my_sets_id)
-        getAllMySets()
-        legoRecyclerViewAdapter.selectedItem = {singleItemClickedReaction(it)
+        getAllMySetsFromDatabase()
+        legoRecyclerViewAdapter.selectedItem = {
+            singleItemClickedReaction(it)
         }
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun getAllMySetsFromDatabase() {
+        GlobalScope.launch(Dispatchers.Main) {
+            getAllMySets()
+        }
     }
 
     private fun initializeLegoViewModel() {
@@ -52,7 +63,7 @@ class MySetsFragment : Fragment(), KodeinAware {
     }
 
     private fun singleItemClickedReaction(legoSet: LegoSet) {
-        Toast.makeText(context, legoSet.set_num, Toast.LENGTH_LONG).show()
+        startDetailActivity(legoSet)
     }
 
     private fun initializeRecyclerView(recyclerView: RecyclerView) {
@@ -61,9 +72,13 @@ class MySetsFragment : Fragment(), KodeinAware {
         recyclerView.adapter = legoRecyclerViewAdapter
     }
 
-    private fun getAllMySets() {
-        mySetsViewModel.getAllMySets().observe(this, Observer {
-            legoRecyclerViewAdapter.swapList(it)
+    private suspend fun getAllMySets() {
+        mySetsViewModel.getListOfMySets().observe(this, Observer { listOfMySets ->
+            legoRecyclerViewAdapter.swapList(listOfMySets)
         })
+    }
+
+    private fun startDetailActivity(legoSet: LegoSet) {
+        startActivity(DetailActivity.getIntent(context!!, legoSet))
     }
 }

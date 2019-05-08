@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.example.mysets.R
 import com.example.mysets.models.LegoSet
+import com.example.mysets.ui.main.DetailActivity
 import com.example.mysets.ui.main.LegoRecyclerViewAdapter
 import com.example.mysets.view.model.wishlistViewModel.WishlistViewModel
 import com.example.mysets.view.model.wishlistViewModel.WishlistViewModelFactory
@@ -51,7 +52,7 @@ class WishlistFragment : Fragment(), KodeinAware {
     }
 
     private fun singleItemClickedReaction(legoSet: LegoSet) {
-        Toast.makeText(context, legoSet.set_num, Toast.LENGTH_LONG).show()
+       startDetailActivity(legoSet)
     }
 
     private fun initializeLegoViewModel() {
@@ -69,5 +70,9 @@ class WishlistFragment : Fragment(), KodeinAware {
         wishlistViewModel.getAllMySets().observe(this, Observer {
             legoRecyclerViewAdapter.swapList(it)
         })
+    }
+
+    private fun startDetailActivity(legoSet: LegoSet) {
+        startActivity(DetailActivity.getIntent(context!!, legoSet))
     }
 }

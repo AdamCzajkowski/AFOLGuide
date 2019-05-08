@@ -9,9 +9,14 @@
     <string name="release_year_cardview_text">Release year</string>
     <string name="pieces_cardView_title">Pieces</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_lego_set_hint_edit_text">Search LEGO set</string>
     <string name="rebrickable_url_text">Rebrickable URL</string>
     <string name="lego_image">Lego Image</string>
+
+    <string name="added_to_my_sets">added to My Sets</string>
+    <string name="removed_from_my_sets">removed from My Sets</string>
+
+    <string name="added_to_wishlist">added to Wishlist</string>
+    <string name="removed_from_wishlist">removed from Wishlist</string>
 </resources>
