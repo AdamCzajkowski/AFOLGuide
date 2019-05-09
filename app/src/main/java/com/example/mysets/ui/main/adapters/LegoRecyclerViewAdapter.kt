@@ -13,7 +13,7 @@ class LegoRecyclerViewAdapter: RecyclerView.Adapter<LegoRecyclerViewAdapter.View
     var selectedItem: ((LegoSet) -> Unit)? = null
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val inflater = LayoutInflater.from(viewGroup.context)
+        val inflater = LayoutInflater.from(viewGroup.context.applicationContext)
         val binding = SingleLegoSetBinding.inflate(inflater, viewGroup, false)
         return ViewHolder(binding)
     }

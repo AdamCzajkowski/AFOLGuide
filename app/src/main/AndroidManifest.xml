@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/DarkThemeNoActionBar">
-        <activity android:name=".ui.main.activities.DetailActivity"></activity>
+        <activity android:name=".ui.main.activities.BricksListActivity"></activity>
+        <activity android:name=".ui.main.activities.DetailActivity" />
         <activity android:name=".ui.main.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
