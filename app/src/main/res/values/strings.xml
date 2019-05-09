@@ -19,4 +19,14 @@
 
     <string name="added_to_wishlist">added to Wishlist</string>
     <string name="removed_from_wishlist">removed from Wishlist</string>
+
+    <string name="add_to_my_sets_text">Add to My Sets</string>
+    <string name="add_to_wishlist_text">Add to Wishlist</string>
+
+    <string name="remove_from_my_sets_text">Remove from My Sets</string>
+    <string name="remove_from_wishlist_text">Remove from Wishlist</string>
+    <string name="image_of_my_sets">image of my sets</string>
+    <string name="quantity_title_text">Quantity</string>
+    <string name="color_title_text">Color</string>
+    <string name="brick_image_desc">brick image</string>
 </resources>

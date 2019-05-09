@@ -17,16 +17,6 @@ class DetailViewModel(private val repository: Repository) : ViewModel() {
         repository.addToMySets(legoSet)
     }
 
-    fun addToWishlist(legoSet: LegoSet) = scope.launch {
-        repository.addToWishlist(legoSet)
-    }
-
-    suspend fun getListOfWishlist(): LiveData<MutableList<LegoSet>> {
-        return withContext(Dispatchers.IO) {
-            return@withContext repository.getWishlist()
-        }
-    }
-
     suspend fun getListOfMySets(): LiveData<MutableList<LegoSet>> {
         return withContext(Dispatchers.IO) {
             return@withContext repository.getMySets()
@@ -35,9 +25,5 @@ class DetailViewModel(private val repository: Repository) : ViewModel() {
 
     fun removeFromMySets(legoSet: LegoSet) = scope.launch {
         repository.removeFromMySets(legoSet)
-    }
-
-    fun removeFromWishlist(legoSet: LegoSet) = scope.launch {
-        repository.removeFromWishlist(legoSet)
     }
 }

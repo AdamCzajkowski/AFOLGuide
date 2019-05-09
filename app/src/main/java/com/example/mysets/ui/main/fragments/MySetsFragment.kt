@@ -2,19 +2,18 @@ package com.example.mysets.ui.main.fragments
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mysets.R
 import com.example.mysets.models.LegoSet
-import com.example.mysets.ui.main.DetailActivity
-import com.example.mysets.ui.main.LegoRecyclerViewAdapter
+import com.example.mysets.ui.main.activities.DetailActivity
+import com.example.mysets.ui.main.adapters.LegoRecyclerViewAdapter
 import com.example.mysets.view.model.mySetsViewModel.MySetsViewModel
 import com.example.mysets.view.model.mySetsViewModel.MySetsViewModelFactory
 import kotlinx.android.synthetic.main.fragment_my_sets.*

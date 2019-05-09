@@ -1,4 +1,4 @@
-package com.example.mysets.ui.main
+package com.example.mysets.ui.main.adapters
 
 import android.widget.ImageView
 import android.widget.TextView

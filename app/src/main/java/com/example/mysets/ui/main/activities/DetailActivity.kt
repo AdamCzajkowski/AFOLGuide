@@ -1,30 +1,26 @@
-package com.example.mysets.ui.main
+package com.example.mysets.ui.main.activities
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.mysets.R
 import com.example.mysets.databinding.ActivityDetailBinding
 import com.example.mysets.models.LegoSet
 import com.example.mysets.view.model.detailViewModel.DetailViewModel
 import com.example.mysets.view.model.detailViewModel.DetailViewModelFactory
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.android.synthetic.main.fragment_wishlist.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -52,7 +48,6 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
 
     private val legoSet: LegoSet by lazy { intent.getParcelableExtra<LegoSet>(LEGO_SET) }
 
-    var isInWishlistMarker: ((Boolean) -> Unit)? = null
 
     var isInMySetsMarker: ((Boolean) -> Unit)? = null
 
@@ -65,7 +60,6 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
         bindView()
         checkIsInAnyDatabase()
         initializeMySetsFAB()
-        initializeWishlistFAB()
     }
 
     override fun onBackPressed() {
@@ -96,7 +90,6 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
     private fun checkIsInAnyDatabase() {
         GlobalScope.launch(Dispatchers.Main) {
             isInMySets()
-            isInWishlist()
         }
     }
 
@@ -113,18 +106,6 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
         })
     }
 
-    private suspend fun isInWishlist() {
-        detailViewModel.getListOfWishlist().observe(this, Observer { listOfWishlist ->
-            listOfWishlist?.forEach {
-                if (it.set_num == legoSet.set_num) {
-                    isInWishlistMarker?.invoke(true)
-                    return@Observer
-                }
-            }
-            isInWishlistMarker?.invoke(false)
-            return@Observer
-        })
-    }
 
     private fun bindView() {
         binding.legoSet = legoSet
@@ -139,7 +120,7 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
         ).show()
     }
 
-    private fun setImageButtonIcon(imageButton: FloatingActionButton, drawable: Int) {
+    private fun setImageButtonIcon(imageButton: ImageView, drawable: Int) {
         imageButton.setImageDrawable(
             ContextCompat.getDrawable(
                 this,
@@ -150,97 +131,27 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
 
     private fun initializeMySetsFAB() {
         isInMySetsMarker = { marker ->
+            Log.i("test", "mysets: $marker")
             if(marker) {
-                setImageButtonIcon(my_sets_button, R.drawable.mine_icon)
+                setImageButtonIcon(my_sets_button, R.drawable.wishlist_added_icon)
+                my_sets_text.text = getString(R.string.remove_from_my_sets_text)
             } else {
-                setImageButtonIcon(my_sets_button, R.drawable.un_mine_icon)
+                setImageButtonIcon(my_sets_button, R.drawable.wishlist_unadded_icon)
+                my_sets_text.text = getString(R.string.add_to_my_sets_text)
             }
             my_sets_button.setOnClickListener {
                 if(marker) {
                     detailViewModel.removeFromMySets(legoSet)
-                    setImageButtonIcon(my_sets_button, R.drawable.un_mine_icon)
+                    setImageButtonIcon(my_sets_button, R.drawable.wishlist_unadded_icon)
                     toastMessage(R.string.removed_from_my_sets)
+                    my_sets_text.text = getString(R.string.add_to_my_sets_text)
                 } else {
                     detailViewModel.addToMySets(legoSet)
-                    setImageButtonIcon(my_sets_button, R.drawable.mine_icon)
+                    setImageButtonIcon(my_sets_button, R.drawable.wishlist_added_icon)
                     toastMessage(R.string.added_to_my_sets)
+                    my_sets_text.text = getString(R.string.remove_from_my_sets_text)
                 }
             }
         }
     }
-
-    private fun initializeWishlistFAB() {
-        isInWishlistMarker = { marker ->
-            if(marker) {
-                setImageButtonIcon(wishlist_button, R.drawable.wishlist_added_icon)
-            } else {
-                setImageButtonIcon(wishlist_button, R.drawable.wishlist_unadded_icon)
-            }
-            wishlist_button.setOnClickListener {
-                if(marker) {
-                    detailViewModel.removeFromWishlist(legoSet)
-                    setImageButtonIcon(wishlist_button, R.drawable.wishlist_unadded_icon)
-                    toastMessage(R.string.removed_from_wishlist)
-                } else {
-                    detailViewModel.addToWishlist(legoSet)
-                    setImageButtonIcon(wishlist_button, R.drawable.wishlist_added_icon)
-                    toastMessage(R.string.added_to_wishlist)
-                }
-            }
-        }
-    }
-/*
-    private fun setDrawableImageButton(
-        marker: Boolean,
-        imageButton: FloatingActionButton,
-        drawableON: Int,
-        drawableOFF: Int
-    ) {
-        if (marker) {
-            setImageButtonIcon(imageButton, drawableON)
-        } else {
-            setImageButtonIcon(imageButton, drawableOFF)
-        }
-    }
-
-    private fun initializeMySetsButton(marker: Boolean) {
-        Log.i("test", "work fine!")
-        setDrawableImageButton(
-            marker,
-            my_sets_button,
-            R.drawable.mine_icon,
-            R.drawable.un_mine_icon
-        )
-    }
-
-    private fun initializeWishlistButton(marker: Boolean) {
-        setDrawableImageButton(
-            marker,
-            wishlist_button,
-            R.drawable.wishlist_added_icon,
-            R.drawable.wishlist_unadded_icon
-        )
-    }
-
-    private fun onClickMySetsButtonReaction(marker: Boolean) {
-        if (marker) {
-            detailViewModel.removeFromMySets(legoSet)
-            toastMessage(R.string.removed_from_my_sets)
-        } else {
-            detailViewModel.addToMySets(legoSet)
-            toastMessage(R.string.added_to_my_sets)
-        }
-    }
-
-    private fun onClickWishlistButtonReaction(marker: Boolean) {
-        if (marker) {
-            detailViewModel.removeFromWishlist(legoSet)
-            setImageButtonIcon(wishlist_button, R.drawable.wishlist_unadded_icon)
-            toastMessage(R.string.removed_from_wishlist)
-        } else {
-            detailViewModel.addToWishlist(legoSet)
-            setImageButtonIcon(wishlist_button, R.drawable.wishlist_added_icon)
-            toastMessage(R.string.added_to_wishlist)
-        }
-    }*/
 }

@@ -1,15 +1,10 @@
-package com.example.mysets.ui.main
+package com.example.mysets.ui.main.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mysets.R
 import com.example.mysets.databinding.SingleLegoSetBinding
-import com.example.mysets.extension.inflate
 import com.example.mysets.models.LegoSet
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.single_lego_set.view.*
 
 class LegoRecyclerViewAdapter: RecyclerView.Adapter<LegoRecyclerViewAdapter.ViewHolder>() {
 
