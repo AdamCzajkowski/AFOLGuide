@@ -8,7 +8,7 @@ import com.example.mysets.models.BrickResult
 
 
 class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter.ViewHolder>() {
-    private var listOfBricks = mutableListOf<BrickResult>()
+    private var listOfBricks = mutableListOf<BrickResult.Result>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context.applicationContext)
@@ -24,17 +24,17 @@ class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter
         holder.bindView(listOfBricks[position])
     }
 
-    fun swapList(list: MutableList<BrickResult>) {
+    fun swapList(list: MutableList<BrickResult.Result>) {
         listOfBricks.clear()
         listOfBricks.addAll(list)
         notifyDataSetChanged()
     }
 
     class ViewHolder(val binding: SingleBrickRowBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bindView(item: BrickResult) {
-            binding.brickColor = item.results.first().color
-            binding.brickDetail = item.results.first().part
-            binding.brickQuantity = item.results.first()
+        fun bindView(item: BrickResult.Result) {
+            binding.brickColor = item.color
+            binding.brickDetail = item.part
+            binding.brickQuantity = item
         }
     }
 }

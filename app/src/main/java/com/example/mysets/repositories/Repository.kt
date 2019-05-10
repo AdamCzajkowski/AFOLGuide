@@ -19,5 +19,5 @@ class Repository(
     fun removeFromMySets(legoSet: LegoSet) = mySetsDatabase.mySetsDao().delete(legoSet)
 
     suspend fun getBricksFromSet(page: Int, setNumber: String) =
-        safeApi { legoApiService.getBricks(page, setNumber).await() }
+        safeApi { legoApiService.getBricks(setNumber, page).await() }
 }

@@ -11,7 +11,7 @@ data class BrickResult(
     @SerializedName("previous")
     val previous: String?,
     @SerializedName("results")
-    val results: List<Result>
+    val results: MutableList<Result>
 ) {
     data class Result(
         @SerializedName("color")

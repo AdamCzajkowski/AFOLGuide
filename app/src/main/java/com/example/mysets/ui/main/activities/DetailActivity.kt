@@ -60,6 +60,7 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
         bindView()
         checkIsInAnyDatabase()
         initializeMySetsFAB()
+        parts_list_button.setOnClickListener { partListButtonReaction() }
     }
 
     override fun onBackPressed() {
@@ -153,5 +154,9 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
                 }
             }
         }
+    }
+
+    private fun partListButtonReaction() {
+        startActivity(BricksListActivity.getIntent(this, legoSet.set_num))
     }
 }

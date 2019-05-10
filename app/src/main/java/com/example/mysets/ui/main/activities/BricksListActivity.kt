@@ -8,7 +8,10 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mysets.R
+import com.example.mysets.ui.main.adapters.BricksRecyclerViewAdapter
 import com.example.mysets.view.model.bricksListViewModel.BrickListViewModel
 import com.example.mysets.view.model.bricksListViewModel.BrickListViewModelFactory
 import kotlinx.android.synthetic.main.activity_bricks_list.*
@@ -24,7 +27,7 @@ class BricksListActivity : AppCompatActivity(), KodeinAware {
         fun getIntent(context: Context, legoSetNumber: String): Intent =
             Intent(
                 context,
-                DetailActivity::class.java
+                BricksListActivity::class.java
             )
                 .putExtra(LEGO_SET_NUMBER, legoSetNumber)
     }
@@ -34,6 +37,8 @@ class BricksListActivity : AppCompatActivity(), KodeinAware {
     private val legoSetNumber: String by lazy { intent.getStringExtra(LEGO_SET_NUMBER) }
 
     private lateinit var brickListViewModel: BrickListViewModel
+
+    private lateinit var bricksRecyclerViewAdapter: BricksRecyclerViewAdapter
 
     private val brickListViewModelFactory: BrickListViewModelFactory by instance()
 
@@ -46,6 +51,7 @@ class BricksListActivity : AppCompatActivity(), KodeinAware {
         getSuccessRespond()
         getErrorRespond()
         getExceptionRespond()
+        initializeRecyclerView(bricks_recycler_view)
     }
 
     override fun onBackPressed() {
@@ -53,10 +59,15 @@ class BricksListActivity : AppCompatActivity(), KodeinAware {
         super.onBackPressed()
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         finish()
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun initializeRecyclerView(recyclerView: RecyclerView) {
+        bricksRecyclerViewAdapter = BricksRecyclerViewAdapter()
+        recyclerView.layoutManager = LinearLayoutManager(applicationContext)
+        recyclerView.adapter = bricksRecyclerViewAdapter
     }
 
     private fun setViewModel() {
@@ -79,6 +90,8 @@ class BricksListActivity : AppCompatActivity(), KodeinAware {
     private fun getSuccessRespond() {
         brickListViewModel.getBricksSuccess.observe(this, Observer {
             Log.i("searchbrick", "success")
+            bricksRecyclerViewAdapter.swapList(it.results)
+            count_bricks_value.text = it.count.toString()
         })
     }
 
@@ -90,7 +103,7 @@ class BricksListActivity : AppCompatActivity(), KodeinAware {
 
     private fun getExceptionRespond() {
         brickListViewModel.getBricksException.observe(this, Observer {
-            Log.i("searchbrick", "exception")
+            Log.i("searchbrick", "$it")
         })
     }
 }

@@ -30,4 +30,5 @@
     <string name="color_title_text">Color</string>
     <string name="brick_image_desc">brick image</string>
     <string name="diffrent_bricks_text">Diffrent bricks:</string>
+    <string name="parts_list_button_text">parts list</string>
 </resources>

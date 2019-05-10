@@ -20,5 +20,5 @@ interface LegoApiService {
     fun getLegoBySearch(@Query("search") searchQuery: String, @Query("page_size") page_size: Int): Deferred<Response<ApiResultSearch>>
 
     @GET("sets/{set_num}/parts")
-    fun getBricks(@Query("page") page: Int, @Path("set_num") setNumber: String): Deferred<Response<BrickResult>>
+    fun getBricks(@Path("set_num") setNumber: String, @Query("page") page: Int): Deferred<Response<BrickResult>>
 }
