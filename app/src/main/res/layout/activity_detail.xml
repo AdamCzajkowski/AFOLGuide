@@ -9,6 +9,10 @@
         <variable
             name="legoSet"
             type="com.example.mysets.models.LegoSet" />
+
+        <variable
+            name="adapter"
+            type="com.example.mysets.ui.main.adapters.BindingAdapter" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -64,7 +68,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:clipToPadding="false">
 
                 <ImageView
@@ -129,17 +133,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
                 <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-
-                    android:text="@string/rebrickable_url_text"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-                <TextView
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -183,21 +176,16 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="0dp"
+                <Button
+                    android:id="@+id/rebrickable_url_button"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:autoLink="web"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:text="@{legoSet.set_url}"
-                    android:textAlignment="viewEnd"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline3"
-                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                    android:text="@string/rebrickable_url_text"
+                    bindURLa="@{legoSet.set_url}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline3"
@@ -211,11 +199,10 @@
                     style="@style/Widget.AppCompat.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="16dp"
                     android:text="@string/parts_list_button_text"
-                    app:layout_constraintEnd_toEndOf="@+id/textView10"
-                    app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/rebrickable_url_button" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 

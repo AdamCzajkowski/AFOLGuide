@@ -1,5 +1,6 @@
 package com.example.mysets.ui.main.adapters
 
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -22,5 +23,13 @@ object BindingAdapter {
     @BindingAdapter("bindIntToString")
     fun bindIntToString(textView: TextView, int: Int) {
         textView.text = int.toString()
+    }
+
+    var bindURLParse: ((String) -> Unit)? = null
+
+    @JvmStatic
+    @BindingAdapter("bindURLa")
+    fun bindURLbutton(button: Button, text: String) {
+        button.setOnClickListener { bindURLParse?.invoke(text) }
     }
 }

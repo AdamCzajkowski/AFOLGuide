@@ -2,6 +2,7 @@ package com.example.mysets.ui.main.activities
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.mysets.R
 import com.example.mysets.databinding.ActivityDetailBinding
 import com.example.mysets.models.LegoSet
+import com.example.mysets.ui.main.adapters.BindingAdapter
 import com.example.mysets.view.model.detailViewModel.DetailViewModel
 import com.example.mysets.view.model.detailViewModel.DetailViewModelFactory
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -110,6 +112,13 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
 
     private fun bindView() {
         binding.legoSet = legoSet
+        val adapter = BindingAdapter
+        binding.adapter = adapter
+        adapter.bindURLParse = { url ->
+            val openURL = Intent(Intent.ACTION_VIEW)
+            openURL.data = Uri.parse(url)
+            startActivity(openURL)
+        }
     }
 
 
