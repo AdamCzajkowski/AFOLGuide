@@ -20,4 +20,6 @@ class MainActivity : AppCompatActivity() {
         view_pager.adapter = sectionsPagerAdapter
         tabs.setupWithViewPager(view_pager)
     }
+
+
 }

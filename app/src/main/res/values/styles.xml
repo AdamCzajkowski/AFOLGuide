@@ -70,4 +70,16 @@
         <item name="android:focusable">true</item>
     </style>
 
+    <!-- Animation -->
+    <style name="MaterialAnimations" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowContentTransitions">true</item>
+        <!--&lt;!&ndash; specify enter and exit transitions &ndash;&gt;
+        <item name="android:windowEnterTransition">@transition/explode</item>
+        <item name="android:windowExitTransition">@transition/explode</item>
+
+        &lt;!&ndash; specify shared element transitions &ndash;&gt;
+        <item name="android:windowSharedElementEnterTransition">@transition/changebounds</item>
+        <item name="android:windowSharedElementExitTransition">@transition/changebounds</item>-->
+        ...
+    </style>
 </resources>

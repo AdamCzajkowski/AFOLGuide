@@ -40,7 +40,8 @@
                 <ImageView
                     android:id="@+id/image_legoSet_id"
                     bindImagerRecycler="@{legoSet.set_img_url}"
-
+                    android:transitionName="@string/lego_image_transition"
+                    style="@style/MaterialAnimations"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:contentDescription="@string/lego_image"

@@ -27,6 +27,8 @@
                 android:layout_height="0dp"
                 android:contentDescription="@string/lego_image_desc"
                 android:padding="3dp"
+                android:transitionName="@string/lego_image_transition"
+                style="@style/MaterialAnimations"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintHorizontal_bias="1.0"

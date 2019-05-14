@@ -26,6 +26,7 @@ import org.kodein.di.android.support.kodein
 import org.kodein.di.generic.instance
 
 class MySetsFragment : Fragment(), KodeinAware {
+
     override val kodein: Kodein by kodein()
 
     private val mySetsViewModelFactory: MySetsViewModelFactory by instance()
@@ -50,6 +51,7 @@ class MySetsFragment : Fragment(), KodeinAware {
         super.onViewCreated(view, savedInstanceState)
     }
 
+
     private fun getAllMySetsFromDatabase() {
         GlobalScope.launch(Dispatchers.Main) {
             getAllMySets()
@@ -63,6 +65,7 @@ class MySetsFragment : Fragment(), KodeinAware {
 
     private fun singleItemClickedReaction(legoSet: LegoSet) {
         startDetailActivity(legoSet)
+        //startWithAnimationActivity(1, legoSet)
     }
 
     private fun initializeRecyclerView(recyclerView: RecyclerView) {
@@ -80,4 +83,17 @@ class MySetsFragment : Fragment(), KodeinAware {
     private fun startDetailActivity(legoSet: LegoSet) {
         startActivity(DetailActivity.getIntent(context!!, legoSet))
     }
+
+    /*private fun startWithAnimationActivity(resultCode: Int, legoSet: LegoSet) {
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, Pair.create(view, getString(R.string.lego_image_transition)))
+        AppCompatActivity().startActivityFromFragment(
+           this,
+           DetailActivity.getIntent(context!!, legoSet),
+           resultCode,
+           options.toBundle())
+*/
+    /*startActivity(DetailActivity.getIntent(context!!, legoSet), ActivityOptionsCompat.makeSceneTransitionAnimation(
+         this, view!!, getString(R.string.lego_image_transition)
+     ).toBundle())*/
 }
+

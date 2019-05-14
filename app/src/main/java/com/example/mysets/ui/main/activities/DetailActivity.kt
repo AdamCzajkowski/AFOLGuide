@@ -168,4 +168,13 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
     private fun partListButtonReaction() {
         startActivity(BricksListActivity.getIntent(this, legoSet.set_num))
     }
+
+    /*private fun startWithAnimationActivity() {
+        //var slideTransition: Slide = Slide(Gravity.RIGHT)
+        //slideTransition.duration = 1000
+        //var options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity(), view!!, getString(R.string.lego_image_transition))
+        startActivity(BricksListActivity.getIntent(this, legoSet.set_num), ActivityOptionsCompat.makeSceneTransitionAnimation(
+            this, view, getString(R.string.lego_image_transition)
+        ).toBundle())
+    }*/
 }
