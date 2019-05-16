@@ -25,9 +25,9 @@ class SearchLegoViewModel(private val repository: Repository) : ViewModel() {
         cancelJob()
     }
 
-    fun getLegoSetBySearch(searchQuery: String, pageSize: Int) {
+    fun getLegoSetBySearch(searchQuery: String, page: Int, pageSize: Int) {
         scope.launch {
-            when(val searchRespond = repository.getLegoBySearch(searchQuery, pageSize)) {
+            when (val searchRespond = repository.getLegoBySearch(searchQuery, page, pageSize)) {
                 is Result.Success -> getSearchSuccess.postValue(searchRespond.data)
                 is Result.Error -> getSearchError.postValue(searchRespond.error)
                 is Result.Exception -> getSearchException.postValue(searchRespond.exception)

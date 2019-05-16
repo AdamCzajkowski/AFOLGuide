@@ -25,7 +25,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/cardview_dark_background">
+        android:layout_margin="3dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_single_brick"
@@ -37,10 +37,10 @@
 
                 android:id="@+id/imageView"
                 bindImagerRecycler="@{brickDetail.partImgUrl}"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
+                android:layout_width="135dp"
+                android:layout_height="135dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginBottom="8dp"
                 android:contentDescription="@string/brick_image_desc"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -54,7 +54,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:text="@{brickDetail.partNum}"
-                android:textColor="#FFFFFF"
+                android:textColor="#A6FFFFFF"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -66,7 +66,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/number_text"
-                android:textColor="#FFFFFF"
+                android:textColor="#A6FFFFFF"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -78,7 +78,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/name_set_cardview"
-                android:textColor="#FFFFFF"
+                android:textColor="#A6FFFFFF"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toBottomOf="@+id/quantity_title" />
@@ -91,9 +91,9 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:ellipsize="end"
-                android:textColor="#FFFFFF"
                 android:maxLines="2"
                 android:text="@{brickDetail.name}"
+                android:textColor="#A6FFFFFF"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/name_brick_title"
@@ -106,8 +106,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/quantity_title_text"
+                android:textColor="#A6FFFFFF"
                 android:textSize="12sp"
-                android:textColor="#FFFFFF"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toBottomOf="@+id/brick_number_title" />
 
@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:textColor="#FFFFFF"
+                android:textColor="#A6FFFFFF"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/brick_num_value" />
@@ -130,8 +130,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/color_title_text"
+                android:textColor="#A6FFFFFF"
                 android:textSize="12sp"
-                android:textColor="#FFFFFF"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toBottomOf="@+id/name_brick_value" />
 
@@ -149,16 +149,45 @@
             <Button
                 android:id="@+id/rebrickable_brick_button"
                 bindURLa="@{brickDetail.partUrl}"
-                android:layout_width="0dp"
+                android:layout_width="150dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/check_state_rebrickable_url_button"
+                android:textColor="#A6FFFFFF"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView" />
+
+            <TextView
+                android:id="@+id/position_value"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#A6FFFFFF"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@+id/position_title"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/position_title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/rebrickable_url_text"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/color_title" />
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:textColor="#A6FFFFFF"
+                android:text="@string/brick_title"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 </layout>

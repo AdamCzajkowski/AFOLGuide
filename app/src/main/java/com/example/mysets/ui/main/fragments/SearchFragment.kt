@@ -41,6 +41,12 @@ class SearchFragment : Fragment(), KodeinAware {
 
     private val compositeDisposable = CompositeDisposable()
 
+    private val pageSize = 20
+
+    private var pageCounter = 1
+
+    var forceSearch: ((Boolean) -> Unit)? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,8 +62,17 @@ class SearchFragment : Fragment(), KodeinAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initializeRecyclerView(rv_search_id)
-        legoRecyclerViewAdapter.selectedItem = {legoSet ->
+        legoRecyclerViewAdapter.selectedItem = { legoSet ->
             singleItemClickedReaction(legoSet)
+        }
+        legoRecyclerViewAdapter.endMarker = { marker ->
+            if (marker) {
+                pageCounter++
+                Log.i("searchSet", "pageCounter increment = $pageCounter")
+                forceSearch?.invoke(true)
+            } else {
+                forceSearch?.invoke(false)
+            }
         }
         super.onViewCreated(view, savedInstanceState)
     }
@@ -91,38 +106,65 @@ class SearchFragment : Fragment(), KodeinAware {
                     start: Int,
                     count: Int,
                     after: Int
-                ) {}
+                ) {
+                }
+
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     subsciber.onNext(s.toString())
+                    pageCounter = 1
+                    Log.i("searchSet", "\npageCounter down to one")
+
                 }
             })
         }).debounce(200, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
-            .subscribe { searchLegoViewModel.getLegoSetBySearch(it, 20) }
-
+            .subscribe {
+                Log.i(
+                    "searchSet",
+                    " --------------------- start searching ------------------------"
+                )
+                forceSearch = { marker ->
+                    if (marker) {
+                        searchLegoViewModel.getLegoSetBySearch(it, pageSize, pageCounter)
+                    }
+                }
+                searchLegoViewModel.getLegoSetBySearch(it, pageSize, pageCounter)
+            }
         compositeDisposable.addAll(disposable)
     }
+
 
     private fun getSuccessRespond() {
         searchLegoViewModel.getSearchSuccess.observe(
             viewLifecycleOwner,
             Observer {
-                Log.i("search", it.count.toString())
-                if(it.count < 14000) legoRecyclerViewAdapter.swapList(it.results)
-                else {
-                    legoRecyclerViewAdapter.clearList()
+                if (pageCounter == 1) {
+                    if (it.count < 14000) {
+                        legoRecyclerViewAdapter.swapList(
+                            it.results
+                        )
+                        Log.i("searchSet", "pageCounter one swaplist")
+                    } else {
+                        legoRecyclerViewAdapter.clearList()
+                        Log.i("searchSet", "pageCounter one clear list")
+                    }
+                } else {
+                    if (it.count < 14000) legoRecyclerViewAdapter.addToList(
+                        it.results
+                    )
+                    Log.i("searchSet", "pageCounter = $pageCounter add to list")
                 }
             }
         )
     }
 
     private fun getErrorRespond() {
-       searchLegoViewModel.getSearchError.observe(
-           viewLifecycleOwner,
-           Observer {
-               Log.i("searchError", it)
-           }
-       )
+        searchLegoViewModel.getSearchError.observe(
+            viewLifecycleOwner,
+            Observer {
+                Log.i("searchError", it)
+            }
+        )
     }
 
     private fun getExceptionRespond() {

@@ -23,6 +23,7 @@ import org.kodein.di.generic.instance
 class BricksListActivity : AppCompatActivity(), KodeinAware {
 
     companion object {
+
         private const val LEGO_SET_NUMBER = "legoSet"
         fun getIntent(context: Context, legoSetNumber: String): Intent =
             Intent(
@@ -40,6 +41,10 @@ class BricksListActivity : AppCompatActivity(), KodeinAware {
 
     private lateinit var bricksRecyclerViewAdapter: BricksRecyclerViewAdapter
 
+    private val pageSize = 30
+
+    private var pageCounter = 1
+
     private val brickListViewModelFactory: BrickListViewModelFactory by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,11 +52,18 @@ class BricksListActivity : AppCompatActivity(), KodeinAware {
         setContentView(R.layout.activity_bricks_list)
         setViewModel()
         setUpToolbar()
-        getBricks(1, legoSetNumber)
+        initializeRecyclerView(bricks_recycler_view)
+        bricksRecyclerViewAdapter.endMarker = { marker ->
+            if (marker) {
+                pageCounter++
+                getBricks(pageCounter, legoSetNumber, pageSize)
+            }
+        }
+        getBricks(pageCounter, legoSetNumber, pageSize)
         getSuccessRespond()
         getErrorRespond()
         getExceptionRespond()
-        initializeRecyclerView(bricks_recycler_view)
+
     }
 
     override fun onBackPressed() {
@@ -79,19 +91,25 @@ class BricksListActivity : AppCompatActivity(), KodeinAware {
         setSupportActionBar(bricks_toolbar_id)
         with(supportActionBar!!) {
             setDisplayHomeAsUpEnabled(true)
-            setDisplayShowTitleEnabled(false)
+            setDisplayShowTitleEnabled(true)
+            title = legoSetNumber
         }
     }
 
-    private fun getBricks(page: Int, setNumber: String) {
-        brickListViewModel.getBricksFromSet(page, setNumber)
+    private fun getBricks(page: Int, setNumber: String, pageSize: Int) {
+        brickListViewModel.getBricksFromSet(page, setNumber, pageSize)
     }
 
     private fun getSuccessRespond() {
         brickListViewModel.getBricksSuccess.observe(this, Observer {
-            Log.i("searchbrick", "success")
-            bricksRecyclerViewAdapter.swapList(it.results)
-            count_bricks_value.text = it.count.toString()
+            if (pageCounter == 1) {
+                bricksRecyclerViewAdapter.swapList(it.results)
+                count_bricks_value.text = it.count.toString()
+                Log.i("searchbrick", "success $pageCounter")
+            } else {
+                bricksRecyclerViewAdapter.addToList(it.results)
+                Log.i("searchbrick", "success $pageCounter")
+            }
         })
     }
 

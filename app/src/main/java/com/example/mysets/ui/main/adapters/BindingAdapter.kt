@@ -15,7 +15,13 @@ object BindingAdapter {
                 .load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREfb58-te-dTEfAWLrWesITRdlqFVslyGNojhMntNXyNh3z11Y")
                 .into(imageView)
         } else {
-            Picasso.get().load("$imageUrl").into(imageView)
+            Picasso
+                .get()
+                .load("$imageUrl")
+                .fit()
+                .centerCrop()
+                .into(imageView)
+
         }
     }
 

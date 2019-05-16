@@ -5,7 +5,6 @@
     tools:context=".ui.main.activities.DetailActivity">
 
     <data>
-
         <variable
             name="legoSet"
             type="com.example.mysets.models.LegoSet" />
@@ -53,6 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:layout_marginEnd="106dp"
+                    android:transitionName="transition"
                     app:layout_collapseMode="parallax" />
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -76,32 +76,34 @@
                     android:id="@+id/my_sets_button"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:layout_marginStart="16dp"
 
+                    android:layout_marginTop="16dp"
                     android:contentDescription="@string/image_of_my_sets"
                     android:src="@drawable/wishlist_unadded_icon"
                     app:layout_anchorGravity="bottom|left"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/my_sets_text" />
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/my_sets_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="15dp"
                     android:text="@string/add_to_my_sets_text"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/my_sets_button"
+                    app:layout_constraintTop_toTopOf="@+id/my_sets_button" />
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginEnd="16dp"
                     android:text="@string/number_text"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                    app:layout_constraintTop_toTopOf="@+id/my_sets_button" />
+                    app:layout_constraintTop_toBottomOf="@+id/my_sets_button" />
 
                 <TextView
                     android:id="@+id/textView2"
@@ -179,12 +181,13 @@
 
                 <Button
                     android:id="@+id/rebrickable_url_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/rebrickable_url_text"
                     bindURLa="@{legoSet.set_url}"
+                    android:layout_width="150dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/check_state_rebrickable_url_button"
+                    android:textColor="#A6FFFFFF"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -198,10 +201,11 @@
                 <Button
                     android:id="@+id/parts_list_button"
                     style="@style/Widget.AppCompat.Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="85dp"
+                    android:layout_height="35dp"
                     android:layout_marginEnd="16dp"
-                    android:text="@string/parts_list_button_text"
+                    android:background="@drawable/check_state_parts_list_button"
+                    android:textColor="#A6FFFFFF"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/rebrickable_url_button" />
             </androidx.constraintlayout.widget.ConstraintLayout>

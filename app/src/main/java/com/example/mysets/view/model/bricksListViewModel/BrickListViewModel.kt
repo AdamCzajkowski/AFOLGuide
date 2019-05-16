@@ -25,9 +25,9 @@ class BrickListViewModel(val repository: Repository) : ViewModel() {
         cancelJob()
     }
 
-    fun getBricksFromSet(page: Int, setNumber: String) {
+    fun getBricksFromSet(page: Int, setNumber: String, pageSize: Int) {
         scope.launch {
-            when (val bricksResponse = repository.getBricksFromSet(page, setNumber)) {
+            when (val bricksResponse = repository.getBricksFromSet(page, setNumber, pageSize)) {
                 is Result.Success -> getBricksSuccess.postValue(bricksResponse.data)
                 is Result.Error -> getBricksError.postValue(bricksResponse.error)
                 is Result.Exception -> getBricksException.postValue(bricksResponse.exception)

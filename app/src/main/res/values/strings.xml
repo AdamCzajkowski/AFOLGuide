@@ -1,30 +1,23 @@
 <resources>
     <string name="app_name">AFOL Application</string>
-    <string name="tab_title_my">My sets</string>
+    <string name="tab_title_my">Favorites</string>
     <string name="tab_title_search">Search</string>
-    <string name="tab_title_wishlist">My wish list</string>
     <string name="lego_image_desc">lego image</string>
     <string name="number_text">No.</string>
     <string name="name_set_cardview">Name</string>
     <string name="release_year_cardview_text">Release year</string>
     <string name="pieces_cardView_title">Pieces</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_lego_set_hint_edit_text">Search LEGO set</string>
     <string name="rebrickable_url_text">Rebrickable URL</string>
     <string name="lego_image">Lego Image</string>
 
-    <string name="added_to_my_sets">added to My Sets</string>
-    <string name="removed_from_my_sets">removed from My Sets</string>
+    <string name="added_to_my_sets">added to Favorities</string>
+    <string name="removed_from_my_sets">removed from Favorities</string>
 
-    <string name="added_to_wishlist">added to Wishlist</string>
-    <string name="removed_from_wishlist">removed from Wishlist</string>
+    <string name="add_to_my_sets_text">Add to Favorites</string>
 
-    <string name="add_to_my_sets_text">Add to My Sets</string>
-    <string name="add_to_wishlist_text">Add to Wishlist</string>
-
-    <string name="remove_from_my_sets_text">Remove from My Sets</string>
-    <string name="remove_from_wishlist_text">Remove from Wishlist</string>
+    <string name="remove_from_my_sets_text">Remove from Favorities</string>
     <string name="image_of_my_sets">image of my sets</string>
     <string name="quantity_title_text">Quantity</string>
     <string name="color_title_text">Color</string>
@@ -33,4 +26,5 @@
     <string name="parts_list_button_text">parts list</string>
 
     <string name="lego_image_transition">lego set image</string>
+    <string name="brick_title">Brick</string>
 </resources>

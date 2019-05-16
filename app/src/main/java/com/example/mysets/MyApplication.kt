@@ -21,7 +21,6 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
-import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -72,14 +71,14 @@ class MyApplication : Application(), KodeinAware {
 
         bind() from singleton { GsonConverterFactory.create() }
         bind() from singleton { CoroutineCallAdapterFactory() }
-        bind() from provider { BrickListViewModel(instance()) }
-        bind() from provider { BrickListViewModelFactory(instance()) }
-        bind() from provider { DetailViewModelFactory(instance()) }
-        bind() from provider { DetailViewModel(instance()) }
-        bind() from provider { MySetsViewModel(instance()) }
-        bind() from provider { SearchLegoViewModel(instance()) }
-        bind() from provider { MySetsViewModelFactory(instance()) }
-        bind() from provider { SearchLegoViewModelFactory(instance()) }
+        bind() from singleton { BrickListViewModel(instance()) }
+        bind() from singleton { BrickListViewModelFactory(instance()) }
+        bind() from singleton { DetailViewModelFactory(instance()) }
+        bind() from singleton { DetailViewModel(instance()) }
+        bind() from singleton { MySetsViewModel(instance()) }
+        bind() from singleton { SearchLegoViewModel(instance()) }
+        bind() from singleton { MySetsViewModelFactory(instance()) }
+        bind() from singleton { SearchLegoViewModelFactory(instance()) }
         bind() from singleton { instance<Retrofit>().create(LegoApiService::class.java) }
         bind() from singleton { Repository(instance(), instance()) }
     }

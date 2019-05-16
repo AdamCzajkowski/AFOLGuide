@@ -56,13 +56,17 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
-        detailViewModel = ViewModelProviders.of(this, detailViewModelFactory).get(DetailViewModel::class.java)
+        detailViewModel =
+            ViewModelProviders.of(this, detailViewModelFactory).get(DetailViewModel::class.java)
         setUpDetailsToolbar()
         setUpDetailsCollapsingToolbar()
         bindView()
         checkIsInAnyDatabase()
         initializeMySetsFAB()
-        parts_list_button.setOnClickListener { partListButtonReaction() }
+        parts_list_button.setOnClickListener {
+            partListButtonReaction()
+            //startPartsListActivity()
+        }
     }
 
     override fun onBackPressed() {
@@ -79,6 +83,7 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
         setSupportActionBar(lego_details_toolbar_id)
         with(supportActionBar!!) {
             setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp)
             setDisplayShowTitleEnabled(false)
         }
     }
@@ -142,7 +147,7 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
     private fun initializeMySetsFAB() {
         isInMySetsMarker = { marker ->
             Log.i("test", "mysets: $marker")
-            if(marker) {
+            if (marker) {
                 setImageButtonIcon(my_sets_button, R.drawable.wishlist_added_icon)
                 my_sets_text.text = getString(R.string.remove_from_my_sets_text)
             } else {
@@ -150,7 +155,7 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
                 my_sets_text.text = getString(R.string.add_to_my_sets_text)
             }
             my_sets_button.setOnClickListener {
-                if(marker) {
+                if (marker) {
                     detailViewModel.removeFromMySets(legoSet)
                     setImageButtonIcon(my_sets_button, R.drawable.wishlist_unadded_icon)
                     toastMessage(R.string.removed_from_my_sets)
@@ -168,13 +173,4 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
     private fun partListButtonReaction() {
         startActivity(BricksListActivity.getIntent(this, legoSet.set_num))
     }
-
-    /*private fun startWithAnimationActivity() {
-        //var slideTransition: Slide = Slide(Gravity.RIGHT)
-        //slideTransition.duration = 1000
-        //var options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity(), view!!, getString(R.string.lego_image_transition))
-        startActivity(BricksListActivity.getIntent(this, legoSet.set_num), ActivityOptionsCompat.makeSceneTransitionAnimation(
-            this, view, getString(R.string.lego_image_transition)
-        ).toBundle())
-    }*/
 }
