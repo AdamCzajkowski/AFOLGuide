@@ -26,4 +26,6 @@ class DetailViewModel(private val repository: Repository) : ViewModel() {
     fun removeFromMySets(legoSet: LegoSet) = scope.launch {
         repository.removeFromMySets(legoSet)
     }
+
+    fun getListOfMyMocs(): LiveData<MutableList>
 }

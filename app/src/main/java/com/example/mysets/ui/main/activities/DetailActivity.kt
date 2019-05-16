@@ -13,10 +13,13 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mysets.R
 import com.example.mysets.databinding.ActivityDetailBinding
 import com.example.mysets.models.LegoSet
 import com.example.mysets.ui.main.adapters.BindingAdapter
+import com.example.mysets.ui.main.adapters.MOCRecyclerViewAdapter
 import com.example.mysets.view.model.detailViewModel.DetailViewModel
 import com.example.mysets.view.model.detailViewModel.DetailViewModelFactory
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -50,6 +53,7 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
 
     private val legoSet: LegoSet by lazy { intent.getParcelableExtra<LegoSet>(LEGO_SET) }
 
+    lateinit var mocRecyclerViewAdapter: MOCRecyclerViewAdapter
 
     var isInMySetsMarker: ((Boolean) -> Unit)? = null
 
@@ -61,6 +65,7 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
         setUpDetailsToolbar()
         setUpDetailsCollapsingToolbar()
         bindView()
+        initializeRecyclerView(moc_recycler_view_id)
         checkIsInAnyDatabase()
         initializeMySetsFAB()
         parts_list_button.setOnClickListener {
@@ -142,6 +147,12 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
                 drawable
             )
         )
+    }
+
+    private fun initializeRecyclerView(recyclerView: RecyclerView) {
+        mocRecyclerViewAdapter = MOCRecyclerViewAdapter()
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = mocRecyclerViewAdapter
     }
 
     private fun initializeMySetsFAB() {

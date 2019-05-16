@@ -27,4 +27,7 @@
 
     <string name="lego_image_transition">lego set image</string>
     <string name="brick_title">Brick</string>
+    <string name="moc_image_desc">moc image</string>
+    <string name="parts_text">Parts</string>
+    <string name="designer_text">Designer</string>
 </resources>
