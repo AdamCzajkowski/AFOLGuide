@@ -20,4 +20,10 @@ class Repository(
 
     suspend fun getBricksFromSet(page: Int, setNumber: String, pageSize: Int) =
         safeApi { legoApiService.getBricks(setNumber, page, pageSize).await() }
+
+    suspend fun getLegoDetail(setNumber: String) =
+        safeApi { legoApiService.getLegoDetail(setNumber).await() }
+
+    suspend fun getLegoAlternatives(setNumber: String) =
+        safeApi { legoApiService.getMOCs(setNumber).await() }
 }

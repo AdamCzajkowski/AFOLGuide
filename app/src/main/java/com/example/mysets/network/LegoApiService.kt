@@ -2,6 +2,7 @@ package com.example.mysets.network
 
 import com.example.mysets.models.ApiResultSearch
 import com.example.mysets.models.BrickResult
+import com.example.mysets.models.LegoSet
 import com.example.mysets.models.MOCResult
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
@@ -18,4 +19,7 @@ interface LegoApiService {
 
     @GET("sets/{set_num}/alternates/")
     fun getMOCs(@Path("set_num") setNumber: String): Deferred<Response<MOCResult>>
+
+    @GET("sets/")
+    fun getLegoDetail(@Query("set_num") setNumber: String): Deferred<Response<LegoSet>>
 }
