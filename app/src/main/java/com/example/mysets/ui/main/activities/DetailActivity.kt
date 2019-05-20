@@ -34,7 +34,7 @@ import org.kodein.di.generic.instance
 class DetailActivity : AppCompatActivity(), KodeinAware {
 
     companion object {
-        private const val LEGO_SET = "legoSet"
+        const val LEGO_SET = "legoSetNumber"
         fun getIntent(context: Context, legoSet: LegoSet): Intent =
             Intent(
                 context,
@@ -60,17 +60,20 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
-        detailViewModel =
-            ViewModelProviders.of(this, detailViewModelFactory).get(DetailViewModel::class.java)
+        initializeViewModel()
+        getErrorRespond()
+        getExceptionRespond()
+        getSuccessRespond()
+        getMocs()
         setUpDetailsToolbar()
         setUpDetailsCollapsingToolbar()
         bindView()
         initializeRecyclerView(moc_recycler_view_id)
+
         checkIsInAnyDatabase()
         initializeMySetsFAB()
         parts_list_button.setOnClickListener {
             partListButtonReaction()
-            //startPartsListActivity()
         }
     }
 
@@ -82,6 +85,34 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         finish()
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun getMocs() {
+        detailViewModel.getMOCs(legoSet.set_num!!)
+    }
+
+    private fun getErrorRespond() {
+        detailViewModel.getMocsError.observe(
+            this,
+            Observer {
+                Log.i("searchError", it)
+            }
+        )
+    }
+
+    private fun getExceptionRespond() {
+        detailViewModel.getMocsException.observe(
+            this,
+            Observer {
+                Log.i("searchException", it.message.toString())
+            }
+        )
+    }
+
+    private fun getSuccessRespond() {
+        detailViewModel.getMocsSuccess.observe(this, Observer {
+            mocRecyclerViewAdapter.swapList(it.results.toMutableList())
+        })
     }
 
     private fun setUpDetailsToolbar() {
@@ -106,6 +137,11 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
         }
     }
 
+    private fun initializeViewModel() {
+        detailViewModel =
+            ViewModelProviders.of(this, detailViewModelFactory).get(DetailViewModel::class.java)
+    }
+
     private suspend fun isInMySets() {
         detailViewModel.getListOfMySets().observe(this, Observer { listOfMySets ->
             listOfMySets?.forEach {
@@ -119,7 +155,6 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
         })
     }
 
-
     private fun bindView() {
         binding.legoSet = legoSet
         val adapter = BindingAdapter
@@ -130,7 +165,6 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
             startActivity(openURL)
         }
     }
-
 
     private fun toastMessage(message: Int) {
         Toast.makeText(
@@ -182,6 +216,6 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
     }
 
     private fun partListButtonReaction() {
-        startActivity(BricksListActivity.getIntent(this, legoSet.set_num))
+        startActivity(BricksListActivity.getIntent(this, legoSet.set_num!!))
     }
 }

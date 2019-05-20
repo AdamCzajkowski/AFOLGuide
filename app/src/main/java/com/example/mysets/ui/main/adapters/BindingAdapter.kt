@@ -13,6 +13,8 @@ object BindingAdapter {
         if (imageUrl == null) {
             Picasso.get()
                 .load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREfb58-te-dTEfAWLrWesITRdlqFVslyGNojhMntNXyNh3z11Y")
+                .fit()
+                .centerCrop()
                 .into(imageView)
         } else {
             Picasso

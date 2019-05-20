@@ -15,15 +15,17 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/cardview_dark_background">
 
             <ImageView
                 android:id="@+id/imageView2"
                 bindImagerRecycler="@{moc.mocImgUrl}"
                 android:layout_width="0dp"
-                android:layout_height="150dp"
+                android:layout_height="0dp"
 
                 android:contentDescription="@string/moc_image_desc"
+                app:layout_constraintBottom_toBottomOf="@+id/relese_year_moc_title"
                 app:layout_constraintEnd_toStartOf="@+id/guideline4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -40,8 +42,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/name_set_cardview"
+                android:textColor="#A6FFFFFF"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,6 +56,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/parts_text"
+                android:textColor="#A6FFFFFF"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toBottomOf="@+id/name_moc_value" />
 
@@ -62,6 +68,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/designer_text"
+                android:textColor="#A6FFFFFF"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toBottomOf="@+id/parts_moc_title" />
 
@@ -71,9 +79,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
                 android:text="@string/release_year_cardview_text"
+                android:textColor="#A6FFFFFF"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
-                app:layout_constraintTop_toBottomOf="@+id/designer_moc_title" />
+                app:layout_constraintTop_toBottomOf="@+id/designer_moc_value" />
 
             <TextView
                 android:id="@+id/name_moc_value"
@@ -84,6 +96,8 @@
                 android:maxLines="2"
                 android:text="@{moc.name}"
                 android:textAlignment="textEnd"
+                android:textColor="#A6FFFFFF"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/name_moc_title"
                 app:layout_constraintTop_toTopOf="@+id/name_moc_title" />
@@ -94,16 +108,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:textColor="#A6FFFFFF"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/parts_moc_title" />
 
             <TextView
                 android:id="@+id/designer_moc_value"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginEnd="16dp"
+                android:maxLines="2"
                 android:text="@{moc.designerName}"
+                android:textAlignment="textEnd"
+                android:textColor="#A6FFFFFF"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/designer_moc_title"
                 app:layout_constraintTop_toTopOf="@+id/designer_moc_title" />
 
             <TextView
@@ -112,6 +134,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:textColor="#A6FFFFFF"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/relese_year_moc_title" />
         </androidx.constraintlayout.widget.ConstraintLayout>

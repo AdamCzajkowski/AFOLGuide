@@ -58,6 +58,7 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <!--suppress AndroidDomInspection -->
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll"
             android:layout_width="match_parent"
@@ -213,10 +214,35 @@
                     android:id="@+id/moc_recycler_view_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="4dp"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/list_mocs_title" />
+
+                <TextView
+                    android:id="@+id/list_mocs_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/mocs_based_on_text"
+                    android:textColor="#A6FFFFFF"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintTop_toBottomOf="@+id/rebrickable_url_button" />
+
+                <TextView
+                    android:id="@+id/set_number_mocs_list_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@{legoSet.set_num}"
+                    android:textColor="#A6FFFFFF"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@+id/list_mocs_title"
+                    app:layout_constraintTop_toTopOf="@+id/list_mocs_title" />
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 

@@ -16,27 +16,13 @@ class DetailViewModel(private val repository: Repository) : ViewModel() {
     private val coroutineContext: CoroutineContext get() = job + Dispatchers.Default
     private val scope = CoroutineScope(coroutineContext)
 
-    private val getLegoDetailSuccess = MutableLiveData<LegoSet>()
-    private val getLegoDetailError = MutableLiveData<String>()
-    private val getLegoDetailException = MutableLiveData<Exception>()
-
-    private val getMocsSuccess = MutableLiveData<MOCResult>()
-    private val getMocsError = MutableLiveData<String>()
-    private val getMocsException = MutableLiveData<Exception>()
+    val getMocsSuccess = MutableLiveData<MOCResult>()
+    val getMocsError = MutableLiveData<String>()
+    val getMocsException = MutableLiveData<Exception>()
 
     override fun onCleared() {
         super.onCleared()
         cancelJob()
-    }
-
-    fun getLegoDetails(setNumber: String) {
-        scope.launch {
-            when (val legoDetailsRespond = repository.getLegoDetail(setNumber)) {
-                is Result.Success<LegoSet> -> getLegoDetailSuccess.postValue(legoDetailsRespond.data)
-                is Result.Error -> getLegoDetailError.postValue(legoDetailsRespond.error)
-                is Result.Exception -> getLegoDetailException.postValue(legoDetailsRespond.exception)
-            }
-        }
     }
 
     fun getMOCs(setNumber: String) {

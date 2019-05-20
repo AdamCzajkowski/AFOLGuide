@@ -84,16 +84,5 @@ class MySetsFragment : Fragment(), KodeinAware {
         startActivity(DetailActivity.getIntent(context!!, legoSet))
     }
 
-    /*private fun startWithAnimationActivity(resultCode: Int, legoSet: LegoSet) {
-        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, Pair.create(view, getString(R.string.lego_image_transition)))
-        AppCompatActivity().startActivityFromFragment(
-           this,
-           DetailActivity.getIntent(context!!, legoSet),
-           resultCode,
-           options.toBundle())
-*/
-    /*startActivity(DetailActivity.getIntent(context!!, legoSet), ActivityOptionsCompat.makeSceneTransitionAnimation(
-         this, view!!, getString(R.string.lego_image_transition)
-     ).toBundle())*/
 }
 

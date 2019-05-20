@@ -30,4 +30,5 @@
     <string name="moc_image_desc">moc image</string>
     <string name="parts_text">Parts</string>
     <string name="designer_text">Designer</string>
+    <string name="mocs_based_on_text">MOCs based on</string>
 </resources>
