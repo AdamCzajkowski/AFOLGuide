@@ -37,8 +37,9 @@
 
                 android:id="@+id/imageView"
                 bindImagerRecycler="@{brickDetail.partImgUrl}"
+                bindImgToUrl="@{brickDetail.partUrl}"
                 android:layout_width="135dp"
-                android:layout_height="135dp"
+                android:layout_height="115dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="8dp"
@@ -51,13 +52,12 @@
                 android:id="@+id/brick_num_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:text="@{brickDetail.partNum}"
                 android:textColor="#A6FFFFFF"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/brick_number_title" />
 
             <TextView
                 android:id="@+id/brick_number_title"
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/name_set_cardview"
                 android:textColor="#A6FFFFFF"
                 android:textSize="12sp"
@@ -88,23 +88,23 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="@{brickDetail.name}"
+                android:textAlignment="textEnd"
                 android:textColor="#A6FFFFFF"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/name_brick_title"
-                app:layout_constraintTop_toBottomOf="@+id/quantity_value" />
+                app:layout_constraintTop_toTopOf="@+id/name_brick_title" />
 
             <TextView
                 android:id="@+id/quantity_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/quantity_title_text"
                 android:textColor="#A6FFFFFF"
                 android:textSize="12sp"
@@ -116,19 +116,18 @@
                 bindIntToString="@{brickQuantity.quantity}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:textColor="#A6FFFFFF"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/brick_num_value" />
+                app:layout_constraintTop_toTopOf="@+id/quantity_title" />
 
             <TextView
                 android:id="@+id/color_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/color_title_text"
                 android:textColor="#A6FFFFFF"
                 android:textSize="12sp"
@@ -141,25 +140,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="@{brickColor.name}"
+                android:textColor="#A6FFFFFF"
                 android:textSize="12sp"
-                android:textColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/color_title" />
-
-            <Button
-                android:id="@+id/rebrickable_brick_button"
-                bindURLa="@{brickDetail.partUrl}"
-                android:layout_width="150dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/check_state_rebrickable_url_button"
-                android:textColor="#A6FFFFFF"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView" />
 
             <TextView
                 android:id="@+id/position_value"

@@ -74,6 +74,11 @@ class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter
                 openURL.data = Uri.parse(url)
                 startActivity(context, openURL, Bundle())
             }
+            adapter.bindImageToUrl = { url ->
+                val openURLFromImage = Intent(Intent.ACTION_VIEW)
+                openURLFromImage.data = Uri.parse(url)
+                startActivity(context, openURLFromImage, Bundle())
+            }
         }
     }
 }

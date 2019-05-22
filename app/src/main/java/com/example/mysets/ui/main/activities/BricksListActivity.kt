@@ -14,6 +14,8 @@ import com.example.mysets.R
 import com.example.mysets.ui.main.adapters.BricksRecyclerViewAdapter
 import com.example.mysets.view.model.bricksListViewModel.BrickListViewModel
 import com.example.mysets.view.model.bricksListViewModel.BrickListViewModelFactory
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import kotlinx.android.synthetic.main.activity_bricks_list.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -79,7 +81,8 @@ class BricksListActivity : AppCompatActivity(), KodeinAware {
     private fun initializeRecyclerView(recyclerView: RecyclerView) {
         bricksRecyclerViewAdapter = BricksRecyclerViewAdapter()
         recyclerView.layoutManager = LinearLayoutManager(applicationContext)
-        recyclerView.adapter = bricksRecyclerViewAdapter
+        val alphaAdapter = AlphaInAnimationAdapter(bricksRecyclerViewAdapter)
+        recyclerView.adapter = ScaleInAnimationAdapter(alphaAdapter)
     }
 
     private fun setViewModel() {

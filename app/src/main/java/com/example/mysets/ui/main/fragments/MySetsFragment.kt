@@ -16,6 +16,8 @@ import com.example.mysets.ui.main.activities.DetailActivity
 import com.example.mysets.ui.main.adapters.LegoRecyclerViewAdapter
 import com.example.mysets.view.model.mySetsViewModel.MySetsViewModel
 import com.example.mysets.view.model.mySetsViewModel.MySetsViewModelFactory
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import kotlinx.android.synthetic.main.fragment_my_sets.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -71,7 +73,8 @@ class MySetsFragment : Fragment(), KodeinAware {
     private fun initializeRecyclerView(recyclerView: RecyclerView) {
         legoRecyclerViewAdapter = LegoRecyclerViewAdapter()
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = legoRecyclerViewAdapter
+        val alphaAdapter = AlphaInAnimationAdapter(legoRecyclerViewAdapter)
+        recyclerView.adapter = ScaleInAnimationAdapter(alphaAdapter)
     }
 
     private suspend fun getAllMySets() {

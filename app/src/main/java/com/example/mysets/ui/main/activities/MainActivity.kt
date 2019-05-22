@@ -2,6 +2,7 @@ package com.example.mysets.ui.main.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.ToxicBakery.viewpager.transforms.CubeOutTransformer
 import com.example.mysets.R
 import com.example.mysets.ui.main.adapters.SectionsPagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         val sectionsPagerAdapter =
             SectionsPagerAdapter(this, supportFragmentManager)
         view_pager.adapter = sectionsPagerAdapter
+        view_pager.setPageTransformer(true, CubeOutTransformer())
         tabs.setupWithViewPager(view_pager)
     }
 

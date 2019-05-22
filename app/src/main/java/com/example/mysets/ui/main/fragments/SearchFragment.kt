@@ -23,6 +23,8 @@ import com.example.mysets.view.model.searchViewModel.SearchLegoViewModelFactory
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.disposables.CompositeDisposable
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import org.kodein.di.Kodein
@@ -159,6 +161,7 @@ class SearchFragment : Fragment(), KodeinAware {
     }
 
     private fun getErrorRespond() {
+
         searchLegoViewModel.getSearchError.observe(
             viewLifecycleOwner,
             Observer {
@@ -185,7 +188,8 @@ class SearchFragment : Fragment(), KodeinAware {
     private fun initializeRecyclerView(recyclerView: RecyclerView) {
         legoRecyclerViewAdapter = LegoRecyclerViewAdapter()
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = legoRecyclerViewAdapter
+        val alphaAdapter = AlphaInAnimationAdapter(legoRecyclerViewAdapter)
+        recyclerView.adapter = ScaleInAnimationAdapter(alphaAdapter)
     }
 
     private fun hideKeyboard() {

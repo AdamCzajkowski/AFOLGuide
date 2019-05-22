@@ -40,4 +40,12 @@ object BindingAdapter {
     fun bindURLbutton(button: Button, text: String) {
         button.setOnClickListener { bindURLParse?.invoke(text) }
     }
+
+    var bindImageToUrl: ((String) -> Unit)? = null
+
+    @JvmStatic
+    @BindingAdapter("bindImgToUrl")
+    fun bindImgToUrl(imageView: ImageView, text: String) {
+        imageView.setOnClickListener { bindImageToUrl?.invoke(text) }
+    }
 }

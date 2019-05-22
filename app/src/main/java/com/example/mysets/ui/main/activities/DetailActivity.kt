@@ -22,6 +22,8 @@ import com.example.mysets.ui.main.adapters.BindingAdapter
 import com.example.mysets.ui.main.adapters.MOCRecyclerViewAdapter
 import com.example.mysets.view.model.detailViewModel.DetailViewModel
 import com.example.mysets.view.model.detailViewModel.DetailViewModelFactory
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -164,6 +166,11 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
             openURL.data = Uri.parse(url)
             startActivity(openURL)
         }
+        adapter.bindImageToUrl = { url ->
+            val openURLfromImage = Intent(Intent.ACTION_VIEW)
+            openURLfromImage.data = Uri.parse(url)
+            startActivity(openURLfromImage)
+        }
     }
 
     private fun toastMessage(message: Int) {
@@ -186,7 +193,8 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
     private fun initializeRecyclerView(recyclerView: RecyclerView) {
         mocRecyclerViewAdapter = MOCRecyclerViewAdapter()
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = mocRecyclerViewAdapter
+        val alphaAdapter = AlphaInAnimationAdapter(mocRecyclerViewAdapter)
+        recyclerView.adapter = ScaleInAnimationAdapter(alphaAdapter)
     }
 
     private fun initializeMySetsFAB() {

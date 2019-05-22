@@ -7,6 +7,10 @@
         <variable
             name="moc"
             type="com.example.mysets.models.MOCResult.Result" />
+
+        <variable
+            name="adapter"
+            type="com.example.mysets.ui.main.adapters.BindingAdapter" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -23,7 +27,7 @@
                 bindImagerRecycler="@{moc.mocImgUrl}"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-
+                bindImgToUrl="@{moc.mocUrl}"
                 android:contentDescription="@string/moc_image_desc"
                 app:layout_constraintBottom_toBottomOf="@+id/relese_year_moc_title"
                 app:layout_constraintEnd_toStartOf="@+id/guideline4"

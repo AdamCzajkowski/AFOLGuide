@@ -8,6 +8,7 @@ import com.example.mysets.R
 import com.example.mysets.ui.main.fragments.MySetsFragment
 import com.example.mysets.ui.main.fragments.SearchFragment
 
+
 private val TAB_TITLES = arrayOf(
     R.string.tab_title_my,
     R.string.tab_title_search
