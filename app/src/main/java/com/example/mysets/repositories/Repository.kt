@@ -26,4 +26,7 @@ class Repository(
 
     suspend fun getLegoAlternatives(setNumber: String) =
         safeApi { legoApiService.getMOCs(setNumber).await() }
+
+    suspend fun getThemes(page: Int, pageSize: Int) =
+        safeApi { legoApiService.getThemes(page, pageSize).await() }
 }

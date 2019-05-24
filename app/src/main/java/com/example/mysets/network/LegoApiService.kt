@@ -1,9 +1,6 @@
 package com.example.mysets.network
 
-import com.example.mysets.models.ApiResultSearch
-import com.example.mysets.models.BrickResult
-import com.example.mysets.models.LegoSet
-import com.example.mysets.models.MOCResult
+import com.example.mysets.models.*
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.GET
@@ -22,4 +19,7 @@ interface LegoApiService {
 
     @GET("sets/")
     fun getLegoDetail(@Query("set_num") setNumber: String): Deferred<Response<LegoSet>>
+
+    @GET("themes/")
+    fun getThemes(@Query("page") page: Int, @Query("page_size") pageSize: Int): Deferred<Response<ThemesResult>>
 }

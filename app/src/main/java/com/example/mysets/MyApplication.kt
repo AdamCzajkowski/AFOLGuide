@@ -14,6 +14,8 @@ import com.example.mysets.view.model.mySetsViewModel.MySetsViewModel
 import com.example.mysets.view.model.mySetsViewModel.MySetsViewModelFactory
 import com.example.mysets.view.model.searchViewModel.SearchLegoViewModel
 import com.example.mysets.view.model.searchViewModel.SearchLegoViewModelFactory
+import com.example.mysets.view.model.themesViewModel.ThemesViewModel
+import com.example.mysets.view.model.themesViewModel.ThemesViewModelFactory
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -71,6 +73,8 @@ class MyApplication : Application(), KodeinAware {
 
         bind() from singleton { GsonConverterFactory.create() }
         bind() from singleton { CoroutineCallAdapterFactory() }
+        bind() from singleton { ThemesViewModel(instance()) }
+        bind() from singleton { ThemesViewModelFactory(instance()) }
         bind() from singleton { BrickListViewModel(instance()) }
         bind() from singleton { BrickListViewModelFactory(instance()) }
         bind() from singleton { DetailViewModelFactory(instance()) }

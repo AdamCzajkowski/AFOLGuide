@@ -23,7 +23,6 @@ object BindingAdapter {
                 .fit()
                 .centerCrop()
                 .into(imageView)
-
         }
     }
 

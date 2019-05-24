@@ -22,6 +22,4 @@ class MainActivity : AppCompatActivity() {
         view_pager.setPageTransformer(true, CubeOutTransformer())
         tabs.setupWithViewPager(view_pager)
     }
-
-
 }
