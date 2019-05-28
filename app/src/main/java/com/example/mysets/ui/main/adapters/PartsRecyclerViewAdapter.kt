@@ -8,12 +8,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mysets.databinding.SingleBrickRowBinding
-import com.example.mysets.models.BrickResult
-import kotlinx.android.synthetic.main.single_brick_row.view.*
+import com.example.mysets.databinding.SinglePartBinding
+import com.example.mysets.models.PartResult
+import kotlinx.android.synthetic.main.single_part.view.*
 
-class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter.ViewHolder>() {
-    private var listOfBricks = mutableListOf<BrickResult.Result>()
+class PartsRecyclerViewAdapter : RecyclerView.Adapter<PartsRecyclerViewAdapter.ViewHolder>() {
+    private var listOfParts = mutableListOf<PartResult.Result>()
 
     var endMarker: ((Boolean) -> Unit)? = null
 
@@ -21,17 +21,17 @@ class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context.applicationContext)
-        val binding = SingleBrickRowBinding.inflate(inflater, parent, false)
+        val binding = SinglePartBinding.inflate(inflater, parent, false)
         context = parent.context
         return ViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
-        return listOfBricks.size
+        return listOfParts.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindView(listOfBricks[position], position + 1)
+        holder.bindView(listOfParts[position], position + 1)
         holder.createAdapter(context)
         if (position == itemCount - (0.1 * itemCount).toInt()) {
             endMarker?.invoke(true)
@@ -40,38 +40,31 @@ class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter
         }
     }
 
-    fun swapList(list: MutableList<BrickResult.Result>) {
-        listOfBricks.clear()
-        listOfBricks.addAll(list)
+    fun swapList(list: MutableList<PartResult.Result>) {
+        listOfParts.clear()
+        listOfParts.addAll(list)
         notifyDataSetChanged()
     }
 
-    fun addToList(list: MutableList<BrickResult.Result>) {
-        listOfBricks.addAll(list)
+    fun addToList(list: MutableList<PartResult.Result>) {
+        listOfParts.addAll(list)
         notifyItemRangeChanged(itemCount - list.size, itemCount)
     }
 
     fun clearList() {
-        listOfBricks.clear()
+        listOfParts.clear()
         notifyDataSetChanged()
     }
 
-    class ViewHolder(val binding: SingleBrickRowBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bindView(item: BrickResult.Result, position: Int) {
-            binding.brickColor = item.color
-            binding.brickDetail = item.part
-            binding.brickQuantity = item
+    class ViewHolder(val binding: SinglePartBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bindView(item: PartResult.Result, position: Int) {
+            binding.part = item
             itemView.position_value.text = position.toString()
         }
 
         fun createAdapter(context: Context) {
             val adapter = BindingAdapter
             binding.adapter = adapter
-            adapter.bindURLParse = { url ->
-                val openURL = Intent(Intent.ACTION_VIEW)
-                openURL.data = Uri.parse(url)
-                startActivity(context, openURL, Bundle())
-            }
             adapter.bindImageToUrl = { url ->
                 val openURLFromImage = Intent(Intent.ACTION_VIEW)
                 openURLFromImage.data = Uri.parse(url)

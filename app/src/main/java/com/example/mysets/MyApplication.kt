@@ -12,8 +12,12 @@ import com.example.mysets.view.model.detailViewModel.DetailViewModel
 import com.example.mysets.view.model.detailViewModel.DetailViewModelFactory
 import com.example.mysets.view.model.mySetsViewModel.MySetsViewModel
 import com.example.mysets.view.model.mySetsViewModel.MySetsViewModelFactory
+import com.example.mysets.view.model.searchBrickViewModel.SearchBrickViewModel
+import com.example.mysets.view.model.searchBrickViewModel.SearchBrickViewModelFactory
 import com.example.mysets.view.model.searchViewModel.SearchLegoViewModel
 import com.example.mysets.view.model.searchViewModel.SearchLegoViewModelFactory
+import com.example.mysets.view.model.themeActivityViewModel.ThemeActivityViewModel
+import com.example.mysets.view.model.themeActivityViewModel.ThemeActivityViewModelFactory
 import com.example.mysets.view.model.themesViewModel.ThemesViewModel
 import com.example.mysets.view.model.themesViewModel.ThemesViewModelFactory
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -65,6 +69,7 @@ class MyApplication : Application(), KodeinAware {
                 .addCallAdapterFactory(instance())
                 .build()
         }
+
         bind() from singleton {
             Room.databaseBuilder(applicationContext, MySetsDatabase::class.java, "mySets.db")
                 .fallbackToDestructiveMigration()
@@ -85,5 +90,9 @@ class MyApplication : Application(), KodeinAware {
         bind() from singleton { SearchLegoViewModelFactory(instance()) }
         bind() from singleton { instance<Retrofit>().create(LegoApiService::class.java) }
         bind() from singleton { Repository(instance(), instance()) }
+        bind() from singleton { ThemeActivityViewModel(instance()) }
+        bind() from singleton { ThemeActivityViewModelFactory(instance()) }
+        bind() from singleton { SearchBrickViewModel(instance()) }
+        bind() from singleton { SearchBrickViewModelFactory(instance()) }
     }
 }

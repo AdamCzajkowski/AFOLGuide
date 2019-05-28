@@ -13,8 +13,6 @@ class LegoRecyclerViewAdapter : RecyclerView.Adapter<LegoRecyclerViewAdapter.Vie
 
     var selectedItem: ((LegoSet) -> Unit)? = null
 
-    private var multiplier = 1
-
     var endMarker: ((Boolean) -> Unit)? = null
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -24,19 +22,19 @@ class LegoRecyclerViewAdapter : RecyclerView.Adapter<LegoRecyclerViewAdapter.Vie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         holder.bindView(listOfLegoSet[position])
 
         holder.itemView.setOnClickListener {
             selectedItem?.invoke(listOfLegoSet[position])
         }
 
-        if (position == (multiplier * 20) - 5) {
-            multiplier++
+        if (position == itemCount - (0.1 * itemCount).toInt()) {
             endMarker?.invoke(true)
-            Log.i("searchSet", "endMarker true multiplier $multiplier")
+            Log.i("searchSet", "endMarker true multiplier $itemCount")
         } else {
             endMarker?.invoke(false)
-            Log.i("searchSet", "endMarker false multiplier $multiplier")
+            Log.i("searchSet", "endMarker false multiplier $itemCount")
         }
     }
 
@@ -53,7 +51,6 @@ class LegoRecyclerViewAdapter : RecyclerView.Adapter<LegoRecyclerViewAdapter.Vie
         listOfLegoSet.clear()
         listOfLegoSet.addAll(list)
         notifyDataSetChanged()
-        multiplier = 1
     }
 
     fun addToList(list: MutableList<LegoSet>) {

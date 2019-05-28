@@ -6,7 +6,7 @@
 
         <variable
             name="theme"
-            type="com.example.mysets.models.ThemesResult.Result" />
+            type="com.example.mysets.models.GroupedThemes" />
     </data>
 
     <androidx.cardview.widget.CardView

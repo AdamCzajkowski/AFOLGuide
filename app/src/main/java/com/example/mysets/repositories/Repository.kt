@@ -21,12 +21,18 @@ class Repository(
     suspend fun getBricksFromSet(page: Int, setNumber: String, pageSize: Int) =
         safeApi { legoApiService.getBricks(setNumber, page, pageSize).await() }
 
-    suspend fun getLegoDetail(setNumber: String) =
-        safeApi { legoApiService.getLegoDetail(setNumber).await() }
+    /*suspend fun getLegoDetail(setNumber: String) =
+        safeApi { legoApiService.getLegoDetail(setNumber).await() }*/
 
     suspend fun getLegoAlternatives(setNumber: String) =
         safeApi { legoApiService.getMOCs(setNumber).await() }
 
     suspend fun getThemes(page: Int, pageSize: Int) =
         safeApi { legoApiService.getThemes(page, pageSize).await() }
+
+    suspend fun getLegoFromTheme(page: Int, pageSize: Int, themeId: Int) =
+        safeApi { legoApiService.getLegoByTheme(page, pageSize, themeId).await() }
+
+    suspend fun getPartBySearch(page: Int, pageSize: Int, searchQuery: String) =
+        safeApi { legoApiService.getPartBySearch(page, pageSize, searchQuery).await() }
 }

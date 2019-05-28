@@ -20,6 +20,5 @@ class MainActivity : AppCompatActivity() {
             SectionsPagerAdapter(this, supportFragmentManager)
         view_pager.adapter = sectionsPagerAdapter
         view_pager.setPageTransformer(true, CubeOutTransformer())
-        tabs.setupWithViewPager(view_pager)
     }
 }

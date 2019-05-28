@@ -7,14 +7,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mysets.R
+import com.example.mysets.models.GroupedThemes
 import com.example.mysets.models.ThemesResult
+import com.example.mysets.ui.main.activities.LegoSetFromThemeActivity
 import com.example.mysets.ui.main.adapters.ThemesRecyclerViewAdapter
 import com.example.mysets.view.model.themesViewModel.ThemesViewModel
 import com.example.mysets.view.model.themesViewModel.ThemesViewModelFactory
@@ -41,6 +42,8 @@ class ThemesFragment : Fragment(), KodeinAware {
 
     private var listOfThemes = mutableListOf<ThemesResult.Result>()
 
+    private var listOfGroupedThemesFinished = mutableListOf<GroupedThemes>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,7 +65,7 @@ class ThemesFragment : Fragment(), KodeinAware {
 
     private fun selectedItem() {
         themesRecyclerViewAdapter.selectedItem = {
-            Toast.makeText(context, "${it.name} selected", Toast.LENGTH_LONG).show()
+            startThemesActivity(it)
         }
     }
 
@@ -71,10 +74,41 @@ class ThemesFragment : Fragment(), KodeinAware {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val filteredList = listOfThemes.filter { it.name.contains(s.toString()) }
+                Log.i("filtered", "$listOfGroupedThemesFinished")
+                val filteredList =
+                    listOfGroupedThemesFinished.filter { it.name.contains(s.toString(), true) }
                 themesRecyclerViewAdapter.swapList(filteredList.toMutableList())
             }
         })
+    }
+
+    private fun mapThemesToGroup(listOfThemes: MutableList<ThemesResult.Result>): MutableList<GroupedThemes> {
+        val listOfGroupedThemes = mutableListOf<GroupedThemes>()
+        Log.i("mapped", "start mapping")
+        listOfThemes.forEach { theme ->
+            Log.i("mapped", "new finding start for ${theme.name}")
+            if (listOfGroupedThemes.isEmpty()) {
+                val firstGropedTheme = GroupedThemes(theme.name, mutableListOf(theme.id))
+                Log.i("mapped", "create first item for ${theme.name}")
+                listOfGroupedThemes.add(firstGropedTheme)
+            } else {
+                Log.i(
+                    "mapped",
+                    "${listOfGroupedThemes.size},  list of groupedTheme is not empty, ${listOfGroupedThemes.last()}"
+                )
+                Log.i("mapped", "comaparing ${listOfGroupedThemes.last().name} to ${theme.name}")
+                if (listOfGroupedThemes.last().name == theme.name) {
+                    listOfGroupedThemes.last().listOfID.add(theme.id)
+                    Log.i("mapped", "find match ${theme.name}")
+                } else {
+                    Log.i("mapped", "find new ${theme.name}")
+                    listOfGroupedThemes.add(GroupedThemes(theme.name, mutableListOf(theme.id)))
+                }
+            }
+        }
+        Log.i("mapped", "Finish ${listOfGroupedThemes}")
+        listOfGroupedThemesFinished = listOfGroupedThemes
+        return listOfGroupedThemesFinished
     }
 
     private fun initializeLegoViewModel() {
@@ -95,8 +129,13 @@ class ThemesFragment : Fragment(), KodeinAware {
             Observer {
                 listOfThemes = it.results.toMutableList()
                 listOfThemes.sortBy { it.name }
-                themesRecyclerViewAdapter.swapList(listOfThemes)
+                themesRecyclerViewAdapter.swapList(mapThemesToGroup(listOfThemes))
             })
+    }
+
+    private fun startThemesActivity(groupedThemes: GroupedThemes) {
+        val intent = LegoSetFromThemeActivity.getIntent(context!!, groupedThemes)
+        startActivity(intent)
     }
 
     private fun getErrorRespond() {

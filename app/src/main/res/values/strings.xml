@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">AFOL Application</string>
+
     <string name="tab_title_my">Favorites</string>
-    <string name="tab_title_search">Search</string>
+    <string name="tab_title_search">Search Set</string>
+    <string name="Themes_tab_name">Themes</string>
+    <string name="tab_title_search_part">Search Part</string>
+
     <string name="lego_image_desc">lego image</string>
     <string name="number_text">No.</string>
     <string name="name_set_cardview">Name</string>
@@ -22,7 +26,7 @@
     <string name="quantity_title_text">Quantity</string>
     <string name="color_title_text">Color</string>
     <string name="brick_image_desc">brick image</string>
-    <string name="diffrent_bricks_text">Diffrent bricks:</string>
+    <string name="diffrent_bricks_text">Different bricks:</string>
     <string name="parts_list_button_text">parts list</string>
 
     <string name="lego_image_transition">lego set image</string>
@@ -32,9 +36,10 @@
     <string name="designer_text">Designer</string>
     <string name="mocs_based_on_text">MOCs based on</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="Themes_tab_name">Themes</string>
+
     <string name="search_lego_theme_text">Search lego theme</string>
     <string name="sets_number_title_text">Sets:</string>
+    <string name="diffrent_lego_sets_text">Different Lego sets</string>
+    <string name="search_lego_part_text">Search Lego Part</string>
 </resources>

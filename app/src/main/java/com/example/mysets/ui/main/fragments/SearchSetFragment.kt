@@ -33,7 +33,7 @@ import org.kodein.di.android.support.kodein
 import org.kodein.di.generic.instance
 import java.util.concurrent.TimeUnit
 
-class SearchFragment : Fragment(), KodeinAware {
+class SearchSetFragment : Fragment(), KodeinAware {
     override val kodein: Kodein by kodein()
 
     private val searchLegoViewModelFactory: SearchLegoViewModelFactory by instance()
@@ -100,7 +100,7 @@ class SearchFragment : Fragment(), KodeinAware {
     }
 
     private fun startSearching(view: View) {
-        val disposable = Observable.create(ObservableOnSubscribe<String> { subsciber ->
+        val disposable = Observable.create(ObservableOnSubscribe<String> { subscriber ->
             view.search_edit_text_id.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {}
                 override fun beforeTextChanged(
@@ -112,7 +112,7 @@ class SearchFragment : Fragment(), KodeinAware {
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    subsciber.onNext(s.toString())
+                    subscriber.onNext(s.toString())
                     pageCounter = 1
                     Log.i("searchSet", "\npageCounter down to one")
 

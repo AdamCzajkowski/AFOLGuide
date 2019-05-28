@@ -22,4 +22,10 @@ interface LegoApiService {
 
     @GET("themes/")
     fun getThemes(@Query("page") page: Int, @Query("page_size") pageSize: Int): Deferred<Response<ThemesResult>>
+
+    @GET("parts/")
+    fun getPartBySearch(@Query("page") page: Int, @Query("page_size") pageSize: Int, @Query("search") searchQuery: String): Deferred<Response<PartResult>>
+
+    @GET("sets/")
+    fun getLegoByTheme(@Query("page") page: Int, @Query("page_size") page_size: Int, @Query("theme_id") theme_id: Int): Deferred<Response<ApiResultSearch>>
 }

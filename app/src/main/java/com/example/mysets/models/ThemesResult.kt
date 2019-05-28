@@ -1,7 +1,9 @@
 package com.example.mysets.models
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class ThemesResult(
     @SerializedName("count")
@@ -20,3 +22,9 @@ data class ThemesResult(
         val name: String
     )
 }
+
+@Parcelize
+class GroupedThemes(
+    val name: String,
+    val listOfID: MutableList<Int>
+) : Parcelable

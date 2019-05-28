@@ -44,7 +44,7 @@ object BindingAdapter {
 
     @JvmStatic
     @BindingAdapter("bindImgToUrl")
-    fun bindImgToUrl(imageView: ImageView, text: String) {
-        imageView.setOnClickListener { bindImageToUrl?.invoke(text) }
+    fun bindImgToUrl(imageView: ImageView, text: String?) {
+        if (text != null) imageView.setOnClickListener { bindImageToUrl?.invoke(text) }
     }
 }

@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mysets.databinding.SingleThemeBinding
-import com.example.mysets.models.ThemesResult
+import com.example.mysets.models.GroupedThemes
 
 class ThemesRecyclerViewAdapter : RecyclerView.Adapter<ThemesRecyclerViewAdapter.ViewHolder>() {
-    private val listOfThemes = mutableListOf<ThemesResult.Result>()
+    private val listOfThemes = mutableListOf<GroupedThemes>()
 
-    var selectedItem: ((ThemesResult.Result) -> Unit)? = null
+    var selectedItem: ((GroupedThemes) -> Unit)? = null
 
     override fun getItemCount(): Int {
         return listOfThemes.size
@@ -29,14 +29,14 @@ class ThemesRecyclerViewAdapter : RecyclerView.Adapter<ThemesRecyclerViewAdapter
         return ViewHolder(binding)
     }
 
-    fun swapList(list: MutableList<ThemesResult.Result>) {
+    fun swapList(list: MutableList<GroupedThemes>) {
         listOfThemes.clear()
         listOfThemes.addAll(list)
         notifyDataSetChanged()
     }
 
     class ViewHolder(val binding: SingleThemeBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bindView(item: ThemesResult.Result) {
+        fun bindView(item: GroupedThemes) {
             binding.theme = item
             binding.executePendingBindings()
         }
