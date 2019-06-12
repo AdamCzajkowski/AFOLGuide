@@ -10,10 +10,14 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mysets.databinding.SinglePartBinding
 import com.example.mysets.models.PartResult
+import com.example.mysets.utility.autoNotify
 import kotlinx.android.synthetic.main.single_part.view.*
+import kotlin.properties.Delegates
 
 class PartsRecyclerViewAdapter : RecyclerView.Adapter<PartsRecyclerViewAdapter.ViewHolder>() {
-    private var listOfParts = mutableListOf<PartResult.Result>()
+    var listOfParts: MutableList<PartResult.Result> by Delegates.observable(mutableListOf()) { _, oldList, newList ->
+        autoNotify(oldList, newList) { old, new -> old.partCatId == new.partCatId }
+    }
 
     var endMarker: ((Boolean) -> Unit)? = null
 
@@ -38,12 +42,6 @@ class PartsRecyclerViewAdapter : RecyclerView.Adapter<PartsRecyclerViewAdapter.V
         } else {
             endMarker?.invoke(false)
         }
-    }
-
-    fun swapList(list: MutableList<PartResult.Result>) {
-        listOfParts.clear()
-        listOfParts.addAll(list)
-        notifyDataSetChanged()
     }
 
     fun addToList(list: MutableList<PartResult.Result>) {

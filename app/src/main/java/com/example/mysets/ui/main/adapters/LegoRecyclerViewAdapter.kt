@@ -6,10 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mysets.databinding.SingleLegoSetBinding
 import com.example.mysets.models.LegoSet
+import com.example.mysets.utility.autoNotify
+import kotlin.properties.Delegates
 
 class LegoRecyclerViewAdapter : RecyclerView.Adapter<LegoRecyclerViewAdapter.ViewHolder>() {
 
-    private val listOfLegoSet = mutableListOf<LegoSet>()
+    var listOfLegoSet: MutableList<LegoSet> by Delegates.observable(mutableListOf()) { _, oldList, newList ->
+        autoNotify(oldList, newList) { old, new -> old.id == new.id }
+    }
 
     var selectedItem: ((LegoSet) -> Unit)? = null
 
@@ -44,12 +48,6 @@ class LegoRecyclerViewAdapter : RecyclerView.Adapter<LegoRecyclerViewAdapter.Vie
 
     fun clearList() {
         listOfLegoSet.clear()
-        notifyDataSetChanged()
-    }
-
-    fun swapList(list: MutableList<LegoSet>) {
-        listOfLegoSet.clear()
-        listOfLegoSet.addAll(list)
         notifyDataSetChanged()
     }
 

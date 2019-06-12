@@ -5,9 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mysets.databinding.SingleThemeBinding
 import com.example.mysets.models.GroupedThemes
+import com.example.mysets.utility.autoNotify
+import kotlin.properties.Delegates
 
 class ThemesRecyclerViewAdapter : RecyclerView.Adapter<ThemesRecyclerViewAdapter.ViewHolder>() {
-    private val listOfThemes = mutableListOf<GroupedThemes>()
+    var listOfThemes: MutableList<GroupedThemes> by Delegates.observable(mutableListOf()) { _, oldList, newList ->
+        autoNotify(oldList, newList) { old, new -> old.listOfID.first() == new.listOfID.first() }
+    }
 
     var selectedItem: ((GroupedThemes) -> Unit)? = null
 
@@ -27,12 +31,6 @@ class ThemesRecyclerViewAdapter : RecyclerView.Adapter<ThemesRecyclerViewAdapter
         val inflater = LayoutInflater.from(parent.context.applicationContext)
         val binding = SingleThemeBinding.inflate(inflater, parent, false)
         return ViewHolder(binding)
-    }
-
-    fun swapList(list: MutableList<GroupedThemes>) {
-        listOfThemes.clear()
-        listOfThemes.addAll(list)
-        notifyDataSetChanged()
     }
 
     class ViewHolder(val binding: SingleThemeBinding) : RecyclerView.ViewHolder(binding.root) {

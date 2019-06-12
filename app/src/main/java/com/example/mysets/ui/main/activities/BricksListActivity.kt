@@ -65,7 +65,6 @@ class BricksListActivity : AppCompatActivity(), KodeinAware {
         getSuccessRespond()
         getErrorRespond()
         getExceptionRespond()
-
     }
 
     override fun onBackPressed() {

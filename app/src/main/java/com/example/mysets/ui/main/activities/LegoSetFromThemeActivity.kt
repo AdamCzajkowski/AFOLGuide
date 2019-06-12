@@ -119,7 +119,8 @@ class LegoSetFromThemeActivity : AppCompatActivity(), KodeinAware {
     private fun getSuccessRespond() {
         themeActivityViewModel.getThemesSuccess.observe(this, Observer {
             if (counter == 1) {
-                legoRecyclerViewAdapter.swapList(it.results)
+                //legoRecyclerViewAdapter.swapList(it.results)
+                legoRecyclerViewAdapter.listOfLegoSet = it.results
                 Log.i(
                     "themeset",
                     "id = ${groupedThemes.listOfID[counter - 1]}, swaplist counter $counter"
@@ -127,6 +128,7 @@ class LegoSetFromThemeActivity : AppCompatActivity(), KodeinAware {
 
             } else {
                 legoRecyclerViewAdapter.addToList(it.results)
+                //legoRecyclerViewAdapter.listOfLegoSet = it.results
                 Log.i(
                     "themeset",
                     " --------> id = ${groupedThemes.listOfID[counter - 1]}, add to list counter $counter"
