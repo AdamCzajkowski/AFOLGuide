@@ -71,13 +71,18 @@ class ThemesFragment : Fragment(), KodeinAware {
 
     private fun searchTheme() {
         search_edit_text_theme_id.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {}
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                // not used
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // not used
+            }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 Log.i("filtered", "$listOfGroupedThemesFinished")
                 val filteredList =
                     listOfGroupedThemesFinished.filter { it.name.contains(s.toString(), true) }
-                themesRecyclerViewAdapter.swapList(filteredList.toMutableList())
+                themesRecyclerViewAdapter.listOfThemes = filteredList.toMutableList()
             }
         })
     }
@@ -129,7 +134,7 @@ class ThemesFragment : Fragment(), KodeinAware {
             Observer {
                 listOfThemes = it.results.toMutableList()
                 listOfThemes.sortBy { it.name }
-                themesRecyclerViewAdapter.swapList(mapThemesToGroup(listOfThemes))
+                themesRecyclerViewAdapter.listOfThemes = mapThemesToGroup(listOfThemes)
             })
     }
 

@@ -113,7 +113,7 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
 
     private fun getSuccessRespond() {
         detailViewModel.getMocsSuccess.observe(this, Observer {
-            mocRecyclerViewAdapter.swapList(it.results.toMutableList())
+            mocRecyclerViewAdapter.listOfMoc = it.results.toMutableList()
         })
     }
 

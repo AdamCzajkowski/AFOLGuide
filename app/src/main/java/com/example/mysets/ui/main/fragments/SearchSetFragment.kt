@@ -142,9 +142,10 @@ class SearchSetFragment : Fragment(), KodeinAware {
             Observer {
                 if (pageCounter == 1) {
                     if (it.count < 14000) {
-                        legoRecyclerViewAdapter.swapList(
+                        /*legoRecyclerViewAdapter.swapList(
                             it.results
-                        )
+                        )*/
+                        legoRecyclerViewAdapter.listOfLegoSet = it.results
                         Log.i("searchSet", "pageCounter one swaplist")
                     } else {
                         legoRecyclerViewAdapter.clearList()
@@ -154,6 +155,8 @@ class SearchSetFragment : Fragment(), KodeinAware {
                     if (it.count < 14000) legoRecyclerViewAdapter.addToList(
                         it.results
                     )
+                    /*legoRecyclerViewAdapter.listOfLegoSet = it.results*/
+
                     Log.i("searchSet", "pageCounter = $pageCounter add to list")
                 }
             }

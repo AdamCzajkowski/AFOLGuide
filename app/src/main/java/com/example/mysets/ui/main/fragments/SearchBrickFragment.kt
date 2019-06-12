@@ -141,7 +141,8 @@ class SearchBrickFragment : Fragment(), KodeinAware {
     private fun getSuccessRespond() {
         searchBrickViewModel.getPartsSuccess.observe(this, Observer {
             if (pageCounter == 1) {
-                if (it.count < 30000) partsRecyclerViewAdapter.swapList(it.results.toMutableList())
+                if (it.count < 30000) partsRecyclerViewAdapter.listOfParts =
+                    it.results.toMutableList()
                 else partsRecyclerViewAdapter.clearList()
             } else {
                 if (it.count < 30000) partsRecyclerViewAdapter.addToList(it.results.toMutableList())

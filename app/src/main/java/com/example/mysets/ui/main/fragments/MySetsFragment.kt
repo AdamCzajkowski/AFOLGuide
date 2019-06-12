@@ -79,7 +79,8 @@ class MySetsFragment : Fragment(), KodeinAware {
 
     private suspend fun getAllMySets() {
         mySetsViewModel.getListOfMySets().observe(this, Observer { listOfMySets ->
-            legoRecyclerViewAdapter.swapList(listOfMySets)
+            //legoRecyclerViewAdapter.swapList(listOfMySets)
+            legoRecyclerViewAdapter.listOfLegoSet = listOfMySets
         })
     }
 
