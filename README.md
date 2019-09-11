@@ -1,4 +1,4 @@
-# AFOLApplication
+# AFOL Application
 
 This is simple app to research Lego sets and bricks. All information about Lego are from rebrickable.com. 
 
