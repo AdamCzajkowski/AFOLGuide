@@ -7,11 +7,11 @@
 
         <variable
             name="part"
-            type="com.example.mysets.models.PartResult.Result" />
+            type="com.application.afol.models.PartResult.Result" />
 
         <variable
             name="adapter"
-            type="com.example.mysets.ui.main.adapters.BindingAdapter" />
+            type="com.application.afol.ui.adapters.BindingAdapter" />
     </data>
 
     <com.google.android.material.circularreveal.cardview.CircularRevealCardView

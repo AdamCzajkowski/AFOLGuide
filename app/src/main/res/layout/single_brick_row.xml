@@ -6,19 +6,19 @@
 
         <variable
             name="brickQuantity"
-            type="com.example.mysets.models.BrickResult.Result" />
+            type="com.application.afol.models.BrickResult.Result" />
 
         <variable
             name="brickColor"
-            type="com.example.mysets.models.BrickResult.Result.Color" />
+            type="com.application.afol.models.BrickResult.Result.Color" />
 
         <variable
             name="brickDetail"
-            type="com.example.mysets.models.BrickResult.Result.Part" />
+            type="com.application.afol.models.BrickResult.Result.Part" />
 
         <variable
             name="adapter"
-            type="com.example.mysets.ui.main.adapters.BindingAdapter" />
+            type="com.application.afol.ui.adapters.BindingAdapter" />
     </data>
 
     <com.google.android.material.circularreveal.cardview.CircularRevealCardView
