@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/mySetsFragment"
+        android:enabled="true"
+        android:icon="@drawable/lego_head"
+        android:title="@string/tab_title_my"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/searchSetFragment"
+        android:enabled="true"
+        android:icon="@drawable/sets_white"
+        android:title="@string/tab_sets_search"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/searchBrickFragment"
+        android:enabled="true"
+        android:icon="@drawable/blocks_white"
+        android:title="@string/tab_bricks_search"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/themesFragment"
+        android:enabled="true"
+        android:icon="@drawable/themes_white"
+        android:title="@string/Themes_tab_name"
+        app:showAsAction="ifRoom" />
+</menu>

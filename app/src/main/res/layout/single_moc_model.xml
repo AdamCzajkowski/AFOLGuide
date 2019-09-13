@@ -6,11 +6,11 @@
 
         <variable
             name="moc"
-            type="com.example.mysets.models.MOCResult.Result" />
+            type="com.application.afol.models.MOCResult.Result" />
 
         <variable
             name="adapter"
-            type="com.example.mysets.ui.main.adapters.BindingAdapter" />
+            type="com.application.afol.ui.adapters.BindingAdapter" />
     </data>
 
     <androidx.cardview.widget.CardView

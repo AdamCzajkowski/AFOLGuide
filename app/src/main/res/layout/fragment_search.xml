@@ -5,7 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.fragments.SearchSetFragment">
+    tools:context=".ui.fragments.SearchSetFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -34,5 +34,14 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <include
+        android:id="@+id/user_instruction_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        layout="@layout/default_search_text_box"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_search_id"
+        app:layout_constraintEnd_toEndOf="@+id/rv_search_id"
+        app:layout_constraintStart_toStartOf="@+id/rv_search_id"
+        app:layout_constraintTop_toTopOf="@+id/rv_search_id" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

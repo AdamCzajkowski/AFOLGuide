@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_bottom"
+    app:startDestination="@id/mySetsFragment">
+
+    <fragment
+        android:id="@+id/mySetsFragment"
+        android:name="com.application.afol.ui.fragments.MySetsFragment"
+        android:label="fragment_my_sets"
+        tools:layout="@layout/fragment_my_sets" />
+    <fragment
+        android:id="@+id/searchSetFragment"
+        android:name="com.application.afol.ui.fragments.SearchSetFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/searchBrickFragment"
+        android:name="com.application.afol.ui.fragments.SearchBrickFragment"
+        android:label="fragment_search_brick"
+        tools:layout="@layout/fragment_search_brick" />
+    <fragment
+        android:id="@+id/themesFragment"
+        android:name="com.application.afol.ui.fragments.ThemesFragment"
+        android:label="fragment_themes"
+        tools:layout="@layout/fragment_themes" />
+</navigation>

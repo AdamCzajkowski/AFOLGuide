@@ -2,16 +2,16 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.main.activities.DetailActivity">
+    tools:context=".ui.activities.DetailActivity">
 
     <data>
         <variable
             name="legoSet"
-            type="com.example.mysets.models.LegoSet" />
+            type="com.application.afol.models.LegoSet" />
 
         <variable
             name="adapter"
-            type="com.example.mysets.ui.main.adapters.BindingAdapter" />
+            type="com.application.afol.ui.adapters.BindingAdapter" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
