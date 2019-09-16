@@ -114,7 +114,7 @@ class SearchBrickFragment : Fragment(), KodeinAware {
                     subsciber.onNext(s.toString())
                     pageCounter = 1
                     Log.i("searchPart", "\npageCounter down to one")
-
+                    partsRecyclerViewAdapter.notifyDataSetChanged()
                 }
             })
         }).debounce(200, TimeUnit.MILLISECONDS)

@@ -79,10 +79,11 @@ class ThemesFragment : Fragment(), KodeinAware {
                 // not used
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                Log.i("filtered", "$listOfGroupedThemesFinished")
                 val filteredList =
                     listOfGroupedThemesFinished.filter { it.name.contains(s.toString(), true) }
+                Log.i("filtered", "${filteredList.size}")
                 themesRecyclerViewAdapter.listOfThemes = filteredList.toMutableList()
+                themesRecyclerViewAdapter.notifyDataSetChanged()
             }
         })
     }
@@ -93,9 +94,9 @@ class ThemesFragment : Fragment(), KodeinAware {
         listOfThemes.forEach { theme ->
             Log.i("mapped", "new finding start for ${theme.name}")
             if (listOfGroupedThemes.isEmpty()) {
-                val firstGropedTheme = GroupedThemes(theme.name, mutableListOf(theme.id))
+                val firstGroupedTheme = GroupedThemes(theme.name, mutableListOf(theme.id))
                 Log.i("mapped", "create first item for ${theme.name}")
-                listOfGroupedThemes.add(firstGropedTheme)
+                listOfGroupedThemes.add(firstGroupedTheme)
             } else {
                 Log.i(
                     "mapped",
@@ -131,7 +132,7 @@ class ThemesFragment : Fragment(), KodeinAware {
 
     private fun getSuccessRespond() {
         themesViewModel.getThemesSuccess.observe(viewLifecycleOwner,
-            Observer {
+            Observer { it ->
                 listOfThemes = it.results.toMutableList()
                 listOfThemes.sortBy { it.name }
                 themesRecyclerViewAdapter.listOfThemes = mapThemesToGroup(listOfThemes)

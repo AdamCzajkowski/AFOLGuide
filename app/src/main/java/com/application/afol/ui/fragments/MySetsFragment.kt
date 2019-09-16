@@ -1,6 +1,5 @@
 package com.application.afol.ui.fragments
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,16 +7,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.afol.R
 import com.application.afol.models.LegoSet
 import com.application.afol.ui.activities.DetailActivity
-import com.application.afol.ui.adapters.LegoRecyclerViewAdapter
+import com.application.afol.ui.adapters.MySetsRecyclerViewAdapter
+import com.application.afol.utility.DragManageAdapter
 import com.application.afol.utility.gone
 import com.application.afol.utility.show
 import com.application.afol.vm.mySetsViewModel.MySetsViewModel
 import com.application.afol.vm.mySetsViewModel.MySetsViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import kotlinx.android.synthetic.main.fragment_my_sets.*
@@ -36,7 +38,8 @@ class MySetsFragment : Fragment(), KodeinAware {
     private val mySetsViewModelFactory: MySetsViewModelFactory by instance()
 
     private lateinit var mySetsViewModel: MySetsViewModel
-    private lateinit var legoRecyclerViewAdapter: LegoRecyclerViewAdapter
+
+    private lateinit var mySetsRecyclerViewAdapter: MySetsRecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,9 +52,11 @@ class MySetsFragment : Fragment(), KodeinAware {
         initializeLegoViewModel()
         initializeRecyclerView(rv_my_sets_id)
         getAllMySetsFromDatabase()
-        legoRecyclerViewAdapter.selectedItem = {
+        mySetsRecyclerViewAdapter.selectedItem = {
             singleItemClickedReaction(it)
         }
+        setupItemTouchHelper()
+        removeFromMySetsOnSwipe()
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -66,25 +71,57 @@ class MySetsFragment : Fragment(), KodeinAware {
             ViewModelProviders.of(this, mySetsViewModelFactory).get(MySetsViewModel::class.java)
     }
 
-    private fun singleItemClickedReaction(legoSet: LegoSet) {
-        startDetailActivity(legoSet)
-        //startWithAnimationActivity(1, legoSet)
-    }
+    private fun singleItemClickedReaction(legoSet: LegoSet) = startDetailActivity(legoSet)
 
     private fun initializeRecyclerView(recyclerView: RecyclerView) {
-        legoRecyclerViewAdapter = LegoRecyclerViewAdapter()
+        mySetsRecyclerViewAdapter = MySetsRecyclerViewAdapter()
         recyclerView.layoutManager = LinearLayoutManager(context)
-        val alphaAdapter = AlphaInAnimationAdapter(legoRecyclerViewAdapter)
+        val alphaAdapter = AlphaInAnimationAdapter(mySetsRecyclerViewAdapter)
         recyclerView.adapter = ScaleInAnimationAdapter(alphaAdapter)
+    }
+
+    private fun setupItemTouchHelper() {
+        val callback = DragManageAdapter(
+            mySetsRecyclerViewAdapter, context!!,
+            0, ItemTouchHelper.LEFT
+        )
+        val helper = ItemTouchHelper(callback)
+        helper.attachToRecyclerView(rv_my_sets_id)
     }
 
     private suspend fun getAllMySets() {
         mySetsViewModel.getListOfMySets().observe(this, Observer { listOfMySets ->
-            //legoRecyclerViewAdapter.swapList(listOfMySets)
-            legoRecyclerViewAdapter.listOfLegoSet = listOfMySets
+            mySetsRecyclerViewAdapter.listOfLegoSet = listOfMySets
             if (listOfMySets.isEmpty()) default_my_sets_view.show()
             else default_my_sets_view.gone()
         })
+    }
+
+    private fun removeFromMySetsOnSwipe() {
+        mySetsRecyclerViewAdapter.swipedItem = { legoSet ->
+            mySetsViewModel.removeFromMySets(legoSet)
+            showUndoSnackbar(legoSet)
+        }
+    }
+
+    private fun showUndoSnackbar(legoSet: LegoSet) {
+        val snackbar = Snackbar.make(
+            view!!, legoSet.name + " deleted from Favorites",
+            Snackbar.LENGTH_LONG
+        )
+        snackbar.setAction("Undo") { undoDelete() }
+        snackbar.show()
+    }
+
+    private fun undoDelete() {
+        mySetsRecyclerViewAdapter.let {
+            it.listOfLegoSet.add(
+                it.mRecentlyDeletedItemPosition,
+                it.mRecentlyDeletedItem
+            )
+            mySetsViewModel.addToMySets(it.mRecentlyDeletedItem)
+            it.notifyDataSetChanged()
+        }
     }
 
     private fun startDetailActivity(legoSet: LegoSet) {
