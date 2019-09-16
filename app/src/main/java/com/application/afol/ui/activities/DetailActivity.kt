@@ -25,12 +25,13 @@ import com.application.afol.vm.detailViewModel.DetailViewModelFactory
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
-import kotlin.coroutines.coroutineContext
 
 class DetailActivity : AppCompatActivity(), KodeinAware {
 
@@ -200,26 +201,16 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
 
     private fun initializeMySetsFAB() {
         isInMySetsMarker = { marker ->
-            Log.i("test", "mysets: $marker")
             if (marker) {
                 setImageButtonIcon(my_sets_button, R.drawable.wishlist_added_icon)
-                my_sets_text.text = getString(R.string.remove_from_my_sets_text)
+                my_sets_text.text = getString(R.string.exist_in_my_sets_text)
             } else {
                 setImageButtonIcon(my_sets_button, R.drawable.wishlist_unadded_icon)
                 my_sets_text.text = getString(R.string.add_to_my_sets_text)
-            }
-            my_sets_button.setOnClickListener {
-                if (marker) {
-                    detailViewModel.removeFromMySets(legoSet)
-                    //GlobalScope.launch { detailViewModel.getListOfMySets().observe(this@DetailActivity, Observer { listOfMySets -> Log.i ("test", "number of my sets ${listOfMySets.size}")})}
-                    setImageButtonIcon(my_sets_button, R.drawable.wishlist_unadded_icon)
-                    toastMessage(R.string.removed_from_my_sets)
-                    my_sets_text.text = getString(R.string.add_to_my_sets_text)
-                } else {
+                my_sets_button.setOnClickListener {
                     detailViewModel.addToMySets(legoSet)
                     setImageButtonIcon(my_sets_button, R.drawable.wishlist_added_icon)
-                    toastMessage(R.string.added_to_my_sets)
-                    my_sets_text.text = getString(R.string.remove_from_my_sets_text)
+                    my_sets_text.text = getString(R.string.exist_in_my_sets_text)
                 }
             }
         }

@@ -36,6 +36,7 @@ class DetailViewModel(private val repository: Repository) : ViewModel() {
     }
 
     private fun cancelJob() = job.cancel()
+
     fun addToMySets(legoSet: LegoSet) = scope.launch {
         repository.addToMySets(legoSet)
     }
@@ -44,9 +45,5 @@ class DetailViewModel(private val repository: Repository) : ViewModel() {
         return withContext(Dispatchers.Main) {
             return@withContext repository.getMySets()
         }
-    }
-
-    fun removeFromMySets(legoSet: LegoSet) = scope.launch {
-        repository.removeFromMySets(legoSet)
     }
 }

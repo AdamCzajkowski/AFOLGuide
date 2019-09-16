@@ -117,7 +117,7 @@ class SearchSetFragment : Fragment(), KodeinAware {
                     subscriber.onNext(s.toString())
                     pageCounter = 1
                     Log.i("searchSet", "\npageCounter down to one")
-
+                    legoRecyclerViewAdapter.notifyDataSetChanged()
                 }
             })
         }).debounce(200, TimeUnit.MILLISECONDS)
