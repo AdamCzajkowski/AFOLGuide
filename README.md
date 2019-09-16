@@ -18,9 +18,16 @@ Also:
 - Picasso
 - Coroutines
 
-Screenshots:
+Screens form AFOL app v1:
 
- <img src="https://i.ibb.co/L6n1Bd3/Screenshot-20190529-082604-AFOL-Application.jpg" width="250">  <img src="https://i.ibb.co/YR0df6j/Screenshot-20190529-082640-AFOL-Application.jpg" width="250"> <img src="https://i.ibb.co/xKnxfjk/Screenshot-20190529-082707-AFOL-Application.jpg" width="250"> <img src="https://i.ibb.co/xjrDQCS/Screenshot-20190529-082717-AFOL-Application.jpg" width="250"> <img src="https://i.ibb.co/DM6Hxdy/Screenshot-20190529-082737-AFOL-Application.jpg" width="250"> <img src="https://i.ibb.co/rF3QSYv/Screenshot-20190529-082742-AFOL-Application.jpg" width="250"> <img src="https://i.ibb.co/T8Q5XpC/Screenshot-20190529-082752-AFOL-Application.jpg" width="250"> <img src="https://i.ibb.co/3ytGscT/Screenshot-20190529-082758-AFOL-Application.jpg" width="250">
+<img src="https://i.ibb.co/L6n1Bd3/Screenshot-20190529-082604-AFOL-Application.jpg" width="250">  <img src="https://i.ibb.co/YR0df6j/Screenshot-20190529-082640-AFOL-Application.jpg" width="250"> <img src="https://i.ibb.co/xKnxfjk/Screenshot-20190529-082707-AFOL-Application.jpg" width="250"> <img src="https://i.ibb.co/xjrDQCS/Screenshot-20190529-082717-AFOL-Application.jpg" width="250"> <img src="https://i.ibb.co/DM6Hxdy/Screenshot-20190529-082737-AFOL-Application.jpg" width="250"> <img src="https://i.ibb.co/rF3QSYv/Screenshot-20190529-082742-AFOL-Application.jpg" width="250"> <img src="https://i.ibb.co/T8Q5XpC/Screenshot-20190529-082752-AFOL-Application.jpg" width="250"> <img src="https://i.ibb.co/3ytGscT/Screenshot-20190529-082758-AFOL-Application.jpg" width="250">
 
+Changelog: 
+
+16.08.2019: 
+ - Updated UI to Bottom Navigation Bar, 
+ - Removing from 'Favorites' moved to reyccler and by swiping to left 
+ - Fix bugs 
+ - Prepare for receivinf instructions for orifinal LEGO sets
 
 By Adam Czajkowski
