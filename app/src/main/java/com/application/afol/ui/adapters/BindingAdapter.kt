@@ -33,11 +33,19 @@ object BindingAdapter {
     }
 
     var bindURLParse: ((String) -> Unit)? = null
+    var bindInstrctionURLParse: ((String) -> Unit)? = null
+
 
     @JvmStatic
     @BindingAdapter("bindURLa")
     fun bindURLbutton(button: Button, text: String) {
         button.setOnClickListener { bindURLParse?.invoke(text) }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bindInstruction")
+    fun Button.bindInstructionURLbutton(text: String) {
+        setOnClickListener { bindInstrctionURLParse?.invoke(text) }
     }
 
     var bindImageToUrl: ((String) -> Unit)? = null

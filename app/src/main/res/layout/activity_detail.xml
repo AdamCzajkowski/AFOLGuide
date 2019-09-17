@@ -75,10 +75,10 @@
 
                 <ImageView
                     android:id="@+id/my_sets_button"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-
-                    android:layout_marginTop="16dp"
+                    android:layout_width="48dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="60dp"
                     android:contentDescription="@string/image_of_my_sets"
                     android:src="@drawable/wishlist_unadded_icon"
                     app:layout_anchorGravity="bottom|left"
@@ -87,10 +87,10 @@
 
                 <TextView
                     android:id="@+id/my_sets_text"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="3dp"
                     android:text="@string/add_to_my_sets_text"
                     android:textSize="18sp"
                     app:layout_constraintStart_toEndOf="@+id/my_sets_button"
@@ -138,7 +138,7 @@
 
                 <TextView
                     android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:text="@{legoSet.set_num}"
@@ -183,14 +183,23 @@
                 <Button
                     android:id="@+id/rebrickable_url_button"
                     bindURLa="@{legoSet.set_url}"
-                    android:layout_width="150dp"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:background="@drawable/check_state_rebrickable_url_button"
-                    android:textColor="#A6FFFFFF"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginEnd="16dp"
+                    android:text="rebrickable"
+                    app:layout_constraintEnd_toStartOf="@+id/lego_instruction"
                     app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+                <Button
+                    android:id="@+id/lego_instruction"
+                    bindInstruction="@{legoSet.set_num}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="instruction"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/rebrickable_url_button" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline3"
@@ -202,13 +211,12 @@
                 <Button
                     android:id="@+id/parts_list_button"
                     style="@style/Widget.AppCompat.Button"
-                    android:layout_width="85dp"
-                    android:layout_height="35dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/check_state_parts_list_button"
-                    android:textColor="#A6FFFFFF"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/rebrickable_url_button" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Parts list"
+                    app:layout_constraintStart_toEndOf="@+id/lego_instruction"
+                    app:layout_constraintTop_toTopOf="@+id/lego_instruction" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/moc_recycler_view_id"

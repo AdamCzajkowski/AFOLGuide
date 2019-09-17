@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -173,14 +172,11 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
             openURLfromImage.data = Uri.parse(url)
             startActivity(openURLfromImage)
         }
-    }
-
-    private fun toastMessage(message: Int) {
-        Toast.makeText(
-            this,
-            "${legoSet.name} ${getString(message)}",
-            Toast.LENGTH_LONG
-        ).show()
+        adapter.bindInstrctionURLParse = { set_num ->
+            val openInstructionURL = Intent(Intent.ACTION_VIEW)
+            openInstructionURL.data = Uri.parse(startInstructionSite(set_num))
+            startActivity(openInstructionURL)
+        }
     }
 
     private fun setImageButtonIcon(imageButton: ImageView, drawable: Int) {
@@ -215,6 +211,13 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
             }
         }
     }
+
+    private fun startInstructionSite(set_num: String) =
+        "https://www.lego.com/pl-pl/service/buildinginstructions/search#?search&text=" + set_num.substring(
+            0,
+            set_num.length - 2
+        )
+
 
     private fun partListButtonReaction() {
         startActivity(

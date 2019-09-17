@@ -117,7 +117,6 @@ class SearchSetFragment : Fragment(), KodeinAware {
                     subscriber.onNext(s.toString())
                     pageCounter = 1
                     Log.i("searchSet", "\npageCounter down to one")
-                    legoRecyclerViewAdapter.notifyDataSetChanged()
                 }
             })
         }).debounce(200, TimeUnit.MILLISECONDS)
@@ -162,6 +161,7 @@ class SearchSetFragment : Fragment(), KodeinAware {
                     /*legoRecyclerViewAdapter.listOfLegoSet = it.results*/
                     Log.i("searchSet", "pageCounter = $pageCounter add to list")
                 }
+                legoRecyclerViewAdapter.notifyDataSetChanged()
             }
         )
     }
