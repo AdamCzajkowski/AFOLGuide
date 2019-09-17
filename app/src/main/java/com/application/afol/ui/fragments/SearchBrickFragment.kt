@@ -114,7 +114,6 @@ class SearchBrickFragment : Fragment(), KodeinAware {
                     subsciber.onNext(s.toString())
                     pageCounter = 1
                     Log.i("searchPart", "\npageCounter down to one")
-                    partsRecyclerViewAdapter.notifyDataSetChanged()
                 }
             })
         }).debounce(200, TimeUnit.MILLISECONDS)
@@ -149,6 +148,7 @@ class SearchBrickFragment : Fragment(), KodeinAware {
             } else {
                 if (it.count < 30000) partsRecyclerViewAdapter.addToList(it.results.toMutableList()).also { user_instruction_view.gone() }
             }
+            partsRecyclerViewAdapter.notifyDataSetChanged()
         })
     }
 
