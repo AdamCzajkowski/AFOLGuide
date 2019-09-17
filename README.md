@@ -24,10 +24,13 @@ Screens form AFOL app v1:
 
 Changelog: 
 
-16.08.2019: 
+16.09.2019: 
  - Updated UI to Bottom Navigation Bar, 
  - Removing from 'Favorites' moved to reyccler and by swiping to left 
  - Fix bugs 
  - Prepare for receivinf instructions for orifinal LEGO sets
 
+17.09.2019:
+ - In Details of set now user can go straight to LEGO official site to download instructions
+ - Fix bugs
 By Adam Czajkowski
