@@ -63,4 +63,5 @@ Changelog:
  
  24.09.2019:
  - Removed unused files
+ 
 By Adam Czajkowski
