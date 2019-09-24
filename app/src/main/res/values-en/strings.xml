@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AFOL Application</string>
+    <string name="Themes_tab_name">Themes</string>
+    <string name="add_to_my_sets_text">Add to Favorites</string>
+    <string name="brick_image_desc">brick image</string>
+    <string name="brick_title">Brick</string>
+    <string name="color_title_text">Color</string>
+    <string name="default_my_sets_for_user">In this section, you will be able to see your favorite LEGO sets. You can add set to `Favorite` by clicking proper button in `Lego Set\'s Details`.</string>
+    <string name="default_text_for_user">In this section, after filling text field with proper tags, you will be able to see your search results.</string>
+    <string name="designer_text">Designer</string>
+    <string name="exist_in_my_sets_text">Exist in Favorites</string>
+    <string name="image_of_my_sets">image of my sets</string>
+    <string name="lego_image">LEGO Image</string>
+    <string name="lego_image_desc">LEGO image</string>
+    <string name="lego_image_transition">LEGO set image</string>
+    <string name="moc_image_desc">moc image</string>
+    <string name="mocs_based_on_text">MOCs based on</string>
+    <string name="name_set_cardview">Name</string>
+    <string name="number_text">No.</string>
+    <string name="parts_text">Parts</string>
+    <string name="pieces_cardView_title">Qty Pieces</string>
+    <string name="quantity_title_text">Quantity</string>
+    <string name="release_year_cardview_text">Release year</string>
+    <string name="search_lego_part_text">Search LEGO parts</string>
+    <string name="search_lego_set_hint_edit_text">Search LEGO set</string>
+    <string name="search_lego_theme_text">Search LEGO theme</string>
+    <string name="tab_bricks_search">Bricks</string>
+    <string name="tab_sets_search">Sets</string>
+    <string name="tab_title_my">Favorites</string>
+    <string name="tab_title_search">Search Set</string>
+    <string name="tab_title_search_part">Search Part</string>
+    <string name="diffrent_bricks_text">Different bricks:</string>
+    <string name="information_image">information image</string>
+</resources>

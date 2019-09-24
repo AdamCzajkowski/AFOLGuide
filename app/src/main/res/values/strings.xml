@@ -15,11 +15,7 @@
     <string name="pieces_cardView_title">Pieces</string>
 
     <string name="search_lego_set_hint_edit_text">Search LEGO set</string>
-    <string name="rebrickable_url_text">Rebrickable URL</string>
     <string name="lego_image">LEGO Image</string>
-
-    <string name="added_to_my_sets">added to Favorites</string>
-    <string name="removed_from_my_sets">removed from Favorites</string>
 
     <string name="add_to_my_sets_text">Add to Favorites</string>
 
@@ -29,7 +25,6 @@
     <string name="color_title_text">Color</string>
     <string name="brick_image_desc">brick image</string>
     <string name="diffrent_bricks_text">Different bricks:</string>
-    <string name="parts_list_button_text">parts list</string>
 
     <string name="lego_image_transition">LEGO set image</string>
     <string name="brick_title">Brick</string>
@@ -38,12 +33,9 @@
     <string name="designer_text">Designer</string>
     <string name="mocs_based_on_text">MOCs based on</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="search_lego_theme_text">Search LEGO theme</string>
-    <string name="sets_number_title_text">Sets:</string>
-    <string name="diffrent_lego_sets_text">Different LEGO sets</string>
     <string name="search_lego_part_text">Search LEGO parts</string>
     <string name="default_text_for_user">In this section, after filling text field with proper tags, you will be able to see your search results.</string>
     <string name="default_my_sets_for_user">In this section, you will be able to see your favorite LEGO sets. You can add set to `Favorite` by clicking proper button in `Lego Set\'s Details`.</string>
-    </resources>
+    <string name="information_image">information image</string>
+</resources>
