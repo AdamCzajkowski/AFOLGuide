@@ -20,7 +20,18 @@ Also:
 
 Screens form AFOL app v1:
 
-<img src="https://i.ibb.co/L6n1Bd3/Screenshot-20190529-082604-AFOL-Application.jpg" width="250">  <img src="https://i.ibb.co/YR0df6j/Screenshot-20190529-082640-AFOL-Application.jpg" width="250"> <img src="https://i.ibb.co/xKnxfjk/Screenshot-20190529-082707-AFOL-Application.jpg" width="250"> <img src="https://i.ibb.co/xjrDQCS/Screenshot-20190529-082717-AFOL-Application.jpg" width="250"> <img src="https://i.ibb.co/DM6Hxdy/Screenshot-20190529-082737-AFOL-Application.jpg" width="250"> <img src="https://i.ibb.co/rF3QSYv/Screenshot-20190529-082742-AFOL-Application.jpg" width="250"> <img src="https://i.ibb.co/T8Q5XpC/Screenshot-20190529-082752-AFOL-Application.jpg" width="250"> <img src="https://i.ibb.co/3ytGscT/Screenshot-20190529-082758-AFOL-Application.jpg" width="250">
+<img src="https://i.ibb.co/xDdW6Fw/Screenshot-1569305217.png" width=250>
+<img src="https://i.ibb.co/pjcy52j/Screenshot-1569305288.png" width=250>
+<img src="https://i.ibb.co/tQW4BDZ/Screenshot-1569305303.png" width=250>
+<img src="https://i.ibb.co/ZLy09qf/Screenshot-1569305311.png" width=250>
+<img src="https://i.ibb.co/VC6nNJq/Screenshot-1569305322.png" width=250>
+<img src="https://i.ibb.co/Z8dZZG7/Screenshot-1569305332.png" width=250>
+<img src="https://i.ibb.co/PW9bs5x/Screenshot-1569305358.png" width=250>
+<img src="https://i.ibb.co/QrSSJzQ/Screenshot-1569305363.png" width=250>
+<img src="https://i.ibb.co/LhdbH7j/Screenshot-1569305371.png" width=250>
+<img src="https://i.ibb.co/fMmjMdy/Screenshot-1569305377.png" width=250>
+<img src="https://i.ibb.co/g4J4PZG/Screenshot-1569305419.png" width=250>
+<img src="https://i.ibb.co/f26K5Wp/Screenshot-1569305439.png" width=250>
 
 Changelog: 
 
