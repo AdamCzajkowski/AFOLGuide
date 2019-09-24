@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AFOL Aplikacja</string>
+    <string name="Themes_tab_name">Motywy</string>
+    <string name="add_to_my_sets_text">Dodaj do ulubionych</string>
+    <string name="brick_image_desc">Obraz klocka</string>
+    <string name="brick_title">Klocek</string>
+    <string name="color_title_text">Kolor</string>
+    <string name="default_my_sets_for_user">W tej sekcji będą widoczne Twoje ulubione zestawy. Możesz dodać zestawy do \'Ulubionych\' poprzez kliknięcie w odpowiedni przycisk w \'Szczegóły zestawu LEGO\'.</string>
+    <string name="default_text_for_user">W tej sekcji, po wypełnieniu pola tekstowego odpowiednim hasłem, będziesz widział wyniki wyszukiwania.</string>
+    <string name="designer_text">Autor</string>
+    <string name="exist_in_my_sets_text">Istnieje w ulubionych</string>
+    <string name="image_of_my_sets">obrazek moich zestawów</string>
+    <string name="lego_image">obrazek LEGO</string>
+    <string name="lego_image_desc">obrazek LEGO</string>
+    <string name="lego_image_transition">obrazek zestawu LEGO</string>
+    <string name="moc_image_desc">obrazek MOC</string>
+    <string name="mocs_based_on_text">MOC bazuje na</string>
+    <string name="name_set_cardview">Nazwa</string>
+    <string name="number_text">Nr</string>
+    <string name="parts_text">Części</string>
+    <string name="pieces_cardView_title">Il. Klocków</string>
+    <string name="quantity_title_text">Ilość</string>
+    <string name="release_year_cardview_text">Rok wydania</string>
+    <string name="search_lego_part_text">"Szukaj części LEGO "</string>
+    <string name="search_lego_set_hint_edit_text">Szukaj zestawu LEGO</string>
+    <string name="search_lego_theme_text">Szukaj motywu LEGO</string>
+    <string name="tab_bricks_search">Klocki</string>
+    <string name="tab_sets_search">Zestawy</string>
+    <string name="tab_title_my">Ulubione</string>
+    <string name="tab_title_search">Wyszukaj zestaw</string>
+    <string name="tab_title_search_part">Wyszukaj część</string>
+    <string name="diffrent_bricks_text">Różnych części:</string>
+    <string name="information_image">obrazek informacyjny</string>
+</resources>

@@ -1,5 +1,4 @@
-<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/default_search_view"
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -11,7 +10,8 @@
         android:src="@drawable/search_white"
         app:layout_constraintBottom_toTopOf="@+id/text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/information_image" />
 
     <TextView
         android:id="@+id/text"
