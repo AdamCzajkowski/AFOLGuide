@@ -63,5 +63,6 @@ Changelog:
  
  24.09.2019:
  - Removed unused files
+ - Polish translation
  
 By Adam Czajkowski
