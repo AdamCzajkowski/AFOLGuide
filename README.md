@@ -20,20 +20,20 @@ By cliking on LEGO set's user will go to "LEGO set's details"
 "Bricks" section:
 -------------------------------
 In this section, user will be able to see his search result LEGO bricks after filling text field with proper tags like brick's number or name. 
-by clicking on image of brick app will open rebrickable site with information about that brick in web browser.
+by clicking on image of brick user will see rebrickable site with information about that brick in web browser.
 
 "Themes" section:
 -------------------------------
 In this section, user will be able to see LEGO themes after filling text field with proper tags like name of theme list will be sorted. 
-By clicking on theme, app will open screen with LEGO's sets from that theme and by clicking on image of set app will open "LEGO set's details" screen. 
+By clicking on theme, user will see screen with LEGO's sets from that theme and by clicking on image of user will go to "LEGO set's details" screen. 
 
 "LEGO set's details" screen:
 -------------------------------
-In this section, user will be able to see LEGO set's detail. User can add set to "Favorite" by clicking heart's icon and if set is in favorite heart icon is full cover and text near will be "Exist in favorites"
-By clicking "REBRICKABLE" button, app will open rebrickable site with information about that set in web browser.
-By clicking "INSTRUCTION" button, app will open official LEGO's site with instruction in web browser.
-By clicking "PARTS LIST" button, app will open screen with list of parts used in that model and by clicking on image of brick app will open rebrickable site with information about that brick in web browser.
-At bottom user will be able to see MOCs based on that model which is detail's shown on top and by clicking on image of MOC app will open rebrickable site with information about that MOC in web browser.
+In this section, user will be able to see LEGO set's detail. User can add set to "Favorite" by clicking icon of heart and if set is in favorite icon of heart is full cover and text next to will be changed to "Exist in favorites".
+By clicking "REBRICKABLE" button, user will see rebrickable site with information about that set in web browser.
+By clicking "INSTRUCTION" button, user will see official LEGO's site with instruction in web browser.
+By clicking "PARTS LIST" button, user will see screen with list of parts used in that model and by clicking on image of brick user will see rebrickable site with information about that brick in web browser.
+At bottom user will be able to see MOCs based on that model which is detail's shown on top and by clicking on image of MOC user will see rebrickable site with information about that MOC in web browser.
 
 About used technology:
 -----------------------------
