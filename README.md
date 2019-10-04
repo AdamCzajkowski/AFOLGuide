@@ -10,12 +10,12 @@ Screens:
 -----------------------------
 In this section, user will be able to see his favorite LEGO sets. User can add set to "Favorite" by clicking proper button in "LEGO set's details".
 By swiping card with set user can remove set from favorite list.
-By cliking on LEGO set's user will go to "LEGO set's details"
+By cliking on LEGO set user will go to "LEGO set's details"
 
 "Sets" section:
 ------------------------------
 In this section, user will be able to see his search result LEGO sets after filling text field with proper tags like set's number or name. 
-By cliking on LEGO set's user will go to "LEGO set's details"
+By cliking on LEGO set user will go to "LEGO set's details"
 
 "Bricks" section:
 -------------------------------
@@ -25,7 +25,7 @@ by clicking on image of brick user will see rebrickable site with information ab
 "Themes" section:
 -------------------------------
 In this section, user will be able to see LEGO themes after filling text field with proper tags like name of theme list will be sorted. 
-By clicking on theme, user will see screen with LEGO's sets from that theme and by clicking on image of user will go to "LEGO set's details" screen. 
+By clicking on theme, user will see screen with LEGO sets from that theme and by clicking on image of user will go to "LEGO set's details" screen. 
 
 "LEGO set's details" screen:
 -------------------------------
@@ -46,16 +46,16 @@ Also:
 - MVVM,
 - Kodein,
 - RxJava,
-- Picasso
+- Picasso,
 - Coroutines
 
 Changelog: 
 --------------------------
 16.09.2019: 
- - Updated UI to Bottom Navigation Bar, 
- - Removing from 'Favorites' moved to reyccler and by swiping to left 
+ - Updated UI to Bottom Navigation Bar
+ - Removing from 'Favorites' moved to recycler and by swiping to left 
  - Fix bugs 
- - Prepare for receivinf instructions for orifinal LEGO sets
+ - Prepare for receiving instructions for orifinal LEGO sets
 
 17.09.2019:
  - In Details of set now user can go straight to LEGO official site to download instructions
