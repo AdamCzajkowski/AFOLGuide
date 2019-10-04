@@ -16,12 +16,12 @@
     <string name="lego_image_transition">obrazek zestawu LEGO</string>
     <string name="moc_image_desc">obrazek MOC</string>
     <string name="mocs_based_on_text">MOC bazuje na</string>
-    <string name="name_set_cardview">Nazwa</string>
+    <string name="name_set_card_view">Nazwa</string>
     <string name="number_text">Nr</string>
     <string name="parts_text">Części</string>
     <string name="pieces_cardView_title">Il. Klocków</string>
     <string name="quantity_title_text">Ilość</string>
-    <string name="release_year_cardview_text">Rok wydania</string>
+    <string name="release_year_card_view_text">Rok wydania</string>
     <string name="search_lego_part_text">"Szukaj części LEGO "</string>
     <string name="search_lego_set_hint_edit_text">Szukaj zestawu LEGO</string>
     <string name="search_lego_theme_text">Szukaj motywu LEGO</string>
@@ -30,6 +30,10 @@
     <string name="tab_title_my">Ulubione</string>
     <string name="tab_title_search">Wyszukaj zestaw</string>
     <string name="tab_title_search_part">Wyszukaj część</string>
-    <string name="diffrent_bricks_text">Różnych części:</string>
+    <string name="different_bricks_text">Różnych części:</string>
     <string name="information_image">obrazek informacyjny</string>
+    <string name="deleted_item_snack_bar_text">usunięto z ulubionych</string>
+    <string name="undo_snack_bar_text">Cofnij</string>
+    <string name="added_to_favorites_snack_bar_text">dodano do Ulubionych</string>
+    <string name="already_in_favorites_snack_bar_text">już jest w Ulubionych</string>
 </resources>

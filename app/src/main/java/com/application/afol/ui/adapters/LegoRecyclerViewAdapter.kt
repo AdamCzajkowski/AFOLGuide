@@ -19,6 +19,10 @@ class LegoRecyclerViewAdapter : RecyclerView.Adapter<LegoRecyclerViewAdapter.Vie
 
     var endMarker: ((Boolean) -> Unit)? = null
 
+    lateinit var mRecentlySwipedItem: LegoSet
+
+    var swipedItem: ((LegoSet) -> Unit)? = null
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(viewGroup.context.applicationContext)
         val binding = SingleLegoSetBinding.inflate(inflater, viewGroup, false)
@@ -44,6 +48,11 @@ class LegoRecyclerViewAdapter : RecyclerView.Adapter<LegoRecyclerViewAdapter.Vie
 
     override fun getItemCount(): Int {
         return listOfLegoSet.size
+    }
+
+    fun swapItem(position: Int) {
+        mRecentlySwipedItem = listOfLegoSet[position]
+        swipedItem?.invoke(listOfLegoSet[position])
     }
 
     fun clearList() {

@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/name_set_cardview"
+                android:text="@string/name_set_card_view"
                 android:textColor="#A6FFFFFF"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
