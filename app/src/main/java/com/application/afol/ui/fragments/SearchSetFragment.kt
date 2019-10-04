@@ -10,18 +10,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.afol.R
 import com.application.afol.models.LegoSet
 import com.application.afol.ui.activities.DetailActivity
 import com.application.afol.ui.adapters.LegoRecyclerViewAdapter
+import com.application.afol.utility.DragManageAddAdapter
 import com.application.afol.utility.gone
 import com.application.afol.utility.show
 import com.application.afol.vm.searchViewModel.SearchLegoViewModel
 import com.application.afol.vm.searchViewModel.SearchLegoViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.disposables.CompositeDisposable
@@ -29,6 +33,9 @@ import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.support.kodein
@@ -51,6 +58,8 @@ class SearchSetFragment : Fragment(), KodeinAware {
 
     var forceSearch: ((Boolean) -> Unit)? = null
 
+    private var listOfFavoritesSets = MutableLiveData<List<LegoSet>>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,6 +70,7 @@ class SearchSetFragment : Fragment(), KodeinAware {
         getSuccessRespond()
         getErrorRespond()
         getExceptionRespond()
+        GlobalScope.launch(Dispatchers.Main) { getMySets() }
         return view
     }
 
@@ -69,6 +79,8 @@ class SearchSetFragment : Fragment(), KodeinAware {
         legoRecyclerViewAdapter.selectedItem = { legoSet ->
             singleItemClickedReaction(legoSet)
         }
+        addToMySetsOnSwipe()
+        setupItemTouchHelper()
         legoRecyclerViewAdapter.endMarker = { marker ->
             if (marker) {
                 pageCounter++
@@ -157,7 +169,7 @@ class SearchSetFragment : Fragment(), KodeinAware {
                 } else {
                     if (it.count < 14000) legoRecyclerViewAdapter.addToList(
                         it.results
-                    ).also {  user_instruction_view.gone() }
+                    ).also { user_instruction_view.gone() }
                     /*legoRecyclerViewAdapter.listOfLegoSet = it.results*/
                     Log.i("searchSet", "pageCounter = $pageCounter add to list")
                 }
@@ -202,6 +214,54 @@ class SearchSetFragment : Fragment(), KodeinAware {
         val inputMethodManager =
             context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view!!.windowToken, 0)
+    }
+
+    private fun setupItemTouchHelper() {
+        val callback = DragManageAddAdapter(
+            legoRecyclerViewAdapter, context!!
+        )
+        ItemTouchHelper(callback).attachToRecyclerView(rv_search_id)
+    }
+
+    private fun addToMySetsOnSwipe() {
+        legoRecyclerViewAdapter.swipedItem = { legoSet ->
+            swipeAction(legoSet)
+        }
+    }
+
+    private suspend fun getMySets() {
+        searchLegoViewModel.getListOfMySets().observe(this, Observer { listOfMySets ->
+            listOfFavoritesSets.value = listOfMySets
+        })
+    }
+
+    private fun swipeAction(legoSet: LegoSet) {
+        if (!isSetInFavorites(legoSet)) {
+            searchLegoViewModel.addToMySets(legoSet)
+            val snackbar =
+                Snackbar.make(
+                    view!!,
+                    legoSet.name + " " + getString(R.string.added_to_favorites_snack_bar_text),
+                    Snackbar.LENGTH_LONG
+                )
+            snackbar.show()
+        } else {
+            val snackbar =
+                Snackbar.make(
+                    view!!,
+                    legoSet.name + " " + getString(R.string.already_in_favorites_snack_bar_text),
+                    Snackbar.LENGTH_LONG
+                )
+            snackbar.show()
+        }
+        legoRecyclerViewAdapter.notifyDataSetChanged()
+    }
+
+    private fun isSetInFavorites(legoSet: LegoSet): Boolean {
+        listOfFavoritesSets.value?.forEach {
+            if (it.set_num == legoSet.set_num) return true
+        }
+        return false
     }
 
     private fun startDetailActivity(legoSet: LegoSet) {

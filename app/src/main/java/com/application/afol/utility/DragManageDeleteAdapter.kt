@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.application.afol.R
 import com.application.afol.ui.adapters.MySetsRecyclerViewAdapter
 
-class DragManageAdapter(
+class DragManageDeleteAdapter(
     adapter: MySetsRecyclerViewAdapter,
     val context: Context,
     dragDirs: Int,
@@ -39,9 +39,10 @@ class DragManageAdapter(
         actionState: Int,
         isCurrentlyActive: Boolean
     ) {
-        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-        val icon = ContextCompat.getDrawable(context,
-            R.drawable.ic_delete_white_36)
+        val icon = ContextCompat.getDrawable(
+            context,
+            R.drawable.ic_delete_white_36
+        )
         val background = ColorDrawable(Color.RED)
 
         val itemView = viewHolder.itemView
@@ -51,32 +52,18 @@ class DragManageAdapter(
         val iconTop = itemView.top + (itemView.height - icon.intrinsicHeight) / 2
         val iconBottom = iconTop + icon.intrinsicHeight
 
-/*        when {
-            *//*dX > 0-> { // Swiping to the right
-                val iconLeft = itemView.left + iconMargin + icon.intrinsicWidth
-                val iconRight = itemView.left + iconMargin
-                icon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
 
-                background.setBounds(itemView.left, itemView.top,
-                    itemView.left + dX.toInt() + backgroundCornerOffset, itemView.bottom
-                )
-            }*//*
-            (dX < 0) || (dX > 0) -> { // Swiping to the left*/
-                val iconLeft = itemView.right - iconMargin - icon.intrinsicWidth
-                val iconRight = itemView.right - iconMargin
-                icon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
+        val iconLeft = itemView.right - iconMargin - icon.intrinsicWidth
+        val iconRight = itemView.right - iconMargin
+        icon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
 
-                background.setBounds(itemView.right + dX.toInt() - backgroundCornerOffset,
-                    itemView.top, itemView.right, itemView.bottom
-                )
-/*
-            }
-            else -> // view is unSwiped
-                background.setBounds(0, 0, 0, 0)
-*/
-//        }
+        background.setBounds(
+            itemView.right + dX.toInt() - backgroundCornerOffset,
+            itemView.top, itemView.right, itemView.bottom
+        )
 
         background.draw(c)
         icon.draw(c)
+        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }
 }

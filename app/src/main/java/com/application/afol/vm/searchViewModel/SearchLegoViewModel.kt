@@ -1,14 +1,13 @@
 package com.application.afol.vm.searchViewModel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.application.afol.models.ApiResultSearch
+import com.application.afol.models.LegoSet
 import com.application.afol.network.Result
 import com.application.afol.repositories.Repository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 class SearchLegoViewModel(private val repository: Repository) : ViewModel() {
@@ -33,6 +32,20 @@ class SearchLegoViewModel(private val repository: Repository) : ViewModel() {
                 is Result.Exception -> getSearchException.postValue(searchRespond.exception)
             }
         }
+    }
+
+    suspend fun getListOfMySets(): LiveData<MutableList<LegoSet>> {
+        return withContext(Dispatchers.IO) {
+            return@withContext repository.getMySets()
+        }
+    }
+
+    fun removeFromMySets(legoSet: LegoSet) = scope.launch {
+        repository.removeFromMySets(legoSet)
+    }
+
+    fun addToMySets(legoSet: LegoSet) = scope.launch {
+        repository.addToMySets(legoSet)
     }
 
     private fun cancelJob() = job.cancel()

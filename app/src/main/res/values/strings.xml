@@ -10,8 +10,8 @@
 
     <string name="lego_image_desc">LEGO image</string>
     <string name="number_text">No.</string>
-    <string name="name_set_cardview">Name</string>
-    <string name="release_year_cardview_text">Release year</string>
+    <string name="name_set_card_view">Name</string>
+    <string name="release_year_card_view_text">Release year</string>
     <string name="pieces_cardView_title">Pieces</string>
 
     <string name="search_lego_set_hint_edit_text">Search LEGO set</string>
@@ -24,7 +24,7 @@
     <string name="quantity_title_text">Quantity</string>
     <string name="color_title_text">Color</string>
     <string name="brick_image_desc">brick image</string>
-    <string name="diffrent_bricks_text">Different bricks:</string>
+    <string name="different_bricks_text">Different bricks:</string>
 
     <string name="lego_image_transition">LEGO set image</string>
     <string name="brick_title">Brick</string>
@@ -38,4 +38,8 @@
     <string name="default_text_for_user">In this section, after filling text field with proper tags, you will be able to see your search results.</string>
     <string name="default_my_sets_for_user">In this section, you will be able to see your favorite LEGO sets. You can add set to `Favorite` by clicking proper button in `Lego Set\'s Details`.</string>
     <string name="information_image">information image</string>
+    <string name="deleted_item_snack_bar_text">deleted from Favorites</string>
+    <string name="undo_snack_bar_text">Undo</string>
+    <string name="added_to_favorites_snack_bar_text">added to Favorites</string>
+    <string name="already_in_favorites_snack_bar_text">already exist in Favorites</string>
 </resources>

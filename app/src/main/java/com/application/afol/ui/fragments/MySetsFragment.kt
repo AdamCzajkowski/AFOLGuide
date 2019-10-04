@@ -14,7 +14,7 @@ import com.application.afol.R
 import com.application.afol.models.LegoSet
 import com.application.afol.ui.activities.DetailActivity
 import com.application.afol.ui.adapters.MySetsRecyclerViewAdapter
-import com.application.afol.utility.DragManageAdapter
+import com.application.afol.utility.DragManageDeleteAdapter
 import com.application.afol.utility.gone
 import com.application.afol.utility.show
 import com.application.afol.vm.mySetsViewModel.MySetsViewModel
@@ -81,7 +81,7 @@ class MySetsFragment : Fragment(), KodeinAware {
     }
 
     private fun setupItemTouchHelper() {
-        val callback = DragManageAdapter(
+        val callback = DragManageDeleteAdapter(
             mySetsRecyclerViewAdapter, context!!,
             0, ItemTouchHelper.LEFT
         )
@@ -106,10 +106,10 @@ class MySetsFragment : Fragment(), KodeinAware {
 
     private fun showUndoSnackbar(legoSet: LegoSet) {
         val snackbar = Snackbar.make(
-            view!!, legoSet.name + " deleted from Favorites",
+            view!!, legoSet.name + " " + getString(R.string.deleted_item_snack_bar_text),
             Snackbar.LENGTH_LONG
         )
-        snackbar.setAction("Undo") { undoDelete() }
+        snackbar.setAction(" " + getString(R.string.undo_snack_bar_text)) { undoDelete() }
         snackbar.show()
     }
 
