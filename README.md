@@ -65,4 +65,8 @@ Changelog:
  - Removed unused files
  - Polish translation
  
+ 4.10.2019:
+ - Add to "Favorites" from search fragment by swiping to right
+ - Fix bugs
+ 
 By Adam Czajkowski
