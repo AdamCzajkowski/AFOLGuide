@@ -3,6 +3,7 @@ package com.application.afol.ui.adapters
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Picasso
 
@@ -21,7 +22,7 @@ object BindingAdapter {
                 .get()
                 .load("$imageUrl")
                 .fit()
-                .centerCrop()
+                .centerInside()
                 .into(imageView)
         }
     }
@@ -54,5 +55,11 @@ object BindingAdapter {
     @BindingAdapter("bindImgToUrl")
     fun bindImgToUrl(imageView: ImageView, text: String?) {
         if (text != null) imageView.setOnClickListener { bindImageToUrl?.invoke(text) }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bindFavoriteIcon")
+    fun AppCompatImageButton.bindFavoriteIcon(state: Boolean) {
+        isSelected = state
     }
 }

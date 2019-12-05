@@ -5,6 +5,7 @@
     tools:context=".ui.activities.DetailActivity">
 
     <data>
+
         <variable
             name="legoSet"
             type="com.application.afol.models.LegoSet" />
@@ -38,12 +39,12 @@
 
                 <ImageView
                     android:id="@+id/image_legoSet_id"
-                    bindImagerRecycler="@{legoSet.set_img_url}"
-                    android:transitionName="@string/lego_image_transition"
                     style="@style/MaterialAnimations"
+                    bindImagerRecycler="@{legoSet.set_img_url}"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:contentDescription="@string/lego_image"
+                    android:transitionName="@string/lego_image_transition"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -69,32 +70,10 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_nested_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false">
-
-                <ImageView
-                    android:id="@+id/my_sets_button"
-                    android:layout_width="48dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="60dp"
-                    android:contentDescription="@string/image_of_my_sets"
-                    android:src="@drawable/wishlist_unadded_icon"
-                    app:layout_anchorGravity="bottom|left"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/my_sets_text"
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:text="@string/add_to_my_sets_text"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toEndOf="@+id/my_sets_button"
-                    app:layout_constraintTop_toTopOf="@+id/my_sets_button" />
 
                 <TextView
                     android:id="@+id/textView"
@@ -104,7 +83,7 @@
                     android:layout_marginEnd="16dp"
                     android:text="@string/number_text"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                    app:layout_constraintTop_toBottomOf="@+id/my_sets_button" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView2"
@@ -186,7 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="8dp"
                     android:text="rebrickable"
                     app:layout_constraintEnd_toStartOf="@+id/lego_instruction"
                     app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -198,6 +177,7 @@
                     android:layout_height="wrap_content"
                     android:text="instruction"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/rebrickable_url_button" />
 
@@ -213,18 +193,20 @@
                     style="@style/Widget.AppCompat.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="8dp"
                     android:text="Parts list"
                     app:layout_constraintStart_toEndOf="@+id/lego_instruction"
                     app:layout_constraintTop_toTopOf="@+id/lego_instruction" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/moc_recycler_view_id"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="50dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/constraint_nested_scroll"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/list_mocs_title" />
 
                 <TextView

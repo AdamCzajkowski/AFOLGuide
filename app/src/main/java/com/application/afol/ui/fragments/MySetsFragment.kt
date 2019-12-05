@@ -112,6 +112,7 @@ class MySetsFragment : Fragment(), KodeinAware {
         snackbar.setAction(" " + getString(R.string.undo_snack_bar_text)) { undoDelete() }
         snackbar.show()
     }
+    
 
     private fun undoDelete() {
         mySetsRecyclerViewAdapter.let {

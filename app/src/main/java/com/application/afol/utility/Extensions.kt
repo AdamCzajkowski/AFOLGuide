@@ -1,8 +1,11 @@
 package com.application.afol.utility
 
+
 import android.view.View
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+
+val doNothing = Unit
 
 fun <T> RecyclerView.Adapter<*>.autoNotify(
     oldList: List<T>,
@@ -29,4 +32,8 @@ fun View.gone() {
 
 fun View.show() {
     visibility = View.VISIBLE
+}
+
+fun View.setVisibility(visible: Boolean) {
+    visibility = if (visible) View.VISIBLE else View.GONE
 }

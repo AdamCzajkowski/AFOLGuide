@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.application.afol.databinding.SingleFavoriteLegoSetBinding
 import com.application.afol.databinding.SingleLegoSetBinding
 import com.application.afol.models.LegoSet
 import com.application.afol.utility.autoNotify
@@ -26,7 +27,7 @@ class MySetsRecyclerViewAdapter: RecyclerView.Adapter<MySetsRecyclerViewAdapter.
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(viewGroup.context.applicationContext)
-        val binding = SingleLegoSetBinding.inflate(inflater, viewGroup, false)
+        val binding = SingleFavoriteLegoSetBinding.inflate(inflater, viewGroup, false)
         return ViewHolder(binding)
     }
 
@@ -50,7 +51,7 @@ class MySetsRecyclerViewAdapter: RecyclerView.Adapter<MySetsRecyclerViewAdapter.
         mRecentlyDeletedItemPosition = position
     }
 
-    class ViewHolder(private val binding: SingleLegoSetBinding) :
+    class ViewHolder(private val binding: SingleFavoriteLegoSetBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindView(item: LegoSet) {
             binding.legoSet = item

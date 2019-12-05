@@ -7,6 +7,7 @@
     <string name="tab_bricks_search">Bricks</string>
     <string name="Themes_tab_name">Themes</string>
     <string name="tab_title_search_part">Search Part</string>
+    <string name="tab_home_tab">Home</string>
 
     <string name="lego_image_desc">LEGO image</string>
     <string name="number_text">No.</string>
@@ -17,9 +18,6 @@
     <string name="search_lego_set_hint_edit_text">Search LEGO set</string>
     <string name="lego_image">LEGO Image</string>
 
-    <string name="add_to_my_sets_text">Add to Favorites</string>
-
-    <string name="exist_in_my_sets_text">Exist in Favorites</string>
     <string name="image_of_my_sets">image of my sets</string>
     <string name="quantity_title_text">Quantity</string>
     <string name="color_title_text">Color</string>

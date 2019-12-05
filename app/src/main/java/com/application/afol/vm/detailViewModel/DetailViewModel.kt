@@ -1,13 +1,14 @@
 package com.application.afol.vm.detailViewModel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.application.afol.models.LegoSet
 import com.application.afol.models.MOCResult
 import com.application.afol.network.Result
 import com.application.afol.repositories.Repository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 class DetailViewModel(private val repository: Repository) : ViewModel() {
@@ -37,13 +38,4 @@ class DetailViewModel(private val repository: Repository) : ViewModel() {
 
     private fun cancelJob() = job.cancel()
 
-    fun addToMySets(legoSet: LegoSet) = scope.launch {
-        repository.addToMySets(legoSet)
-    }
-
-    suspend fun getListOfMySets(): LiveData<MutableList<LegoSet>> {
-        return withContext(Dispatchers.Main) {
-            return@withContext repository.getMySets()
-        }
-    }
 }

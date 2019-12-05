@@ -20,10 +20,12 @@ class MySetsViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun removeFromMySets(legoSet: LegoSet) = scope.launch {
+        legoSet.isInFavorite = false
         repository.removeFromMySets(legoSet)
     }
 
     fun addToMySets(legoSet: LegoSet) = scope.launch {
+        legoSet.isInFavorite = true
         repository.addToMySets(legoSet)
     }
 }

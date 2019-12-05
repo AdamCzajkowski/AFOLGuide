@@ -6,9 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -19,14 +17,12 @@ import com.application.afol.databinding.ActivityDetailBinding
 import com.application.afol.models.LegoSet
 import com.application.afol.ui.adapters.BindingAdapter
 import com.application.afol.ui.adapters.MOCRecyclerViewAdapter
+import com.application.afol.utility.setVisibility
 import com.application.afol.vm.detailViewModel.DetailViewModel
 import com.application.afol.vm.detailViewModel.DetailViewModelFactory
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -54,9 +50,7 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
 
     private val legoSet: LegoSet by lazy { intent.getParcelableExtra<LegoSet>(LEGO_SET) }
 
-    lateinit var mocRecyclerViewAdapter: MOCRecyclerViewAdapter
-
-    var isInMySetsMarker: ((Boolean) -> Unit)? = null
+    private lateinit var mocRecyclerViewAdapter: MOCRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,9 +64,6 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
         setUpDetailsCollapsingToolbar()
         bindView()
         initializeRecyclerView(moc_recycler_view_id)
-
-        checkIsInAnyDatabase()
-        initializeMySetsFAB()
         parts_list_button.setOnClickListener {
             partListButtonReaction()
         }
@@ -113,6 +104,8 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
     private fun getSuccessRespond() {
         detailViewModel.getMocsSuccess.observe(this, Observer {
             mocRecyclerViewAdapter.listOfMoc = it.results.toMutableList()
+            list_mocs_title.setVisibility(mocRecyclerViewAdapter.listOfMoc.isNotEmpty())
+            set_number_mocs_list_value.setVisibility(mocRecyclerViewAdapter.listOfMoc.isNotEmpty())
         })
     }
 
@@ -132,30 +125,9 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
         }
     }
 
-    private fun checkIsInAnyDatabase() {
-        GlobalScope.launch(Dispatchers.Main) {
-            isInMySets()
-        }
-    }
-
     private fun initializeViewModel() {
         detailViewModel =
             ViewModelProviders.of(this, detailViewModelFactory).get(DetailViewModel::class.java)
-    }
-
-    private suspend fun isInMySets() {
-        detailViewModel.getListOfMySets().observe(this, Observer { listOfMySets ->
-            Log.e("isIn", "list was changed")
-            listOfMySets?.forEach {
-                if (it.set_num == legoSet.set_num) {
-                    isInMySetsMarker?.invoke(true)
-                    return@Observer
-                }
-                // Log.e("isIn", "error in $listOfMySets")
-            }
-            isInMySetsMarker?.invoke(false)
-            return@Observer
-        })
     }
 
     private fun bindView() {
@@ -179,37 +151,11 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
         }
     }
 
-    private fun setImageButtonIcon(imageButton: ImageView, drawable: Int) {
-        imageButton.setImageDrawable(
-            ContextCompat.getDrawable(
-                this,
-                drawable
-            )
-        )
-    }
-
     private fun initializeRecyclerView(recyclerView: RecyclerView) {
         mocRecyclerViewAdapter = MOCRecyclerViewAdapter()
         recyclerView.layoutManager = LinearLayoutManager(this)
         val alphaAdapter = AlphaInAnimationAdapter(mocRecyclerViewAdapter)
         recyclerView.adapter = ScaleInAnimationAdapter(alphaAdapter)
-    }
-
-    private fun initializeMySetsFAB() {
-        isInMySetsMarker = { marker ->
-            if (marker) {
-                setImageButtonIcon(my_sets_button, R.drawable.wishlist_added_icon)
-                my_sets_text.text = getString(R.string.exist_in_my_sets_text)
-            } else {
-                setImageButtonIcon(my_sets_button, R.drawable.wishlist_unadded_icon)
-                my_sets_text.text = getString(R.string.add_to_my_sets_text)
-                my_sets_button.setOnClickListener {
-                    detailViewModel.addToMySets(legoSet)
-                    setImageButtonIcon(my_sets_button, R.drawable.wishlist_added_icon)
-                    my_sets_text.text = getString(R.string.exist_in_my_sets_text)
-                }
-            }
-        }
     }
 
     private fun startInstructionSite(set_num: String) =

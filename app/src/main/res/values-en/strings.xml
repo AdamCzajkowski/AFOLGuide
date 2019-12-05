@@ -2,14 +2,12 @@
 <resources>
     <string name="app_name">AFOL Application</string>
     <string name="Themes_tab_name">Themes</string>
-    <string name="add_to_my_sets_text">Add to Favorites</string>
     <string name="brick_image_desc">brick image</string>
     <string name="brick_title">Brick</string>
     <string name="color_title_text">Color</string>
     <string name="default_my_sets_for_user">In this section, you will be able to see your favorite LEGO sets. You can add set to `Favorite` by clicking proper button in `Lego Set\'s Details`.</string>
     <string name="default_text_for_user">In this section, after filling text field with proper tags, you will be able to see your search results.</string>
     <string name="designer_text">Designer</string>
-    <string name="exist_in_my_sets_text">Exist in Favorites</string>
     <string name="image_of_my_sets">image of my sets</string>
     <string name="lego_image">LEGO Image</string>
     <string name="lego_image_desc">LEGO image</string>
@@ -36,4 +34,5 @@
     <string name="undo_snack_bar_text">" Undo"</string>
     <string name="added_to_favorites_snack_bar_text">added to Favorites</string>
     <string name="already_in_favorites_snack_bar_text">already exist in Favorites</string>
+    <string name="tab_home_tab">Home</string>
 </resources>

@@ -30,7 +30,9 @@ class LegoSetFromThemeActivity : AppCompatActivity(), KodeinAware {
         private const val GROUPED_THEMES = "listOfGroupedThemes"
         fun getIntent(context: Context, groupedThemes: GroupedThemes): Intent =
             Intent(context, LegoSetFromThemeActivity::class.java)
-                .putExtra(GROUPED_THEMES, groupedThemes)
+                .putExtra(GROUPED_THEMES, groupedThemes).also {
+                    Log.e("theme", groupedThemes.name + " " + groupedThemes.listOfID)
+                }
     }
 
     override val kodein: Kodein by kodein()

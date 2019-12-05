@@ -2,14 +2,12 @@
 <resources>
     <string name="app_name">AFOL Aplikacja</string>
     <string name="Themes_tab_name">Motywy</string>
-    <string name="add_to_my_sets_text">Dodaj do ulubionych</string>
     <string name="brick_image_desc">Obraz klocka</string>
     <string name="brick_title">Klocek</string>
     <string name="color_title_text">Kolor</string>
     <string name="default_my_sets_for_user">W tej sekcji będą widoczne Twoje ulubione zestawy. Możesz dodać zestawy do \'Ulubionych\' poprzez kliknięcie w odpowiedni przycisk w \'Szczegóły zestawu LEGO\'.</string>
     <string name="default_text_for_user">W tej sekcji, po wypełnieniu pola tekstowego odpowiednim hasłem, będziesz widział wyniki wyszukiwania.</string>
     <string name="designer_text">Autor</string>
-    <string name="exist_in_my_sets_text">Istnieje w ulubionych</string>
     <string name="image_of_my_sets">obrazek moich zestawów</string>
     <string name="lego_image">obrazek LEGO</string>
     <string name="lego_image_desc">obrazek LEGO</string>
@@ -36,4 +34,5 @@
     <string name="undo_snack_bar_text">Cofnij</string>
     <string name="added_to_favorites_snack_bar_text">dodano do Ulubionych</string>
     <string name="already_in_favorites_snack_bar_text">już jest w Ulubionych</string>
+    <string name="tab_home_tab">Główna</string>
 </resources>

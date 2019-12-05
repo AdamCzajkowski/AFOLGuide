@@ -35,9 +35,9 @@
 
     <include
         android:id="@+id/user_instruction_view"
+        layout="@layout/default_search_text_box"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        layout="@layout/default_search_text_box"
         app:layout_constraintBottom_toBottomOf="@+id/rv_search_brick_id"
         app:layout_constraintEnd_toEndOf="@+id/rv_search_brick_id"
         app:layout_constraintStart_toStartOf="@+id/rv_search_brick_id"
