@@ -44,6 +44,12 @@ object BindingAdapter {
     }
 
     @JvmStatic
+    @BindingAdapter("bindShortNumber")
+    fun TextView.bindShortNumber(set_num: String) {
+        text = set_num.dropLast(2)
+    }
+
+    @JvmStatic
     @BindingAdapter("bindInstruction")
     fun Button.bindInstructionURLbutton(text: String) {
         setOnClickListener { bindInstrctionURLParse?.invoke(text) }

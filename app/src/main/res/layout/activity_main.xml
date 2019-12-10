@@ -11,15 +11,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/name_set_text_name_id"
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:gravity="center"
-            android:minHeight="?actionBarSize"
-            android:text="@string/app_name"
-            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-            android:textSize="12sp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/name_set_text_name_id"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/main_toolbar_height"
+                android:gravity="center_vertical"
+                android:minHeight="?actionBarSize"
+                android:text="@string/app_name"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+                android:textColor="@color/white_semi_transparent"
+                android:textSize="@dimen/text_size_12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/author_set_text_name_id"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/author_set_text_name_id" />
+
+            <TextView
+                android:id="@+id/author_set_text_name_id"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/main_toolbar_height"
+                android:gravity="center_vertical"
+                android:minHeight="?actionBarSize"
+                android:text="@string/author"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+                android:textColor="@color/white_semi_transparent"
+                android:textSize="@dimen/text_size_10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 

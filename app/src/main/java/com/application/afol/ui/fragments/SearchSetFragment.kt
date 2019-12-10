@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,19 +12,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.afol.R
 import com.application.afol.models.LegoSet
 import com.application.afol.ui.activities.DetailActivity
 import com.application.afol.ui.adapters.LegoRecyclerViewAdapter
-import com.application.afol.utility.DragManageAddAdapter
 import com.application.afol.utility.doNothing
 import com.application.afol.utility.setVisibility
+import com.application.afol.utility.showSnackbar
 import com.application.afol.vm.searchViewModel.SearchLegoViewModel
 import com.application.afol.vm.searchViewModel.SearchLegoViewModelFactory
-import com.google.android.material.snackbar.Snackbar
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.disposables.CompositeDisposable
@@ -42,13 +39,17 @@ import org.kodein.di.android.support.kodein
 import org.kodein.di.generic.instance
 import java.util.concurrent.TimeUnit
 
+private const val MAX_VALUE_SEARCHED_ITEMS = 14000
+private const val TIMEOUT_DEBOUNCE = 200L
+
 class SearchSetFragment : Fragment(), KodeinAware {
     override val kodein: Kodein by kodein()
 
-    private val searchLegoViewModelFactory: SearchLegoViewModelFactory by instance()
-
     private lateinit var searchLegoViewModel: SearchLegoViewModel
+
     private lateinit var legoRecyclerViewAdapter: LegoRecyclerViewAdapter
+
+    private val searchLegoViewModelFactory: SearchLegoViewModelFactory by instance()
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -56,9 +57,9 @@ class SearchSetFragment : Fragment(), KodeinAware {
 
     private var pageCounter = 1
 
-    var forceSearch: ((Boolean) -> Unit)? = null
-
     private var listOfFavoritesSets = MutableLiveData<List<LegoSet>>()
+
+    private var forceSearch: ((Boolean) -> Unit)? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,17 +77,12 @@ class SearchSetFragment : Fragment(), KodeinAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initializeRecyclerView(rv_search_id)
-        legoRecyclerViewAdapter.selectedItem = { legoSet ->
-            singleItemClickedReaction(legoSet)
-        }
+        legoRecyclerViewAdapter.selectedItem = { singleItemClickedReaction(it) }
         addToMySetsOnAction()
-        setupItemTouchHelper()
 
         legoRecyclerViewAdapter.endMarker = { marker ->
             if (marker) {
-                pageCounter++
-                Log.i("searchSet", "pageCounter increment = $pageCounter")
-                forceSearch?.invoke(true)
+                pageCounter++.also { forceSearch?.invoke(true) }
             } else {
                 forceSearch?.invoke(false)
             }
@@ -96,11 +92,13 @@ class SearchSetFragment : Fragment(), KodeinAware {
 
     override fun onDestroy() {
         super.onDestroy()
+
         compositeDisposable.clear()
     }
 
     override fun onPause() {
         super.onPause()
+
         hideKeyboard()
     }
 
@@ -108,10 +106,6 @@ class SearchSetFragment : Fragment(), KodeinAware {
         super.onDestroyView()
 
         hideKeyboard()
-    }
-
-    private fun singleItemClickedReaction(legoSet: LegoSet) {
-        startDetailActivity(legoSet)
     }
 
     private fun startSearching(view: View) {
@@ -130,19 +124,19 @@ class SearchSetFragment : Fragment(), KodeinAware {
                     doNothing
                 }
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    subscriber.onNext(s.toString())
+                override fun onTextChanged(
+                    search: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int
+                ) {
+                    subscriber.onNext(search.toString())
                     pageCounter = 1
-                    Log.i("searchSet", "\npageCounter down to one")
                 }
             })
-        }).debounce(100, TimeUnit.MILLISECONDS)
+        }).debounce(TIMEOUT_DEBOUNCE, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
             .subscribe {
-                Log.i(
-                    "searchSet",
-                    " --------------------- start searching ------------------------"
-                )
                 forceSearch = { marker ->
                     if (marker) {
                         searchLegoViewModel.getLegoSetBySearch(it, pageSize, pageCounter)
@@ -153,50 +147,52 @@ class SearchSetFragment : Fragment(), KodeinAware {
         compositeDisposable.addAll(disposable)
     }
 
-
-    private fun getSuccessRespond() {
+    private fun getSuccessRespond() =
         searchLegoViewModel.getSearchSuccess.observe(
             viewLifecycleOwner,
             Observer {
-                if (pageCounter == 1) {
-                    if (it.count < 14000) {
-                        user_instruction_view.setVisibility(false)
-                        legoRecyclerViewAdapter.listOfLegoSet = it.results
-                        Log.i("searchSet", "pageCounter one swaplist")
+                with(user_instruction_view) {
+                    if (pageCounter == 1) {
+                        if (it.count < MAX_VALUE_SEARCHED_ITEMS) {
+                            setVisibility(false)
+                            legoRecyclerViewAdapter.listOfLegoSet = it.results
+                        } else {
+                            setVisibility(true)
+                            legoRecyclerViewAdapter.clearList()
+                        }
+
                     } else {
-                        legoRecyclerViewAdapter.clearList()
-                        user_instruction_view.setVisibility(true)
-                        Log.i("searchSet", "pageCounter one clear list")
+                        if (it.count < MAX_VALUE_SEARCHED_ITEMS) legoRecyclerViewAdapter.addToList(
+                            it.results
+                        ).also { setVisibility(false) }
                     }
-                } else {
-                    if (it.count < 14000) legoRecyclerViewAdapter.addToList(
-                        it.results
-                    ).also { user_instruction_view.setVisibility(false) }
-                    Log.i("searchSet", "pageCounter = $pageCounter add to list")
+                    legoRecyclerViewAdapter.notifyDataSetChanged()
                 }
-                legoRecyclerViewAdapter.notifyDataSetChanged()
             }
         )
-    }
 
-    private fun getErrorRespond() {
-
+    private fun getErrorRespond() =
         searchLegoViewModel.getSearchError.observe(
             viewLifecycleOwner,
             Observer {
-                Log.i("searchError", it)
+                doNothing
             }
         )
-    }
 
-    private fun getExceptionRespond() {
+
+    private fun getExceptionRespond() =
         searchLegoViewModel.getSearchException.observe(
             viewLifecycleOwner,
             Observer {
-                Log.i("searchException", it.message.toString())
+                doNothing
             }
         )
-    }
+
+    private fun startDetailActivity(legoSet: LegoSet) =
+        startActivity(DetailActivity.getIntent(requireContext(), legoSet))
+
+    private fun singleItemClickedReaction(legoSet: LegoSet) =
+        startDetailActivity(legoSet)
 
     private fun initializeLegoViewModel() {
         searchLegoViewModel =
@@ -211,90 +207,42 @@ class SearchSetFragment : Fragment(), KodeinAware {
         recyclerView.adapter = ScaleInAnimationAdapter(alphaAdapter)
     }
 
-    private fun hideKeyboard() {
-        val inputMethodManager =
-            context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view!!.windowToken, 0)
-    }
-
-    private fun setupItemTouchHelper() {
-        val callback = DragManageAddAdapter(
-            legoRecyclerViewAdapter, context!!
-        )
-        ItemTouchHelper(callback).attachToRecyclerView(rv_search_id)
-    }
-
-    private fun addToMySetsOnAction() {
-        legoRecyclerViewAdapter.swipedItem = { legoSet ->
-            addToFavoritesBySwipe(legoSet)
-        }
-        legoRecyclerViewAdapter.favoriteIconItem = { legoSet ->
-            if (!isSetInFavorites(legoSet)) {
-                addToFavorites(legoSet)
-            } else {
-                removeFromFavorites(legoSet)
+    private fun addToMySetsOnAction() =
+        with(legoRecyclerViewAdapter) {
+            favoriteIconItem = { legoSet ->
+                if (!isSetInFavorites(legoSet)) addToFavorites(legoSet)
+                else removeFromFavorites(legoSet)
+                notifyDataSetChanged()
+                GlobalScope.launch(Dispatchers.Main) { getMySets() }
             }
         }
-    }
 
-    private suspend fun getMySets() {
+    private suspend fun getMySets() =
         searchLegoViewModel.getListOfMySets().observe(this, Observer { listOfMySets ->
             listOfFavoritesSets.value = listOfMySets
             legoRecyclerViewAdapter.listOfFavoritesLegoSet =
                 listOfFavoritesSets.value?.toMutableList()
         })
-    }
 
     private fun removeFromFavorites(legoSet: LegoSet) {
         if (isSetInFavorites(legoSet)) {
-            
-            searchLegoViewModel.removeFromMySets(legoSet)
-            Snackbar.make(
-                view!!,
-                legoSet.name + " ${getString(R.string.deleted_item_snack_bar_text)}",
-                Snackbar.LENGTH_LONG
-            ).show()
+            listOfFavoritesSets.value?.find { searchedLegoSet -> searchedLegoSet.set_num == legoSet.set_num }
+                ?.let { searchLegoViewModel.removeFromMySets(it) }
+            with(legoRecyclerViewAdapter.listOfFavoritesLegoSet) {
+                this?.find { searchedLegoSet -> searchedLegoSet.set_num == legoSet.set_num }?.let {
+                    this.remove(it)
+                }
+            }
+            constraint_search_fragment.showSnackbar(legoSet.name + " " + getString(R.string.deleted_item_snack_bar_text))
         } else doNothing
-        GlobalScope.launch(Dispatchers.Main) { getMySets() }
-        legoRecyclerViewAdapter.notifyDataSetChanged()
     }
 
     private fun addToFavorites(legoSet: LegoSet) {
         if (!isSetInFavorites(legoSet)) {
             searchLegoViewModel.addToMySets(legoSet)
-            val snackbar =
-                Snackbar.make(
-                    view!!,
-                    legoSet.name + " ${getString(R.string.added_to_favorites_snack_bar_text)}",
-                    Snackbar.LENGTH_LONG
-                )
-            snackbar.show()
-            GlobalScope.launch(Dispatchers.Main) { getMySets() }
-            legoRecyclerViewAdapter.notifyDataSetChanged()
+            legoRecyclerViewAdapter.listOfFavoritesLegoSet?.add(legoSet)
+            constraint_search_fragment.showSnackbar(legoSet.name + " " + getString(R.string.added_to_favorites_snack_bar_text))
         } else doNothing
-
-    }
-
-    private fun addToFavoritesBySwipe(legoSet: LegoSet) {
-        if (!isSetInFavorites(legoSet)) {
-            searchLegoViewModel.addToMySets(legoSet)
-            val snackbar =
-                Snackbar.make(
-                    view!!,
-                    legoSet.name + " ${getString(R.string.added_to_favorites_snack_bar_text)}",
-                    Snackbar.LENGTH_LONG
-                )
-            snackbar.show()
-        } else {
-            val snackbar =
-                Snackbar.make(
-                    view!!,
-                    legoSet.name + " ${getString(R.string.already_in_favorites_snack_bar_text)}",
-                    Snackbar.LENGTH_LONG
-                )
-            snackbar.show()
-        }
-        legoRecyclerViewAdapter.notifyDataSetChanged()
     }
 
     private fun isSetInFavorites(legoSet: LegoSet): Boolean {
@@ -304,7 +252,9 @@ class SearchSetFragment : Fragment(), KodeinAware {
         return false
     }
 
-    private fun startDetailActivity(legoSet: LegoSet) {
-        startActivity(DetailActivity.getIntent(context!!, legoSet))
+    private fun hideKeyboard() {
+        val inputMethodManager =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view!!.windowToken, 0)
     }
 }

@@ -1,12 +1,8 @@
 package com.application.afol.ui.adapters
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.application.afol.databinding.SingleBrickRowBinding
 import com.application.afol.models.BrickResult
@@ -17,6 +13,8 @@ class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter
 
     var endMarker: ((Boolean) -> Unit)? = null
 
+    var brickSelected: ((String) -> Unit)? = null
+
     lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,30 +24,25 @@ class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter
         return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return listOfBricks.size
-    }
+    override fun getItemCount() = listOfBricks.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindView(listOfBricks[position], position + 1)
-        holder.createAdapter(context)
-        if (position == itemCount - (0.1 * itemCount).toInt()) {
-            endMarker?.invoke(true)
-        } else {
-            endMarker?.invoke(false)
+        with(holder) {
+            bindView(listOfBricks[position], position + 1)
+            itemView.imageView.setOnClickListener { brickSelected?.invoke(listOfBricks[position].part.partUrl) }
         }
+        if (position == itemCount - (0.1 * itemCount).toInt()) endMarker?.invoke(true)
+        else endMarker?.invoke(false)
     }
 
-    fun swapList(list: MutableList<BrickResult.Result>) {
-        listOfBricks.clear()
-        listOfBricks.addAll(list)
-        notifyDataSetChanged()
-    }
+    fun swapList(list: MutableList<BrickResult.Result>) =
+        with(listOfBricks) {
+            clear()
+            addAll(list)
+        }.also { notifyDataSetChanged() }
 
-    fun addToList(list: MutableList<BrickResult.Result>) {
-        listOfBricks.addAll(list)
-        notifyItemRangeChanged(itemCount - list.size, itemCount)
-    }
+    fun addToList(list: MutableList<BrickResult.Result>) =
+        listOfBricks.addAll(list).also { notifyItemRangeChanged(itemCount - list.size, itemCount) }
 
     fun clearList() {
         listOfBricks.clear()
@@ -58,13 +51,15 @@ class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter
 
     class ViewHolder(val binding: SingleBrickRowBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindView(item: BrickResult.Result, position: Int) {
-            binding.brickColor = item.color
-            binding.brickDetail = item.part
-            binding.brickQuantity = item
+            with(binding) {
+                brickColor = item.color
+                brickDetail = item.part
+                brickQuantity = item
+            }
             itemView.position_value.text = position.toString()
         }
 
-        fun createAdapter(context: Context) {
+        /*fun createAdapter(context: Context) {
             val adapter = BindingAdapter
             binding.adapter = adapter
             BindingAdapter.bindURLParse = { url ->
@@ -77,6 +72,6 @@ class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter
                 openURLFromImage.data = Uri.parse(url)
                 startActivity(context, openURLFromImage, Bundle())
             }
-        }
+        }*/
     }
 }

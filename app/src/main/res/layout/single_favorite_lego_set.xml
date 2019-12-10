@@ -13,8 +13,8 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_margin="3dp">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_3dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -29,31 +29,39 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:contentDescription="@string/lego_image_desc"
-                android:padding="3dp"
+                android:padding="@dimen/margin_3dp"
                 android:transitionName="@string/lego_image_transition"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_4dp"
+                android:layout_marginEnd="@dimen/margin_4dp"
+                android:background="@drawable/ic_delete"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="190dp" />
+                app:layout_constraintGuide_begin="@dimen/favorite_single_guideline" />
 
             <TextView
                 android:id="@+id/number_set_name_text_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/margin_48dp"
                 android:text="@string/number_text"
                 android:textColor="#A6FFFFFF"
-                android:textSize="12sp"
+                android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline2"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,11 +69,11 @@
                 android:id="@+id/name_set_text_name_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/margin_16dp"
                 android:text="@string/name_set_card_view"
                 android:textColor="#A6FFFFFF"
-                android:textSize="12sp"
+                android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline2"
                 app:layout_constraintTop_toBottomOf="@+id/number_set_name_text_id" />
 
@@ -73,11 +81,11 @@
                 android:id="@+id/release_date_text_name_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/margin_16dp"
                 android:text="@string/release_year_card_view_text"
                 android:textColor="#A6FFFFFF"
-                android:textSize="12sp"
+                android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline2"
                 app:layout_constraintTop_toBottomOf="@+id/name_set_text_value_id" />
 
@@ -85,22 +93,22 @@
                 android:id="@+id/number_parts_text_name_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/margin_16dp"
                 android:text="@string/pieces_cardView_title"
                 android:textColor="#A6FFFFFF"
-                android:textSize="12sp"
+                android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline2"
                 app:layout_constraintTop_toBottomOf="@+id/release_date_text_name_id" />
 
             <TextView
                 android:id="@+id/number_set_value_text_id"
+                bindShortNumber="@{legoSet.set_num}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="@{legoSet.set_num}"
+                android:layout_marginEnd="@dimen/margin_16dp"
                 android:textColor="#A6FFFFFF"
-                android:textSize="12sp"
+                android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/number_set_name_text_id" />
 
@@ -108,14 +116,14 @@
                 android:id="@+id/name_set_text_value_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
                 android:ellipsize="end"
                 android:maxLines="3"
                 android:text="@{legoSet.name}"
                 android:textAlignment="textEnd"
                 android:textColor="#A6FFFFFF"
-                android:textSize="12sp"
+                android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/name_set_text_name_id"
                 app:layout_constraintTop_toTopOf="@+id/name_set_text_name_id" />
@@ -125,9 +133,9 @@
                 bindIntToString="@{legoSet.year}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
                 android:textColor="#A6FFFFFF"
-                android:textSize="12sp"
+                android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/release_date_text_name_id" />
 
@@ -136,10 +144,10 @@
                 bindIntToString="@{legoSet.num_parts}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                android:layout_marginBottom="@dimen/margin_16dp"
                 android:textColor="#A6FFFFFF"
-                android:textSize="12sp"
+                android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/number_parts_text_name_id" />

@@ -5,13 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.application.afol.databinding.SingleMocModelBinding
 import com.application.afol.models.MOCResult
-import com.application.afol.utility.autoNotify
-import kotlin.properties.Delegates
 
 class MOCRecyclerViewAdapter : RecyclerView.Adapter<MOCRecyclerViewAdapter.ViewHolder>() {
-    var listOfMoc: MutableList<MOCResult.Result> by Delegates.observable(mutableListOf()) { _, oldList, newList ->
-        autoNotify(oldList, newList) { old, new -> old.mocUrl == new.mocUrl }
-    }
+    var listOfMoc = mutableListOf<MOCResult.Result>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context.applicationContext)
@@ -19,9 +15,7 @@ class MOCRecyclerViewAdapter : RecyclerView.Adapter<MOCRecyclerViewAdapter.ViewH
         return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return listOfMoc.size
-    }
+    override fun getItemCount() = listOfMoc.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindView(listOfMoc[position])
@@ -29,9 +23,11 @@ class MOCRecyclerViewAdapter : RecyclerView.Adapter<MOCRecyclerViewAdapter.ViewH
 
     class ViewHolder(private val binding: SingleMocModelBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindView(moc: MOCResult.Result) {
-            binding.moc = moc
-            binding.executePendingBindings()
+        fun bindView(resultMoc: MOCResult.Result) {
+            with(binding) {
+                moc = resultMoc
+                executePendingBindings()
+            }
         }
     }
 }

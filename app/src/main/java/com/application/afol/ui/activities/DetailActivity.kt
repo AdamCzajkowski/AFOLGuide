@@ -69,6 +69,8 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
         }
     }
 
+    // TODO clean up Details Activity!
+
     override fun onBackPressed() {
         finish()
         super.onBackPressed()
@@ -116,6 +118,7 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
             setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp)
             setDisplayShowTitleEnabled(false)
         }
+        lego_details_collapsing_toolbar_id.title = legoSet.set_num?.dropLast(2)
     }
 
     private fun setUpDetailsCollapsingToolbar() {
