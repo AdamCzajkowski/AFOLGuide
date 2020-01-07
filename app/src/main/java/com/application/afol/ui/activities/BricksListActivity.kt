@@ -96,7 +96,7 @@ class BricksListActivity : AppCompatActivity(), KodeinAware {
         with(supportActionBar!!) {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowTitleEnabled(true)
-            title = legoSetNumber.dropLast(2)
+            title = getString(R.string.parts_list_title_prefix) + " " + legoSetNumber.dropLast(2)
         }
     }
 

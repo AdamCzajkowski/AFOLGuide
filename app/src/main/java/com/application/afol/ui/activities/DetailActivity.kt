@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -194,10 +193,10 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
                 openURL.data = Uri.parse(url)
                 startActivity(openURL)
             }
-            bindImageToUrl = { url ->
-                val openURLFromImage = Intent(Intent.ACTION_VIEW)
-                openURLFromImage.data = Uri.parse(url)
-                startActivity(openURLFromImage)
+            bindMocToUrl = { url ->
+                val openMocFromUrl = Intent(Intent.ACTION_VIEW)
+                openMocFromUrl.data = Uri.parse(url)
+                startActivity(openMocFromUrl)
             }
             bindInstrctionURLParse = { numberOfSet ->
                 val openInstructionURL = Intent(Intent.ACTION_VIEW)

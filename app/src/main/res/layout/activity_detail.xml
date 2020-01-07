@@ -240,11 +240,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_8dp"
-                    android:layout_marginEnd="@dimen/margin_8dp"
+                    android:layout_marginStart="@dimen/margin_8dp"
                     android:text="@string/mocs_based_on_text"
                     android:textColor="#A6FFFFFF"
                     android:textSize="@dimen/text_size_12sp"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rebrickable_url_button" />
 
                 <TextView

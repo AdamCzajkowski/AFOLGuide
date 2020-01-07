@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -149,25 +150,21 @@
                 android:id="@+id/position_value"
                 android:layout_width="wrap_content"
                 android:layout_height="16dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
-                android:textAlignment="viewEnd"
+                android:layout_marginStart="@dimen/margin_4dp"
                 android:textColor="#A6FFFFFF"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/imageView"
+                app:layout_constraintBottom_toBottomOf="@+id/position_title"
                 app:layout_constraintStart_toEndOf="@+id/position_title"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/position_title"
+                tools:text="10" />
 
             <TextView
                 android:id="@+id/position_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
-                android:textColor="#A6FFFFFF"
                 android:text="@string/brick_title"
+                android:textColor="#A6FFFFFF"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/imageView"
                 app:layout_constraintStart_toStartOf="parent"
