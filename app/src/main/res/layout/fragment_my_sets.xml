@@ -18,8 +18,8 @@
         android:background="@color/dark_gray"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/default_my_sets_view"
         android:layout_width="0dp"
+        android:id="@+id/default_my_sets_view"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

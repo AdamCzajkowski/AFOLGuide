@@ -21,6 +21,12 @@ class MOCRecyclerViewAdapter : RecyclerView.Adapter<MOCRecyclerViewAdapter.ViewH
         holder.bindView(listOfMoc[position])
     }
 
+    fun updateList(listOfMocs: MutableList<MOCResult.Result>) {
+        listOfMoc.clear()
+        listOfMoc.addAll(listOfMocs)
+        notifyDataSetChanged()
+    }
+
     class ViewHolder(private val binding: SingleMocModelBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindView(resultMoc: MOCResult.Result) {

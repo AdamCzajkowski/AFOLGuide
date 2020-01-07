@@ -17,12 +17,18 @@ import com.application.afol.databinding.ActivityDetailBinding
 import com.application.afol.models.LegoSet
 import com.application.afol.ui.adapters.BindingAdapter
 import com.application.afol.ui.adapters.MOCRecyclerViewAdapter
+import com.application.afol.utility.doNothing
+import com.application.afol.utility.dropLastTwoChars
 import com.application.afol.utility.setVisibility
+import com.application.afol.utility.showSnackbar
 import com.application.afol.vm.detailViewModel.DetailViewModel
 import com.application.afol.vm.detailViewModel.DetailViewModelFactory
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -42,13 +48,15 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
 
     override val kodein: Kodein by kodein()
 
-    private lateinit var binding: ActivityDetailBinding
+    private val legoSet: LegoSet by lazy { intent.getParcelableExtra<LegoSet>(LEGO_SET) }
 
     private val detailViewModelFactory: DetailViewModelFactory by instance()
 
-    private lateinit var detailViewModel: DetailViewModel
+    private var isSetInFav = false
 
-    private val legoSet: LegoSet by lazy { intent.getParcelableExtra<LegoSet>(LEGO_SET) }
+    private lateinit var binding: ActivityDetailBinding
+
+    private lateinit var detailViewModel: DetailViewModel
 
     private lateinit var mocRecyclerViewAdapter: MOCRecyclerViewAdapter
 
@@ -63,33 +71,76 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
         setUpDetailsToolbar()
         setUpDetailsCollapsingToolbar()
         bindView()
+        GlobalScope.launch(Dispatchers.Main) {
+            getFavorites()
+        }
         initializeRecyclerView(moc_recycler_view_id)
         parts_list_button.setOnClickListener {
             partListButtonReaction()
         }
+        imageButtonFavorite.setOnClickListener {
+            if (isSetInFav) {
+                removeFromFavorites(legoSet)
+            } else {
+                addToFavorites(legoSet)
+            }
+            GlobalScope.launch(Dispatchers.Main) {
+                getFavorites()
+            }
+        }
     }
 
-    // TODO clean up Details Activity!
-
-    override fun onBackPressed() {
-        finish()
-        super.onBackPressed()
-    }
+    override fun onBackPressed() =
+        finish().also { super.onBackPressed() }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         finish()
         return super.onOptionsItemSelected(item)
     }
 
-    private fun getMocs() {
-        detailViewModel.getMOCs(legoSet.set_num!!)
+    private fun removeFromFavorites(legoSet: LegoSet) {
+        detailViewModel.removeFromFavorites(legoSet)
+        showSnackBarFavoriteStatus(false, legoSet)
+        isSetInFav = false
     }
+
+    private fun addToFavorites(legoSet: LegoSet) {
+        detailViewModel.addToFavorites(legoSet)
+        showSnackBarFavoriteStatus(true, legoSet)
+        isSetInFav = true
+    }
+
+    private fun showSnackBarFavoriteStatus(status: Boolean, legoSet: LegoSet) {
+        if (status) {
+            coordinatorLayout.showSnackbar(legoSet.name + " " + getString(R.string.added_to_favorites_snack_bar_text))
+        } else {
+            coordinatorLayout.showSnackbar(legoSet.name + " " + getString(R.string.deleted_item_snack_bar_text))
+        }
+    }
+
+    private fun setAddToFavoriteText(isInFavorite: Boolean) =
+        if (isInFavorite) {
+            favorite_text.text = getString(R.string.details_favorite_text_remove)
+        } else {
+            favorite_text.text = getString(R.string.details_favorite_text_add)
+        }
+
+    private suspend fun getFavorites() =
+        detailViewModel.getListOfFavorites().observe(this, Observer { listOfFavorites ->
+            listOfFavorites.forEach {
+                if (it.set_num == legoSet.set_num) isSetInFav = true
+            }
+            imageButtonFavorite.isSelected = isSetInFav
+            setAddToFavoriteText(isSetInFav)
+        })
+
+    private fun getMocs() = legoSet.set_num?.let { detailViewModel.getMOCs(it) }
 
     private fun getErrorRespond() {
         detailViewModel.getMocsError.observe(
             this,
             Observer {
-                Log.i("searchError", it)
+                doNothing
             }
         )
     }
@@ -98,35 +149,35 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
         detailViewModel.getMocsException.observe(
             this,
             Observer {
-                Log.i("searchException", it.message.toString())
+                doNothing
             }
         )
     }
 
     private fun getSuccessRespond() {
         detailViewModel.getMocsSuccess.observe(this, Observer {
-            mocRecyclerViewAdapter.listOfMoc = it.results.toMutableList()
-            list_mocs_title.setVisibility(mocRecyclerViewAdapter.listOfMoc.isNotEmpty())
-            set_number_mocs_list_value.setVisibility(mocRecyclerViewAdapter.listOfMoc.isNotEmpty())
+            with(mocRecyclerViewAdapter) {
+                updateList(it.results.toMutableList())
+                group_moc.setVisibility(listOfMoc.isNotEmpty())
+            }
         })
     }
 
     private fun setUpDetailsToolbar() {
         setSupportActionBar(lego_details_toolbar_id)
-        with(supportActionBar!!) {
-            setDisplayHomeAsUpEnabled(true)
-            setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp)
-            setDisplayShowTitleEnabled(false)
-        }
-        lego_details_collapsing_toolbar_id.title = legoSet.set_num?.dropLast(2)
+        supportActionBar?.let {
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setDisplayShowTitleEnabled(false)
+            it.setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp)
+        } ?: error("supportActionBar is null")
+        lego_details_collapsing_toolbar_id.title = legoSet.set_num?.dropLastTwoChars()
     }
 
-    private fun setUpDetailsCollapsingToolbar() {
+    private fun setUpDetailsCollapsingToolbar() =
         with(lego_details_collapsing_toolbar_id) {
             setCollapsedTitleTextColor(android.graphics.Color.WHITE)
             setExpandedTitleColor(android.graphics.Color.WHITE)
         }
-    }
 
     private fun initializeViewModel() {
         detailViewModel =
@@ -137,20 +188,22 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
         binding.legoSet = legoSet
         val adapter = BindingAdapter
         binding.adapter = adapter
-        adapter.bindURLParse = { url ->
-            val openURL = Intent(Intent.ACTION_VIEW)
-            openURL.data = Uri.parse(url)
-            startActivity(openURL)
-        }
-        adapter.bindImageToUrl = { url ->
-            val openURLfromImage = Intent(Intent.ACTION_VIEW)
-            openURLfromImage.data = Uri.parse(url)
-            startActivity(openURLfromImage)
-        }
-        adapter.bindInstrctionURLParse = { set_num ->
-            val openInstructionURL = Intent(Intent.ACTION_VIEW)
-            openInstructionURL.data = Uri.parse(startInstructionSite(set_num))
-            startActivity(openInstructionURL)
+        with(adapter) {
+            bindURLParse = { url ->
+                val openURL = Intent(Intent.ACTION_VIEW)
+                openURL.data = Uri.parse(url)
+                startActivity(openURL)
+            }
+            bindImageToUrl = { url ->
+                val openURLFromImage = Intent(Intent.ACTION_VIEW)
+                openURLFromImage.data = Uri.parse(url)
+                startActivity(openURLFromImage)
+            }
+            bindInstrctionURLParse = { numberOfSet ->
+                val openInstructionURL = Intent(Intent.ACTION_VIEW)
+                openInstructionURL.data = Uri.parse(startInstructionSite(numberOfSet))
+                startActivity(openInstructionURL)
+            }
         }
     }
 
@@ -162,18 +215,16 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
     }
 
     private fun startInstructionSite(set_num: String) =
-        "https://www.lego.com/pl-pl/service/buildinginstructions/search#?search&text=" + set_num.substring(
-            0,
-            set_num.length - 2
-        )
+        "https://www.lego.com/pl-pl/service/buildinginstructions/search#?search&text=" +
+                set_num.dropLastTwoChars()
 
-
-    private fun partListButtonReaction() {
-        startActivity(
-            BricksListActivity.getIntent(
-                this,
-                legoSet.set_num!!
+    private fun partListButtonReaction() =
+        legoSet.set_num?.let {
+            startActivity(
+                BricksListActivity.getIntent(
+                    this,
+                    it
+                )
             )
-        )
-    }
+        } ?: error("set number is unknown")
 }

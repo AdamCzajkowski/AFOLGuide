@@ -15,3 +15,5 @@ fun View.showSnackbar(message: String, duration: Int = Snackbar.LENGTH_LONG) =
         message,
         duration
     ).show()
+
+fun String.dropLastTwoChars() = dropLast(2)

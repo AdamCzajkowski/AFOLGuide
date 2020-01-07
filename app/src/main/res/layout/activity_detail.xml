@@ -74,15 +74,35 @@
                 android:layout_height="wrap_content"
                 android:clipToPadding="false">
 
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/imageButtonFavorite"
+                    android:layout_width="@dimen/details_image_size_56dp"
+                    android:layout_height="@dimen/details_image_size_56dp"
+                    android:layout_marginTop="@dimen/margin_8dp"
+                    android:layout_marginEnd="@dimen/margin_8dp"
+                    android:background="@drawable/image_favorite"
+                    app:layout_anchorGravity="bottom|left"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/favorite_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_8dp"
+                    android:text="@string/details_favorite_text_add"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageButtonFavorite"
+                    app:layout_constraintEnd_toStartOf="@+id/imageButtonFavorite"
+                    app:layout_constraintTop_toTopOf="@+id/imageButtonFavorite" />
+
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_24dp"
                     android:layout_marginEnd="@dimen/margin_16dp"
                     android:text="@string/number_text"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageButtonFavorite" />
 
                 <TextView
                     android:id="@+id/textView2"
@@ -207,6 +227,13 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/list_mocs_title" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/group_moc"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="list_mocs_title,set_number_mocs_list_value" />
 
                 <TextView
                     android:id="@+id/list_mocs_title"

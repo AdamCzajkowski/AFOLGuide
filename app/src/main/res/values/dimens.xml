@@ -11,7 +11,6 @@
     <dimen name="margin_6dp">6dp</dimen>
     <dimen name="legoset_single_guideline">190dp</dimen>
     <dimen name="margin_48dp">48dp</dimen>
-    <dimen name="favorite_single_card_view_height">150dp</dimen>
     <dimen name="favorite_single_guideline">190dp</dimen>
     <dimen name="main_toolbar_height">25dp</dimen>
     <dimen name="text_size_10sp">10sp</dimen>
@@ -20,4 +19,5 @@
     <dimen name="collapsed_toolbar_margin_end">106dp</dimen>
     <dimen name="margin_32dp">32dp</dimen>
     <dimen name="detail_guideline">126dp</dimen>
+    <dimen name="details_image_size_56dp">56dp</dimen>
 </resources>

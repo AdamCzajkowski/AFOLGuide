@@ -17,7 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/DarkThemeNoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.application.afol.ui.activities.LegoSetFromThemeActivity" />
         <activity android:name="com.application.afol.ui.activities.BricksListActivity" />
         <activity android:name="com.application.afol.ui.activities.DetailActivity" />
         <activity android:name="com.application.afol.ui.activities.MainActivity">

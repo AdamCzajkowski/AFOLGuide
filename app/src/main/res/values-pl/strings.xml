@@ -28,11 +28,11 @@
     <string name="different_bricks_text">Różnych części:</string>
     <string name="information_image">obrazek informacyjny</string>
     <string name="deleted_item_snack_bar_text">usunięto z ulubionych</string>
-    <string name="undo_snack_bar_text">Cofnij</string>
     <string name="added_to_favorites_snack_bar_text">dodano do Ulubionych</string>
-    <string name="already_in_favorites_snack_bar_text">już jest w Ulubionych</string>
     <string name="author">by Adam Czajkowski</string>
     <string name="instruction_button_text">instrukcja</string>
     <string name="parts_list_button_text">Lista części</string>
     <string name="rebrickable_button_text">rebrickable</string>
+    <string name="details_favorite_text_add">Dodaj do Ulubionych</string>
+    <string name="details_favorite_text_remove">Usuń z Ulubionych</string>
 </resources>

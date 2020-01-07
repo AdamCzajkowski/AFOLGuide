@@ -226,7 +226,8 @@ class SearchSetFragment : Fragment(), KodeinAware {
 
     private fun removeFromFavorites(legoSet: LegoSet) {
         if (isSetInFavorites(legoSet)) {
-            listOfFavoritesSets.value?.find { searchedLegoSet -> searchedLegoSet.set_num == legoSet.set_num }
+            listOfFavoritesSets.value?.find { searchedLegoSet ->
+                searchedLegoSet.set_num == legoSet.set_num }
                 ?.let { searchLegoViewModel.removeFromMySets(it) }
             with(legoRecyclerViewAdapter.listOfFavoritesLegoSet) {
                 this?.find { searchedLegoSet -> searchedLegoSet.set_num == legoSet.set_num }?.let {

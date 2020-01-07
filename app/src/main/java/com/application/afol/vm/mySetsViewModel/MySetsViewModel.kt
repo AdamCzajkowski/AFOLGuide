@@ -15,17 +15,17 @@ class MySetsViewModel(private val repository: Repository) : ViewModel() {
 
     suspend fun getListOfMySets(): LiveData<MutableList<LegoSet>> {
         return withContext(Dispatchers.IO) {
-            return@withContext repository.getMySets()
+            return@withContext repository.getFavorites()
         }
     }
 
     fun removeFromMySets(legoSet: LegoSet) = scope.launch {
         legoSet.isInFavorite = false
-        repository.removeFromMySets(legoSet)
+        repository.removeFromFavorites(legoSet)
     }
 
     fun addToMySets(legoSet: LegoSet) = scope.launch {
         legoSet.isInFavorite = true
-        repository.addToMySets(legoSet)
+        repository.addToFavorites(legoSet)
     }
 }

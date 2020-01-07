@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.databinding.BindingAdapter
+import com.application.afol.utility.dropLastTwoChars
 import com.squareup.picasso.Picasso
 
 object BindingAdapter {
@@ -46,7 +47,7 @@ object BindingAdapter {
     @JvmStatic
     @BindingAdapter("bindShortNumber")
     fun TextView.bindShortNumber(set_num: String) {
-        text = set_num.dropLast(2)
+        text = set_num.dropLastTwoChars()
     }
 
     @JvmStatic

@@ -61,6 +61,11 @@ class MySetsFragment : Fragment(), KodeinAware {
         }
     }
 
+    override fun onResume() {
+        mySetsRecyclerViewAdapter.notifyDataSetChanged()
+        super.onResume()
+    }
+
     private fun initializeLegoViewModel() {
         mySetsViewModel =
             ViewModelProviders.of(this, mySetsViewModelFactory).get(MySetsViewModel::class.java)

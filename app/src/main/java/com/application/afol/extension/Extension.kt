@@ -1,8 +1,6 @@
 package com.application.afol.extension
 
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import com.application.afol.network.Result
 import retrofit2.Response
 
@@ -18,5 +16,3 @@ suspend fun <T : Any> safeApi(call: suspend () -> Response<T>): Result<T> {
         return Result.Exception(e)
     }
 }
-
-// fun ViewGroup.inflate(): LayoutInflater = LayoutInflater.from(context)

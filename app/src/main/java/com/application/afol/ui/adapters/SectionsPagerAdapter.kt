@@ -23,7 +23,7 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
             0 -> MySetsFragment()
             1 -> SearchSetFragment()
             2 -> SearchBrickFragment()
-            else -> throw IllegalStateException("Position $position exceeds the fragment count")
+            else -> throw IllegalStateException("Position $position exceeds the fragment count") as Throwable
         }
     }
 

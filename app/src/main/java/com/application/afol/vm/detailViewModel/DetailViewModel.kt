@@ -35,12 +35,21 @@ class DetailViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
-    suspend fun getListOfMySets(): LiveData<MutableList<LegoSet>> {
+    suspend fun getListOfFavorites(): LiveData<MutableList<LegoSet>> {
         return withContext(Dispatchers.IO) {
-            return@withContext repository.getMySets()
+            return@withContext repository.getFavorites()
         }
     }
 
-    private fun cancelJob() = job.cancel()
+    fun removeFromFavorites(legoSet: LegoSet) = scope.launch {
+        legoSet.isInFavorite = false
+        repository.removeFromFavorites(legoSet)
+    }
 
+    fun addToFavorites(legoSet: LegoSet) = scope.launch {
+        legoSet.isInFavorite = true
+        repository.addToFavorites(legoSet)
+    }
+
+    private fun cancelJob() = job.cancel()
 }

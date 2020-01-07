@@ -102,10 +102,10 @@
 
             <TextView
                 android:id="@+id/number_set_value_text_id"
+                bindShortNumber="@{legoSet.set_num}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_16dp"
-                android:text="@{legoSet.set_num}"
                 android:textColor="#A6FFFFFF"
                 android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintEnd_toEndOf="parent"
