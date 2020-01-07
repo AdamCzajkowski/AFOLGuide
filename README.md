@@ -1,4 +1,4 @@
-# AFOL Application
+# AFOL Guide
 
 This is simple app to research LEGO® sets, instuctions and bricks. All information about LEGO® are from rebrickable.com. 
 
