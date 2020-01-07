@@ -2,13 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_brick_search"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.SearchBrickFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,20 +25,18 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search_brick_id"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"/>
 
     <include
         android:id="@+id/user_instruction_view"
+        layout="@layout/default_search_text_box"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        layout="@layout/default_search_text_box"
         app:layout_constraintBottom_toBottomOf="@+id/rv_search_brick_id"
         app:layout_constraintEnd_toEndOf="@+id/rv_search_brick_id"
         app:layout_constraintStart_toStartOf="@+id/rv_search_brick_id"

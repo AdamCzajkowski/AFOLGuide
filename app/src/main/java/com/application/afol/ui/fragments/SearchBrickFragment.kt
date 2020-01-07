@@ -1,10 +1,11 @@
 package com.application.afol.ui.fragments
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +17,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.afol.R
 import com.application.afol.ui.adapters.PartsRecyclerViewAdapter
-import com.application.afol.utility.gone
-import com.application.afol.utility.show
+import com.application.afol.utility.doNothing
+import com.application.afol.utility.setVisibility
 import com.application.afol.vm.searchBrickViewModel.SearchBrickViewModel
 import com.application.afol.vm.searchBrickViewModel.SearchBrickViewModelFactory
 import io.reactivex.Observable
@@ -32,22 +33,24 @@ import org.kodein.di.android.support.kodein
 import org.kodein.di.generic.instance
 import java.util.concurrent.TimeUnit
 
+private const val TIMEOUT_DEBOUNCE = 200L
+private const val PAGE_SIZE = 20
+private const val MAX_AMOUNT_PART_LOADED = 30000
+
 class SearchBrickFragment : Fragment(), KodeinAware {
     override val kodein: Kodein by kodein()
-
-    private val searchBrickViewModelFactory: SearchBrickViewModelFactory by instance()
 
     private lateinit var searchBrickViewModel: SearchBrickViewModel
 
     private lateinit var partsRecyclerViewAdapter: PartsRecyclerViewAdapter
 
+    private val searchBrickViewModelFactory: SearchBrickViewModelFactory by instance()
+
     private val compositeDisposable = CompositeDisposable()
 
     private var pageCounter = 1
 
-    private val pageSize = 20
-
-    var forceSearch: ((Boolean) -> Unit)? = null
+    private var forceSearch: ((Boolean) -> Unit)? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,17 +60,16 @@ class SearchBrickFragment : Fragment(), KodeinAware {
         getSuccessRespond()
         getExceptionRespond()
         getErrorRespond()
-
         return inflater.inflate(R.layout.fragment_search_brick, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeRecyclerView(rv_search_brick_id)
+        openBrickURL()
         partsRecyclerViewAdapter.endMarker = { marker ->
             if (marker) {
                 pageCounter++
-                Log.i("searchSet", "pageCounter increment = $pageCounter")
                 forceSearch?.invoke(true)
             } else {
                 forceSearch?.invoke(false)
@@ -78,57 +80,60 @@ class SearchBrickFragment : Fragment(), KodeinAware {
 
     override fun onDestroy() {
         super.onDestroy()
+
         compositeDisposable.clear()
     }
 
     override fun onPause() {
         super.onPause()
+
         hideKeyboard()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+
         hideKeyboard()
     }
 
     private fun initializeRecyclerView(recyclerView: RecyclerView) {
         partsRecyclerViewAdapter = PartsRecyclerViewAdapter()
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
-        val alphaAdapter = AlphaInAnimationAdapter(partsRecyclerViewAdapter)
-        recyclerView.adapter = ScaleInAnimationAdapter(alphaAdapter)
+        with(recyclerView) {
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = ScaleInAnimationAdapter(AlphaInAnimationAdapter(partsRecyclerViewAdapter))
+        }
     }
 
     private fun startFetching() {
         val disposable = Observable.create(ObservableOnSubscribe<String> { subsciber ->
             search_brick_edit_text_id.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {}
+                override fun afterTextChanged(s: Editable?) {
+                    doNothing
+                }
+
                 override fun beforeTextChanged(
                     s: CharSequence?,
                     start: Int,
                     count: Int,
                     after: Int
                 ) {
+                    doNothing
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     subsciber.onNext(s.toString())
                     pageCounter = 1
-                    Log.i("searchPart", "\npageCounter down to one")
                 }
             })
-        }).debounce(200, TimeUnit.MILLISECONDS)
+        }).debounce(TIMEOUT_DEBOUNCE, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
             .subscribe {
-                Log.i(
-                    "searchPart",
-                    " --------------------- start searching ------------------------"
-                )
-                forceSearch = { marker ->
-                    if (marker) {
-                        searchBrickViewModel.getBricksFromSearch(pageCounter, pageSize, it)
+                with(searchBrickViewModel) {
+                    forceSearch = { marker ->
+                        if (marker) getBricksFromSearch(pageCounter, PAGE_SIZE, it)
                     }
+                    getBricksFromSearch(pageCounter, PAGE_SIZE, it)
                 }
-                searchBrickViewModel.getBricksFromSearch(pageCounter, pageSize, it)
             }
         compositeDisposable.addAll(disposable)
     }
@@ -139,34 +144,47 @@ class SearchBrickFragment : Fragment(), KodeinAware {
                 .get(SearchBrickViewModel::class.java)
     }
 
-    private fun getSuccessRespond() {
+    private fun openBrickURL() {
+        partsRecyclerViewAdapter.partSelectedURL = {
+            val rebrickableURL = Intent(Intent.ACTION_VIEW)
+            rebrickableURL.data = Uri.parse(it)
+            startActivity(rebrickableURL, Bundle())
+        }
+    }
+
+    private fun getSuccessRespond() =
         searchBrickViewModel.getPartsSuccess.observe(this, Observer {
             if (pageCounter == 1) {
-                if (it.count < 30000) partsRecyclerViewAdapter.listOfParts =
-                    it.results.toMutableList().also { user_instruction_view.gone() }
-                else partsRecyclerViewAdapter.clearList().also { user_instruction_view.show() }
+                if (it.count < MAX_AMOUNT_PART_LOADED) partsRecyclerViewAdapter.listOfParts =
+                    it.results.toMutableList().also { user_instruction_view.setVisibility(false) }
+                else partsRecyclerViewAdapter.clearList().also {
+                    user_instruction_view.setVisibility(
+                        true
+                    )
+                }
             } else {
-                if (it.count < 30000) partsRecyclerViewAdapter.addToList(it.results.toMutableList()).also { user_instruction_view.gone() }
+                if (it.count < MAX_AMOUNT_PART_LOADED) partsRecyclerViewAdapter.addToList(it.results.toMutableList()).also {
+                    user_instruction_view.setVisibility(
+                        false
+                    )
+                }
             }
             partsRecyclerViewAdapter.notifyDataSetChanged()
         })
-    }
 
-    private fun getErrorRespond() {
+    private fun getErrorRespond() =
         searchBrickViewModel.getPartsError.observe(viewLifecycleOwner, Observer {
-            Log.i("searchPart", "error ${it}")
+            doNothing
         })
-    }
 
-    private fun getExceptionRespond() {
+    private fun getExceptionRespond() =
         searchBrickViewModel.getPartsException.observe(viewLifecycleOwner, Observer {
-            Log.i("searchPart", "exception ${it.message}")
+            doNothing
         })
-    }
 
     private fun hideKeyboard() {
         val inputMethodManager =
-            context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view!!.windowToken, 0)
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(constraint_brick_search.windowToken, 0)
     }
 }

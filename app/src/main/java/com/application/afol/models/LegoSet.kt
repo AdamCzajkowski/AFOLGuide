@@ -23,5 +23,6 @@ data class LegoSet(
     @SerializedName("set_img_url")
     val set_img_url: String?,
     @SerializedName("set_url")
-    val set_url: String?
+    val set_url: String?,
+    var isInFavorite: Boolean = false
 ) : Parcelable

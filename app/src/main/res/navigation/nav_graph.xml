@@ -19,9 +19,4 @@
         android:name="com.application.afol.ui.fragments.SearchBrickFragment"
         android:label="fragment_search_brick"
         tools:layout="@layout/fragment_search_brick" />
-    <fragment
-        android:id="@+id/themesFragment"
-        android:name="com.application.afol.ui.fragments.ThemesFragment"
-        android:label="fragment_themes"
-        tools:layout="@layout/fragment_themes" />
 </navigation>

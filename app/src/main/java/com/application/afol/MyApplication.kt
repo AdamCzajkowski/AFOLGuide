@@ -16,10 +16,6 @@ import com.application.afol.vm.searchBrickViewModel.SearchBrickViewModel
 import com.application.afol.vm.searchBrickViewModel.SearchBrickViewModelFactory
 import com.application.afol.vm.searchViewModel.SearchLegoViewModel
 import com.application.afol.vm.searchViewModel.SearchLegoViewModelFactory
-import com.application.afol.vm.themeActivityViewModel.ThemeActivityViewModel
-import com.application.afol.vm.themeActivityViewModel.ThemeActivityViewModelFactory
-import com.application.afol.vm.themesViewModel.ThemesViewModel
-import com.application.afol.vm.themesViewModel.ThemesViewModelFactory
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -78,8 +74,6 @@ class MyApplication : Application(), KodeinAware {
 
         bind() from singleton { GsonConverterFactory.create() }
         bind() from singleton { CoroutineCallAdapterFactory() }
-        bind() from singleton { ThemesViewModel(instance()) }
-        bind() from singleton { ThemesViewModelFactory(instance()) }
         bind() from singleton { BrickListViewModel(instance()) }
         bind() from singleton { BrickListViewModelFactory(instance()) }
         bind() from singleton { DetailViewModelFactory(instance()) }
@@ -90,8 +84,6 @@ class MyApplication : Application(), KodeinAware {
         bind() from singleton { SearchLegoViewModelFactory(instance()) }
         bind() from singleton { instance<Retrofit>().create(LegoApiService::class.java) }
         bind() from singleton { Repository(instance(), instance()) }
-        bind() from singleton { ThemeActivityViewModel(instance()) }
-        bind() from singleton { ThemeActivityViewModelFactory(instance()) }
         bind() from singleton { SearchBrickViewModel(instance()) }
         bind() from singleton { SearchBrickViewModelFactory(instance()) }
     }

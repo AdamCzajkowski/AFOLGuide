@@ -4,23 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/constraint_favorites_fragment"
     tools:context=".ui.fragments.MySetsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_my_sets_id"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/dark_gray"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/dark_gray"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
         android:id="@+id/default_my_sets_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_marginBottom="16dp"
+            android:layout_width="@dimen/favorite_image_size"
+            android:layout_height="@dimen/favorite_image_size"
+            android:layout_marginBottom="@dimen/margin_16dp"
             android:contentDescription="@string/information_image"
             android:src="@drawable/information_icon"
             app:layout_constraintBottom_toTopOf="@+id/text"
@@ -29,7 +38,7 @@
 
         <TextView
             android:id="@+id/text"
-            android:layout_width="250dp"
+            android:layout_width="@dimen/favorite_instruction_text"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/default_my_sets_for_user"

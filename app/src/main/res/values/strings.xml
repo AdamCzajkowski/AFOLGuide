@@ -1,11 +1,10 @@
 <resources>
-    <string name="app_name">AFOL Application</string>
+    <string name="app_name">AFOL\'s informant</string>
 
     <string name="tab_title_my">Favorites</string>
     <string name="tab_title_search">Search Set</string>
     <string name="tab_sets_search">Sets</string>
     <string name="tab_bricks_search">Bricks</string>
-    <string name="Themes_tab_name">Themes</string>
     <string name="tab_title_search_part">Search Part</string>
 
     <string name="lego_image_desc">LEGO image</string>
@@ -17,10 +16,6 @@
     <string name="search_lego_set_hint_edit_text">Search LEGO set</string>
     <string name="lego_image">LEGO Image</string>
 
-    <string name="add_to_my_sets_text">Add to Favorites</string>
-
-    <string name="exist_in_my_sets_text">Exist in Favorites</string>
-    <string name="image_of_my_sets">image of my sets</string>
     <string name="quantity_title_text">Quantity</string>
     <string name="color_title_text">Color</string>
     <string name="brick_image_desc">brick image</string>
@@ -33,13 +28,16 @@
     <string name="designer_text">Designer</string>
     <string name="mocs_based_on_text">MOCs based on</string>
 
-    <string name="search_lego_theme_text">Search LEGO theme</string>
     <string name="search_lego_part_text">Search LEGO parts</string>
     <string name="default_text_for_user">In this section, after filling text field with proper tags, you will be able to see your search results.</string>
-    <string name="default_my_sets_for_user">In this section, you will be able to see your favorite LEGO sets. You can add set to `Favorite` by clicking proper button in `Lego Set\'s Details`.</string>
+    <string name="default_my_sets_for_user">In this section, you will be able to see your favorite LEGO sets. You can add set to `Favorite` by clicking proper button in `Lego Set\'s Details` or heart icon in list of searched sets.</string>
     <string name="information_image">information image</string>
     <string name="deleted_item_snack_bar_text">deleted from Favorites</string>
-    <string name="undo_snack_bar_text">Undo</string>
     <string name="added_to_favorites_snack_bar_text">added to Favorites</string>
-    <string name="already_in_favorites_snack_bar_text">already exist in Favorites</string>
+    <string name="author">by Adam Czajkowski</string>
+    <string name="rebrickable_button_text">rebrickable</string>
+    <string name="instruction_button_text">instruction</string>
+    <string name="parts_list_button_text">Parts list</string>
+    <string name="details_favorite_text_add">Add to favorite</string>
+    <string name="details_favorite_text_remove">Remove from favorite</string>
 </resources>
