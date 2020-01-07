@@ -1,6 +1,6 @@
 # AFOL Application
 
-This is simple app to research LEGO sets, instuctions and bricks. All information about LEGO® are from rebrickable.com. 
+This is simple app to research LEGO® sets, instuctions and bricks. All information about LEGO® are from rebrickable.com. 
 
 Screens:
 ---------------------------
@@ -8,26 +8,26 @@ Screens:
 
 "Favorite" section:
 -----------------------------
-In this section, user will be able to see his favorite LEGO sets. User can add set to "Favorite" by clicking proper button in "LEGO® set's details".
+In this section, user will be able to see his favorite LEGO® sets. User can add set to "Favorite" by clicking proper button in "LEGO® set's details".
 By cliking on LEGO® set user will go to "LEGO® set's details"
 
 "Sets" section:
 ------------------------------
-In this section, user will be able to see his search result LEGO sets after filling text field with proper tags like set's number or name. 
+In this section, user will be able to see his search result LEGO® sets after filling text field with proper tags like set's number or name. 
 By cliking on LEGO® set user will go to "LEGO® set's details"
 
 "Bricks" section:
 -------------------------------
-In this section, user will be able to see his search result LEGO bricks after filling text field with proper tags like brick's number or name. 
-by clicking on image of brick user will see rebrickable site with information about that brick in web browser.
+In this section, user will be able to see his search result LEGO® bricks after filling text field with proper tags like brick's number or name. 
+by clicking on image of brick user will see Rebrickable site with information about that brick in web browser.
 
 "LEGO® set's details" screen:
 -------------------------------
 In this section, user will be able to see LEGO® set's detail. User can add set to "Favorite" by clicking icon of heart and if set is in favorite icon of heart is full cover and text next to will be changed to "Exist in favorites".
 By clicking "REBRICKABLE" button, user will see rebrickable site with information about that set in web browser.
 By clicking "INSTRUCTION" button, user will see official LEGO® site with instruction in web browser.
-By clicking "PARTS LIST" button, user will see screen with list of parts used in that model and by clicking on image of brick user will see rebrickable site with information about that brick in web browser.
-At bottom user will be able to see alternative buildings based on that model which is detail's shown on top and by clicking on it user will see rebrickable site with information about that MOC in web browser.
+By clicking "PARTS LIST" button, user will see screen with list of parts used in that model and by clicking on image of brick user will see Rebrickable site with information about that brick in web browser.
+At bottom user will be able to see alternative buildings based on that model which is detail's shown on top and by clicking on it user will see Rebrickable site with information about that MOC in web browser.
 
 About used technology:
 -----------------------------
