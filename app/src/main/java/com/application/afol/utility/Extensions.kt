@@ -1,6 +1,10 @@
 package com.application.afol.utility
 
+
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 
 val doNothing = Unit
@@ -17,3 +21,9 @@ fun View.showSnackbar(message: String, duration: Int = Snackbar.LENGTH_LONG) =
     ).show()
 
 fun String.dropLastTwoChars() = dropLast(2)
+
+fun AlertDialog.showDialog() = apply {
+    show()
+    window?.setGravity(Gravity.CENTER)
+    window?.setLayout(WRAP_CONTENT, WRAP_CONTENT)
+}
