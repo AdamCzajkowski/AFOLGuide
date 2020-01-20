@@ -6,4 +6,6 @@
     <color name="gray">#8A8888</color>
     <color name="white">#FFFFFF</color>
     <color name="white_semi_transparent">#80FFFFFF</color>
+    <color name="burst_white">#65FFFFFF</color>
+    <color name="semi_burst_white">#A6FFFFFF</color>
 </resources>

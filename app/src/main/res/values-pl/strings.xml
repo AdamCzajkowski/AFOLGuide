@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AFOL informator</string>
+    <string name="app_name">AFOL Guide</string>
     <string name="brick_image_desc">Obraz klocka</string>
     <string name="brick_title">Klocek</string>
     <string name="color_title_text">Kolor</string>
-    <string name="default_my_sets_for_user">W tej sekcji będą widoczne Twoje ulubione zestawy. Możesz dodać zestawy do \'Ulubionych\' poprzez kliknięcie w odpowiedni przycisk w \'Szczegóły zestawu LEGO\' lub ikonę serca w liście wyszukanych zestawów.</string>
+    <string name="default_my_sets_for_user">W tej sekcji będą widoczne Twoje ulubione zestawy. Możesz dodać zestawy do \'Ulubionych\' poprzez kliknięcie w odpowiedni przycisk w \'Szczegóły zestawu LEGO®\' lub ikonę serca w liście wyszukanych zestawów.</string>
     <string name="default_text_for_user">W tej sekcji, po wypełnieniu pola tekstowego odpowiednim hasłem, będziesz widział wyniki wyszukiwania.</string>
     <string name="designer_text">Autor</string>
-    <string name="lego_image">obrazek LEGO</string>
-    <string name="lego_image_desc">obrazek LEGO</string>
-    <string name="lego_image_transition">obrazek zestawu LEGO</string>
+    <string name="lego_image">obrazek LEGO®</string>
+    <string name="lego_image_desc">obrazek LEGO®</string>
+    <string name="lego_image_transition">obrazek zestawu LEGO®</string>
     <string name="moc_image_desc">obrazek MOC</string>
-    <string name="mocs_based_on_text">MOCi bazujące na</string>
+    <string name="mocs_based_on_text">Alternatywne budowle bazujące na</string>
     <string name="name_set_card_view">Nazwa</string>
     <string name="number_text">Nr</string>
     <string name="parts_text">Części</string>
     <string name="pieces_cardView_title">Il. Klocków</string>
     <string name="quantity_title_text">Ilość</string>
     <string name="release_year_card_view_text">Rok wydania</string>
-    <string name="search_lego_part_text">"Szukaj części LEGO "</string>
-    <string name="search_lego_set_hint_edit_text">Szukaj zestawu LEGO</string>
+    <string name="search_lego_part_text">Szukaj części LEGO®</string>
+    <string name="search_lego_set_hint_edit_text">Szukaj zestawu LEGO®</string>
     <string name="tab_bricks_search">Klocki</string>
     <string name="tab_sets_search">Zestawy</string>
     <string name="tab_title_my">Ulubione</string>
@@ -35,4 +35,9 @@
     <string name="rebrickable_button_text">rebrickable</string>
     <string name="details_favorite_text_add">Dodaj do Ulubionych</string>
     <string name="details_favorite_text_remove">Usuń z Ulubionych</string>
+    <string name="parts_list_title_prefix">Lista części z</string>
+    <string name="author_title">Autor:</string>
+    <string name="contact_title">Kontakt:</string>
+    <string name="version">Wersja:</string>
+    <string name="info_title">Info</string>
 </resources>

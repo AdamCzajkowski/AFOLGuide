@@ -1,8 +1,12 @@
 package com.application.afol.ui.adapters
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.application.afol.databinding.SingleBrickRowBinding
 import com.application.afol.models.BrickResult
@@ -28,7 +32,8 @@ class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
-            bindView(listOfBricks[position], position + 1)
+            bindView(listOfBricks[position], position)
+            createAdapter(context)
             itemView.imageView.setOnClickListener { brickSelected?.invoke(listOfBricks[position].part.partUrl) }
         }
         if (position == itemCount - (0.1 * itemCount).toInt()) endMarker?.invoke(true)
@@ -44,11 +49,6 @@ class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter
     fun addToList(list: MutableList<BrickResult.Result>) =
         listOfBricks.addAll(list).also { notifyItemRangeChanged(itemCount - list.size, itemCount) }
 
-    fun clearList() {
-        listOfBricks.clear()
-        notifyDataSetChanged()
-    }
-
     class ViewHolder(val binding: SingleBrickRowBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindView(item: BrickResult.Result, position: Int) {
             with(binding) {
@@ -56,10 +56,11 @@ class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter
                 brickDetail = item.part
                 brickQuantity = item
             }
-            itemView.position_value.text = position.toString()
+            val numberOfPart = position + 1
+            itemView.position_value.text = numberOfPart.toString()
         }
 
-        /*fun createAdapter(context: Context) {
+        fun createAdapter(context: Context) {
             val adapter = BindingAdapter
             binding.adapter = adapter
             BindingAdapter.bindURLParse = { url ->
@@ -72,6 +73,6 @@ class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter
                 openURLFromImage.data = Uri.parse(url)
                 startActivity(context, openURLFromImage, Bundle())
             }
-        }*/
+        }
     }
 }

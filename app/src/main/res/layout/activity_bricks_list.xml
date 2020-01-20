@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_24dp"
-        android:textColor="#66FFFFFF"
+        android:textColor="@color/burst_white"
         android:textSize="@dimen/text_size_12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/diffrent_bricks_title" />
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_8dp"
         android:text="@string/different_bricks_text"
-        android:textColor="#65FFFFFF"
+        android:textColor="@color/burst_white"
         android:textSize="@dimen/text_size_12sp"
         app:layout_constraintEnd_toStartOf="@+id/count_bricks_value"
         app:layout_constraintTop_toBottomOf="@+id/bricks_toolbar_id" />

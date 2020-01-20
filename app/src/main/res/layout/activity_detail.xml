@@ -239,12 +239,12 @@
                     android:id="@+id/list_mocs_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_8dp"
                     android:layout_marginTop="@dimen/margin_8dp"
-                    android:layout_marginEnd="@dimen/margin_8dp"
                     android:text="@string/mocs_based_on_text"
-                    android:textColor="#A6FFFFFF"
+                    android:textColor="@color/semi_burst_white"
                     android:textSize="@dimen/text_size_12sp"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rebrickable_url_button" />
 
                 <TextView
@@ -253,7 +253,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_4dp"
-                    android:textColor="#A6FFFFFF"
+                    android:textColor="@color/semi_burst_white"
                     android:textSize="@dimen/text_size_12sp"
                     app:layout_constraintStart_toEndOf="@+id/list_mocs_title"
                     app:layout_constraintTop_toTopOf="@+id/list_mocs_title" />

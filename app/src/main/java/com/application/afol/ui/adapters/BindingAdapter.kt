@@ -4,6 +4,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageButton
+import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
 import com.application.afol.utility.dropLastTwoChars
 import com.squareup.picasso.Picasso
@@ -57,11 +58,20 @@ object BindingAdapter {
     }
 
     var bindImageToUrl: ((String) -> Unit)? = null
+    var bindMocToUrl: ((String) -> Unit)? = null
 
     @JvmStatic
     @BindingAdapter("bindImgToUrl")
     fun bindImgToUrl(imageView: ImageView, text: String?) {
         if (text != null) imageView.setOnClickListener { bindImageToUrl?.invoke(text) }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bindMOCToURL")
+    fun CardView.bindMOCToURL(url: String?) {
+        if (url != null) setOnClickListener {
+            bindMocToUrl?.invoke(url)
+        }
     }
 
     @JvmStatic
