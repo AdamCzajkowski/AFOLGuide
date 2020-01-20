@@ -41,4 +41,10 @@
     <string name="parts_list_title_prefix">"Parts list of "</string>
     <string name="details_favorite_text_add">Add to favorite</string>
     <string name="details_favorite_text_remove">Remove from favorite</string>
+    <string name="version">Version:</string>
+    <string name="author_title">Author:</string>
+    <string name="author_value" translatable="false">Adam Czajkowski</string>
+    <string name="version_value" translatable="false">0.9 - Beta</string>
+    <string name="contact_title">Contact</string>
+    <string name="author_email" translatable="false">adam.czajkowski8@gmail.com</string>
 </resources>
