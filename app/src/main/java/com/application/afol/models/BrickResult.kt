@@ -34,7 +34,16 @@ data class BrickResult(
             @SerializedName("part_num")
             val partNum: String,
             @SerializedName("part_url")
-            val partUrl: String
-        )
+            val partUrl: String,
+            @SerializedName("external_ids")
+            val externalIds: Bricklink?
+        ) {
+            data class Bricklink(
+                @SerializedName("BrickLink")
+                val bricklink: MutableList<String>?,
+                @SerializedName("BrickOwl")
+                val brickowl: MutableList<String>?
+            )
+        }
     }
 }
