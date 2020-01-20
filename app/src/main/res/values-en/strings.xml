@@ -39,4 +39,5 @@
     <string name="contact_title">Contact:</string>
     <string name="version">Version:</string>
     <string name="parts_list_title_prefix">Parts list of</string>
+    <string name="info_title">Info</string>
 </resources>

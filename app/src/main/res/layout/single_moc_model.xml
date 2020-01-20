@@ -16,10 +16,10 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_moc"
+        bindMOCToURL="@{moc.mocUrl}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        bindMOCToURL="@{moc.mocUrl}"
-        android:layout_margin="2dp">
+        android:layout_margin="@dimen/margin_3dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -32,17 +32,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="12dp" />
+                app:layout_constraintGuide_begin="@dimen/margin_8dp" />
 
             <TextView
                 android:id="@+id/name_moc_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/margin_8dp"
                 android:text="@string/name_set_card_view"
-                android:textColor="#A6FFFFFF"
-                android:textSize="12sp"
+                android:textColor="@color/semi_burst_white"
+                android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,11 +50,11 @@
                 android:id="@+id/parts_moc_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/margin_16dp"
                 android:text="@string/parts_text"
-                android:textColor="#A6FFFFFF"
-                android:textSize="12sp"
+                android:textColor="@color/semi_burst_white"
+                android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toBottomOf="@+id/name_moc_value" />
 
@@ -62,11 +62,11 @@
                 android:id="@+id/designer_moc_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/margin_16dp"
                 android:text="@string/designer_text"
-                android:textColor="#A6FFFFFF"
-                android:textSize="12sp"
+                android:textColor="@color/semi_burst_white"
+                android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toBottomOf="@+id/parts_moc_title" />
 
@@ -74,12 +74,12 @@
                 android:id="@+id/relese_year_moc_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:layout_marginBottom="@dimen/margin_8dp"
                 android:text="@string/release_year_card_view_text"
-                android:textColor="#A6FFFFFF"
-                android:textSize="12sp"
+                android:textColor="@color/semi_burst_white"
+                android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toBottomOf="@+id/designer_moc_value" />
@@ -88,13 +88,13 @@
                 android:id="@+id/name_moc_value"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
                 android:maxLines="2"
                 android:text="@{moc.name}"
                 android:textAlignment="textEnd"
-                android:textColor="#A6FFFFFF"
-                android:textSize="12sp"
+                android:textColor="@color/semi_burst_white"
+                android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/name_moc_title"
                 app:layout_constraintTop_toTopOf="@+id/name_moc_title" />
@@ -104,9 +104,9 @@
                 bindIntToString="@{moc.numParts}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:textColor="#A6FFFFFF"
-                android:textSize="12sp"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                android:textColor="@color/semi_burst_white"
+                android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/parts_moc_title" />
 
@@ -114,13 +114,13 @@
                 android:id="@+id/designer_moc_value"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
                 android:maxLines="2"
                 android:text="@{moc.designerName}"
                 android:textAlignment="textEnd"
-                android:textColor="#A6FFFFFF"
-                android:textSize="12sp"
+                android:textColor="@color/semi_burst_white"
+                android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/designer_moc_title"
                 app:layout_constraintTop_toTopOf="@+id/designer_moc_title" />
@@ -130,12 +130,11 @@
                 bindIntToString="@{moc.year}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:textColor="#A6FFFFFF"
-                android:textSize="12sp"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                android:textColor="@color/semi_burst_white"
+                android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/relese_year_moc_title" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.cardview.widget.CardView>
 </layout>

@@ -25,20 +25,21 @@
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
                 android:textColor="@color/white_semi_transparent"
                 android:textSize="@dimen/text_size_12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/author_set_text_name_id"
+                app:layout_constraintBottom_toBottomOf="@+id/text_info_id"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/author_set_text_name_id" />
+                app:layout_constraintTop_toTopOf="@+id/text_info_id" />
 
             <TextView
-                android:id="@+id/author_set_text_name_id"
+                android:id="@+id/text_info_id"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/main_toolbar_height"
                 android:gravity="center_vertical"
                 android:minHeight="?actionBarSize"
-                android:text="@string/author"
+                android:layout_marginEnd="@dimen/margin_8dp"
+                android:text="@string/info_title"
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
                 android:textColor="@color/white_semi_transparent"
-                android:textSize="@dimen/text_size_10sp"
+                android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

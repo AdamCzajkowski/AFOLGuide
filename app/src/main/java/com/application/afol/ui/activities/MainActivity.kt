@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setUpBottomNavigationView()
-        name_set_text_name_id.setOnClickListener {
+        text_info_id.setOnClickListener {
             InformationDialog(
                 this,
                 R.style.Theme_AppCompat_DayNight_Dialog_Alert
