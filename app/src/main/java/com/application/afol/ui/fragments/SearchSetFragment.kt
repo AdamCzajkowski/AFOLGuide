@@ -163,21 +163,29 @@ class SearchSetFragment : Fragment(), KodeinAware {
             Observer {
                 toggleNoConnectionScreen(true)
                 with(user_instruction_view) {
-                    if (pageCounter == 1) {
-                        if (it.count < MAX_VALUE_SEARCHED_ITEMS) {
-                            setVisibility(false)
-                            legoRecyclerViewAdapter.listOfLegoSet = it.results
-                        } else {
-                            setVisibility(true)
-                            legoRecyclerViewAdapter.clearList()
-                        }
-
+                    if (it.count == 0) {
+                        view!!.no_results_view.setVisibility(true)
+                        setVisibility(false)
+                        legoRecyclerViewAdapter.clearList()
                     } else {
-                        if (it.count < MAX_VALUE_SEARCHED_ITEMS) legoRecyclerViewAdapter.addToList(
-                            it.results
-                        ).also { setVisibility(false) }
+                        view!!.no_results_view.setVisibility(false)
+                        if (pageCounter == 1) {
+                            if (it.count < MAX_VALUE_SEARCHED_ITEMS) {
+                                setVisibility(false)
+                                legoRecyclerViewAdapter.listOfLegoSet = it.results
+                            } else {
+                                view!!.no_results_view.setVisibility(true)
+                                setVisibility(false)
+                                legoRecyclerViewAdapter.clearList()
+                            }
+
+                        } else {
+                            if (it.count < MAX_VALUE_SEARCHED_ITEMS) legoRecyclerViewAdapter.addToList(
+                                it.results
+                            ).also { setVisibility(false) }
+                        }
+                        legoRecyclerViewAdapter.notifyDataSetChanged()
                     }
-                    legoRecyclerViewAdapter.notifyDataSetChanged()
                 }
             }
         )
