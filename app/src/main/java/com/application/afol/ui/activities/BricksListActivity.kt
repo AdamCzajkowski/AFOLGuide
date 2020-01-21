@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.application.afol.R
 import com.application.afol.ui.adapters.BricksRecyclerViewAdapter
 import com.application.afol.utility.doNothing
+import com.application.afol.utility.isInternetAvailable
+import com.application.afol.utility.setVisibility
+import com.application.afol.utility.showSnackbar
 import com.application.afol.vm.bricksListViewModel.BrickListViewModel
 import com.application.afol.vm.bricksListViewModel.BrickListViewModelFactory
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
@@ -54,13 +57,20 @@ class BricksListActivity : AppCompatActivity(), KodeinAware {
         setViewModel()
         setUpToolbar()
         initializeRecyclerView(bricks_recycler_view)
-        bricksRecyclerViewAdapter.endMarker = { marker ->
-            if (marker) {
-                pageCounter++
-                getBricks(pageCounter, legoSetNumber, PAGE_SIZE)
+        if (isInternetAvailable()) {
+            group_parts.setVisibility(true)
+            no_internet_information.setVisibility(false)
+            bricksRecyclerViewAdapter.endMarker = { marker ->
+                if (marker) {
+                    pageCounter++
+                    getBricks(pageCounter, legoSetNumber, PAGE_SIZE)
+                }
             }
+            getBricks(pageCounter, legoSetNumber, PAGE_SIZE)
+        } else {
+            group_parts.setVisibility(false)
+            no_internet_information.setVisibility(true)
         }
-        getBricks(pageCounter, legoSetNumber, PAGE_SIZE)
         getSuccessRespond()
         getErrorRespond()
         getExceptionRespond()

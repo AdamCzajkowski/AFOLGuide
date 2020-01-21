@@ -42,4 +42,25 @@
         app:layout_constraintStart_toStartOf="@+id/rv_search_id"
         app:layout_constraintTop_toTopOf="@+id/rv_search_id" />
 
+    <include
+        android:id="@+id/no_connection_view"
+        layout="@layout/no_internet_screen"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_search_id"
+        app:layout_constraintEnd_toEndOf="@+id/rv_search_id"
+        app:layout_constraintStart_toStartOf="@+id/rv_search_id"
+        app:layout_constraintTop_toTopOf="@+id/rv_search_id" />
+
+    <include
+        android:id="@+id/no_results_view"
+        layout="@layout/no_result_screen"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_search_id"
+        app:layout_constraintEnd_toEndOf="@+id/rv_search_id"
+        app:layout_constraintStart_toStartOf="@+id/rv_search_id"
+        app:layout_constraintTop_toTopOf="@+id/rv_search_id" />
 </androidx.constraintlayout.widget.ConstraintLayout>

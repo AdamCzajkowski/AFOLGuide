@@ -19,7 +19,11 @@ data class BrickResult(
         @SerializedName("part")
         val part: Part,
         @SerializedName("quantity")
-        val quantity: Int
+        val quantity: Int,
+        @SerializedName("is_spare")
+        val isSpare: Boolean,
+        @SerializedName("element_id")
+        val elementID: String
     ) {
         data class Color(
             @SerializedName("name")

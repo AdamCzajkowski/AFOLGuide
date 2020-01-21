@@ -1,5 +1,8 @@
 package com.application.afol.vm.mySetsViewModel
 
+import android.content.Context
+import android.net.ConnectivityManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.application.afol.models.LegoSet

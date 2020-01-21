@@ -32,7 +32,7 @@ class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
-            bindView(listOfBricks[position], position)
+            bindView(listOfBricks[position])
             createAdapter(context)
             itemView.imageView.setOnClickListener { brickSelected?.invoke(listOfBricks[position].part.partUrl) }
         }
@@ -50,14 +50,12 @@ class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter
         listOfBricks.addAll(list).also { notifyItemRangeChanged(itemCount - list.size, itemCount) }
 
     class ViewHolder(val binding: SingleBrickRowBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bindView(item: BrickResult.Result, position: Int) {
+        fun bindView(item: BrickResult.Result) {
             with(binding) {
                 brickColor = item.color
                 brickDetail = item.part
                 brickQuantity = item
             }
-            val numberOfPart = position + 1
-            itemView.position_value.text = numberOfPart.toString()
         }
 
         fun createAdapter(context: Context) {
@@ -72,6 +70,13 @@ class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter
                 val openURLFromImage = Intent(Intent.ACTION_VIEW)
                 openURLFromImage.data = Uri.parse(url)
                 startActivity(context, openURLFromImage, Bundle())
+            }
+            BindingAdapter.bindBLToIUrl = {url ->
+                val openURLFromBL = Intent(Intent.ACTION_VIEW)
+                println("----------------------------> $url")
+                //https://www.bricklink.com/v2/search.page?q=370526#T=A"
+                openURLFromBL.data = Uri.parse("https://www.bricklink.com/v2/search.page?q=$url#T=A")
+                startActivity(context, openURLFromBL, Bundle())
             }
         }
     }

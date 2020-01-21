@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatImageButton
 import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
 import com.application.afol.utility.dropLastTwoChars
+import com.application.afol.utility.setVisibility
 import com.squareup.picasso.Picasso
 
 object BindingAdapter {
@@ -59,11 +60,39 @@ object BindingAdapter {
 
     var bindImageToUrl: ((String) -> Unit)? = null
     var bindMocToUrl: ((String) -> Unit)? = null
+    var bindBLToIUrl: ((String) -> Unit)? = null
+    var bindBLPart: ((String) -> Unit)? = null
 
     @JvmStatic
     @BindingAdapter("bindImgToUrl")
     fun bindImgToUrl(imageView: ImageView, text: String?) {
         if (text != null) imageView.setOnClickListener { bindImageToUrl?.invoke(text) }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bindBrickLink")
+    fun Button.bindBrickLink(url: String?) {
+        if (url != null) {
+            setVisibility(true)
+            setOnClickListener {
+                bindBLToIUrl?.invoke(url)
+            }
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bindBrickLinkFromList")
+    fun Button.bindBrickLinkPart(url: String) {
+        setVisibility(true)
+        setOnClickListener {
+            bindBLPart?.invoke(url)
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bindSparePart")
+    fun TextView.bindSparePart(isSparePart: Boolean) {
+        setVisibility(isSparePart)
     }
 
     @JvmStatic

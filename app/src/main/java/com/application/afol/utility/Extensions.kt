@@ -1,6 +1,8 @@
 package com.application.afol.utility
 
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -26,4 +28,10 @@ fun AlertDialog.showDialog() = apply {
     show()
     window?.setGravity(Gravity.CENTER)
     window?.setLayout(WRAP_CONTENT, WRAP_CONTENT)
+}
+
+fun Context.isInternetAvailable(): Boolean {
+    val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+    val activeNetworkInfo = connectivityManager!!.activeNetworkInfo
+    return activeNetworkInfo != null && activeNetworkInfo.isConnected
 }

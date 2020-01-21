@@ -16,10 +16,7 @@ import com.application.afol.databinding.ActivityDetailBinding
 import com.application.afol.models.LegoSet
 import com.application.afol.ui.adapters.BindingAdapter
 import com.application.afol.ui.adapters.MOCRecyclerViewAdapter
-import com.application.afol.utility.doNothing
-import com.application.afol.utility.dropLastTwoChars
-import com.application.afol.utility.setVisibility
-import com.application.afol.utility.showSnackbar
+import com.application.afol.utility.*
 import com.application.afol.vm.detailViewModel.DetailViewModel
 import com.application.afol.vm.detailViewModel.DetailViewModelFactory
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
@@ -66,18 +63,30 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
         getErrorRespond()
         getExceptionRespond()
         getSuccessRespond()
-        getMocs()
+        if (isInternetAvailable()) {
+            getMocs()
+            imageButtonFavorite.setOnClickListener {
+                if (isSetInFav) {
+                    removeFromFavorites(legoSet)
+                } else {
+                    addToFavorites(legoSet)
+                }
+                GlobalScope.launch(Dispatchers.Main) {
+                    getFavorites()
+                }
+            }
+        } else coordinatorLayout.showSnackbar(getString(R.string.no_connection))
         setUpDetailsToolbar()
         setUpDetailsCollapsingToolbar()
         bindView()
-        GlobalScope.launch(Dispatchers.Main) {
+        if (isInternetAvailable()) GlobalScope.launch(Dispatchers.Main) {
             getFavorites()
         }
         initializeRecyclerView(moc_recycler_view_id)
         parts_list_button.setOnClickListener {
             partListButtonReaction()
         }
-        imageButtonFavorite.setOnClickListener {
+        /*imageButtonFavorite.setOnClickListener {
             if (isSetInFav) {
                 removeFromFavorites(legoSet)
             } else {
@@ -86,7 +95,7 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
             GlobalScope.launch(Dispatchers.Main) {
                 getFavorites()
             }
-        }
+        }*/
     }
 
     override fun onBackPressed() =

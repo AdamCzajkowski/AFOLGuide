@@ -70,5 +70,13 @@ Changelog:
 - Added removing option in list of favorite sets
 - Changed design of NavBar and toolbar
 - Fix small bugs
+
+21.01.2020 : version 0.91 Beta
+- Fix translation bugs submitted by testers 
+- Added 'Spare part' label for parts list
+- Added information about lack of internet connection
+- Added buttons for parts to bricklink page
+- Changed layout of single brick in search brick
+- Changed minimum android version to 5.0
  
 By Adam Czajkowski

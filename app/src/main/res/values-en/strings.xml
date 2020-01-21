@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AFOL Guide</string>
     <string name="brick_image_desc">brick image</string>
     <string name="brick_title">Brick</string>
     <string name="color_title_text">Color</string>
@@ -11,7 +10,7 @@
     <string name="lego_image_desc">LEGO® image</string>
     <string name="lego_image_transition">LEGO® set image</string>
     <string name="moc_image_desc">moc image</string>
-    <string name="mocs_based_on_text">Alternatives buildings based on</string>
+    <string name="mocs_based_on_text">Alternatives builds based on</string>
     <string name="name_set_card_view">Name</string>
     <string name="number_text">No.</string>
     <string name="parts_text">Parts</string>
@@ -20,24 +19,29 @@
     <string name="release_year_card_view_text">Release year</string>
     <string name="search_lego_part_text">Search LEGO® parts</string>
     <string name="search_lego_set_hint_edit_text">Search LEGO® set</string>
-    <string name="tab_bricks_search">Bricks</string>
-    <string name="tab_sets_search">Sets</string>
-    <string name="tab_title_my">Favorites</string>
+    <string name="tab_bricks_search">Bricks catalogue</string>
+    <string name="tab_sets_search">Sets catalogue</string>
+    <string name="tab_title_my">Favourite sets</string>
     <string name="tab_title_search">Search Set</string>
     <string name="tab_title_search_part">Search Part</string>
     <string name="different_bricks_text">Different bricks:</string>
     <string name="information_image">information image</string>
-    <string name="deleted_item_snack_bar_text">deleted from Favorites</string>
-    <string name="added_to_favorites_snack_bar_text">added to Favorites</string>
+    <string name="deleted_item_snack_bar_text">deleted from Favourites</string>
+    <string name="added_to_favorites_snack_bar_text">added to Favourites</string>
     <string name="author">by Adam Czajkowski</string>
     <string name="instruction_button_text">instruction</string>
     <string name="parts_list_button_text">Parts list</string>
     <string name="rebrickable_button_text">rebrickable</string>
-    <string name="details_favorite_text_add">Add to Favorites</string>
-    <string name="details_favorite_text_remove">Remove from Favorites</string>
+    <string name="details_favorite_text_add">Add to Favourites</string>
+    <string name="details_favorite_text_remove">Remove from Favourites</string>
     <string name="author_title">Author:</string>
     <string name="contact_title">Contact:</string>
     <string name="version">Version:</string>
     <string name="parts_list_title_prefix">Parts list of</string>
     <string name="info_title">Info</string>
+    <string name="bricklink">bricklink</string>
+    <string name="spare_part_label_text">spare part</string>
+    <string name="no_connection">No internet connection</string>
+    <string name="default_text_for_no_connection">No internet connection,\n please check your device\'s settings.</string>
+    <string name="no_result_text">0 results,\n please specify the search term more precisely.</string>
 </resources>
