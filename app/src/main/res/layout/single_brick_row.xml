@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -33,6 +32,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/cardview_dark_background">
+
+            <TextView
+                android:id="@+id/sparePartsLabel"
+                android:layout_width="110dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/spare_parts_label_background"
+                android:gravity="center"
+                bindSparePart="@{brickQuantity.spare}"
+                android:drawableStart="@drawable/ic_label_black_24dp"
+                android:paddingStart="@dimen/margin_4dp"
+                android:textSize="@dimen/text_size_10sp"
+                android:text="@string/spare_part_label_text"
+                android:textColor="@color/cardview_dark_background"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -147,14 +164,19 @@
 
             <Button
                 android:id="@+id/bricklink_button"
-                bindBrickLink="@{brickDetail.externalIds.bricklink}"
+                bindBrickLink="@{brickQuantity.elementID}"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_4dp"
-                android:visibility="gone"
+                android:layout_height="30dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:layout_marginBottom="@dimen/margin_8dp"
+                android:layout_marginEnd="@dimen/margin_8dp"
+                android:background="@drawable/spare_parts_label_background"
                 android:text="@string/bricklink"
-                app:layout_constraintEnd_toStartOf="@+id/color_value"
-                app:layout_constraintStart_toStartOf="@+id/color_title"
+                android:textColor="@color/semi_burst_white"
+                android:textSize="@dimen/text_size_12sp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/color_title" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.circularreveal.cardview.CircularRevealCardView>

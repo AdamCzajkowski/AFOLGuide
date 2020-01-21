@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.afol.R
 import com.application.afol.ui.adapters.PartsRecyclerViewAdapter
@@ -96,13 +97,29 @@ class SearchBrickFragment : Fragment(), KodeinAware {
         hideKeyboard()
     }
 
+    private fun toggleNoConnectionScreen(isConnection: Boolean) {
+        if (isConnection) {
+            no_connection_view.setVisibility(false)
+            user_instruction_view.setVisibility(true)
+        } else {
+            no_connection_view.setVisibility(true)
+            user_instruction_view.setVisibility(false)
+        }
+    }
+
     private fun initializeRecyclerView(recyclerView: RecyclerView) {
         partsRecyclerViewAdapter = PartsRecyclerViewAdapter()
         with(recyclerView) {
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = LinearLayoutManager(context)
             adapter = ScaleInAnimationAdapter(AlphaInAnimationAdapter(partsRecyclerViewAdapter))
         }
     }
+/*    private fun initializeRecyclerView(recyclerView: RecyclerView) {
+        legoRecyclerViewAdapter = LegoRecyclerViewAdapter()
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        val alphaAdapter = AlphaInAnimationAdapter(legoRecyclerViewAdapter)
+        recyclerView.adapter = ScaleInAnimationAdapter(alphaAdapter)
+    }*/
 
     private fun startFetching() {
         val disposable = Observable.create(ObservableOnSubscribe<String> { subsciber ->
@@ -154,6 +171,7 @@ class SearchBrickFragment : Fragment(), KodeinAware {
 
     private fun getSuccessRespond() =
         searchBrickViewModel.getPartsSuccess.observe(this, Observer {
+            toggleNoConnectionScreen(true)
             if (pageCounter == 1) {
                 if (it.count < MAX_AMOUNT_PART_LOADED) partsRecyclerViewAdapter.listOfParts =
                     it.results.toMutableList().also { user_instruction_view.setVisibility(false) }
@@ -179,7 +197,7 @@ class SearchBrickFragment : Fragment(), KodeinAware {
 
     private fun getExceptionRespond() =
         searchBrickViewModel.getPartsException.observe(viewLifecycleOwner, Observer {
-            doNothing
+            toggleNoConnectionScreen(false)
         })
 
     private fun hideKeyboard() {

@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">AFOL Guide</string>
+    <string name="app_name" translatable="false">AFOL Guide</string>
 
-    <string name="tab_title_my">Favourites</string>
+    <string name="tab_title_my">"Favourite sets "</string>
     <string name="tab_title_search">Search Set</string>
-    <string name="tab_sets_search">Sets</string>
-    <string name="tab_bricks_search">Bricks</string>
+    <string name="tab_sets_search">Sets catalogue</string>
+    <string name="tab_bricks_search">Bricks catalogue</string>
     <string name="tab_title_search_part">Search Part</string>
 
     <string name="lego_image_desc">LEGO® image</string>
@@ -26,11 +26,11 @@
     <string name="moc_image_desc">moc image</string>
     <string name="parts_text">Parts</string>
     <string name="designer_text">Designer</string>
-    <string name="mocs_based_on_text">Alternatives buildings based on</string>
+    <string name="mocs_based_on_text">Alternatives builds based on</string>
 
     <string name="search_lego_part_text">Search LEGO® parts</string>
     <string name="default_text_for_user">In this section, after filling text field with proper tags, you will be able to see your search results.</string>
-    <string name="default_my_sets_for_user">In this section, you will be able to see your favorite LEGO® sets. You can add a set to \'Favourites\' by clicking a proper button in \'LEGO® set\'s Details\' or heart icon on the list of searched sets.</string>
+    <string name="default_my_sets_for_user">In this section, you will be able to see your favorite LEGO® sets. You can add set to `Favorite` by clicking proper button in `LEGO® set\'s Details` or heart icon in list of searched sets.</string>
     <string name="information_image">information image</string>
     <string name="deleted_item_snack_bar_text">deleted from Favourites</string>
     <string name="added_to_favorites_snack_bar_text">added to Favourites</string>
@@ -48,4 +48,7 @@
     <string name="author_email" translatable="false">adam.czajkowski8@gmail.com</string>
     <string name="info_title">Info</string>
     <string name="bricklink">bricklink</string>
+    <string name="spare_part_label_text">spare part</string>
+    <string name="no_connection">No internet connection</string>
+    <string name="default_text_for_no_connection">No internet connection,\n please check your device\'s settings.</string>
 </resources>

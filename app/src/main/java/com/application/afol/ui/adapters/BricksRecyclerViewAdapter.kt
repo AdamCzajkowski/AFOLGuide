@@ -74,8 +74,8 @@ class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter
             BindingAdapter.bindBLToIUrl = {url ->
                 val openURLFromBL = Intent(Intent.ACTION_VIEW)
                 println("----------------------------> $url")
-                //"https://www.bricklink.com/v2/catalog/catalogitem.page?P=30285#T=C"
-                openURLFromBL.data = Uri.parse("https://www.bricklink.com/v2/catalog/catalogitem.page?P=$url#T=C")
+                //https://www.bricklink.com/v2/search.page?q=370526#T=A"
+                openURLFromBL.data = Uri.parse("https://www.bricklink.com/v2/search.page?q=$url#T=A")
                 startActivity(context, openURLFromBL, Bundle())
             }
         }

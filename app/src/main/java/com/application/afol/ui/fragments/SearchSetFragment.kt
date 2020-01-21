@@ -147,10 +147,21 @@ class SearchSetFragment : Fragment(), KodeinAware {
         compositeDisposable.addAll(disposable)
     }
 
+    private fun toggleNoConnectionScreen(isConnection: Boolean) {
+        if (isConnection) {
+            no_connection_view.setVisibility(false)
+            user_instruction_view.setVisibility(true)
+        } else {
+            no_connection_view.setVisibility(true)
+            user_instruction_view.setVisibility(false)
+        }
+    }
+
     private fun getSuccessRespond() =
         searchLegoViewModel.getSearchSuccess.observe(
             viewLifecycleOwner,
             Observer {
+                toggleNoConnectionScreen(true)
                 with(user_instruction_view) {
                     if (pageCounter == 1) {
                         if (it.count < MAX_VALUE_SEARCHED_ITEMS) {
@@ -179,12 +190,11 @@ class SearchSetFragment : Fragment(), KodeinAware {
             }
         )
 
-
     private fun getExceptionRespond() =
         searchLegoViewModel.getSearchException.observe(
             viewLifecycleOwner,
             Observer {
-                doNothing
+                toggleNoConnectionScreen(false)
             }
         )
 
@@ -227,7 +237,8 @@ class SearchSetFragment : Fragment(), KodeinAware {
     private fun removeFromFavorites(legoSet: LegoSet) {
         if (isSetInFavorites(legoSet)) {
             listOfFavoritesSets.value?.find { searchedLegoSet ->
-                searchedLegoSet.set_num == legoSet.set_num }
+                searchedLegoSet.set_num == legoSet.set_num
+            }
                 ?.let { searchLegoViewModel.removeFromMySets(it) }
             with(legoRecyclerViewAdapter.listOfFavoritesLegoSet) {
                 this?.find { searchedLegoSet -> searchedLegoSet.set_num == legoSet.set_num }?.let {

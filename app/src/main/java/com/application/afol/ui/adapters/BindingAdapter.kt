@@ -61,6 +61,7 @@ object BindingAdapter {
     var bindImageToUrl: ((String) -> Unit)? = null
     var bindMocToUrl: ((String) -> Unit)? = null
     var bindBLToIUrl: ((String) -> Unit)? = null
+    var bindBLPart: ((String) -> Unit)? = null
 
     @JvmStatic
     @BindingAdapter("bindImgToUrl")
@@ -70,13 +71,28 @@ object BindingAdapter {
 
     @JvmStatic
     @BindingAdapter("bindBrickLink")
-    fun Button.bindBrickLink(url: MutableList<String>?) {
-        if(url != null) {
+    fun Button.bindBrickLink(url: String?) {
+        if (url != null) {
             setVisibility(true)
             setOnClickListener {
-                bindBLToIUrl?.invoke(url.first())
+                bindBLToIUrl?.invoke(url)
             }
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bindBrickLinkFromList")
+    fun Button.bindBrickLinkPart(url: String) {
+        setVisibility(true)
+        setOnClickListener {
+            bindBLPart?.invoke(url)
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bindSparePart")
+    fun TextView.bindSparePart(isSparePart: Boolean) {
+        setVisibility(isSparePart)
     }
 
     @JvmStatic

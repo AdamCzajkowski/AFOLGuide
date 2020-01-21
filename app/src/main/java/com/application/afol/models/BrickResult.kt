@@ -19,7 +19,11 @@ data class BrickResult(
         @SerializedName("part")
         val part: Part,
         @SerializedName("quantity")
-        val quantity: Int
+        val quantity: Int,
+        @SerializedName("is_spare")
+        val isSpare: Boolean,
+        @SerializedName("element_id")
+        val elementID: String
     ) {
         data class Color(
             @SerializedName("name")
@@ -34,16 +38,7 @@ data class BrickResult(
             @SerializedName("part_num")
             val partNum: String,
             @SerializedName("part_url")
-            val partUrl: String,
-            @SerializedName("external_ids")
-            val externalIds: Bricklink?
-        ) {
-            data class Bricklink(
-                @SerializedName("BrickLink")
-                val bricklink: MutableList<String>?,
-                @SerializedName("BrickOwl")
-                val brickowl: MutableList<String>?
-            )
-        }
+            val partUrl: String
+        )
     }
 }
