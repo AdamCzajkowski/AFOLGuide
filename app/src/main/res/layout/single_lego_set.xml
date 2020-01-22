@@ -23,8 +23,9 @@
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/image_favorite"
                 bindFavoriteIcon="@{legoSet.inFavorite}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+
+                android:layout_height="35dp"
                 android:layout_marginTop="@dimen/margin_6dp"
                 android:layout_marginEnd="@dimen/margin_6dp"
                 android:background="@drawable/image_favorite"

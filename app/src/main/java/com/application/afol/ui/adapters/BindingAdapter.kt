@@ -61,7 +61,7 @@ object BindingAdapter {
     var bindImageToUrl: ((String) -> Unit)? = null
     var bindMocToUrl: ((String) -> Unit)? = null
     var bindBLToIUrl: ((String) -> Unit)? = null
-    var bindBLPart: ((String) -> Unit)? = null
+    var bindPartUrl: ((String) -> Unit)? = null
 
     @JvmStatic
     @BindingAdapter("bindImgToUrl")
@@ -81,15 +81,6 @@ object BindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("bindBrickLinkFromList")
-    fun Button.bindBrickLinkPart(url: String) {
-        setVisibility(true)
-        setOnClickListener {
-            bindBLPart?.invoke(url)
-        }
-    }
-
-    @JvmStatic
     @BindingAdapter("bindSparePart")
     fun TextView.bindSparePart(isSparePart: Boolean) {
         setVisibility(isSparePart)
@@ -100,6 +91,14 @@ object BindingAdapter {
     fun CardView.bindMOCToURL(url: String?) {
         if (url != null) setOnClickListener {
             bindMocToUrl?.invoke(url)
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("bindPartToUrl")
+    fun CardView.bindPartToUrl(url: String?) {
+        if (url != null) setOnClickListener {
+            bindPartUrl?.invoke(url)
         }
     }
 

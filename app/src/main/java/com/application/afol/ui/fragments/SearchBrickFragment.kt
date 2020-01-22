@@ -27,7 +27,7 @@ import io.reactivex.disposables.CompositeDisposable
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import kotlinx.android.synthetic.main.fragment_search_brick.*
-import kotlinx.android.synthetic.main.fragment_search_brick.view.no_results_view
+import kotlinx.android.synthetic.main.fragment_search_brick.view.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.support.kodein
@@ -114,12 +114,6 @@ class SearchBrickFragment : Fragment(), KodeinAware {
             adapter = ScaleInAnimationAdapter(AlphaInAnimationAdapter(partsRecyclerViewAdapter))
         }
     }
-/*    private fun initializeRecyclerView(recyclerView: RecyclerView) {
-        legoRecyclerViewAdapter = LegoRecyclerViewAdapter()
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        val alphaAdapter = AlphaInAnimationAdapter(legoRecyclerViewAdapter)
-        recyclerView.adapter = ScaleInAnimationAdapter(alphaAdapter)
-    }*/
 
     private fun startFetching() {
         val disposable = Observable.create(ObservableOnSubscribe<String> { subsciber ->
@@ -172,28 +166,34 @@ class SearchBrickFragment : Fragment(), KodeinAware {
     private fun getSuccessRespond() =
         searchBrickViewModel.getPartsSuccess.observe(this, Observer {
             toggleNoConnectionScreen(true)
-            if (it.count == 0) {
-                view!!.no_results_view.setVisibility(true)
-                user_instruction_view.setVisibility(false)
-                partsRecyclerViewAdapter.clearList()
-            } else {
-                view!!.no_results_view.setVisibility(false)
-                if (pageCounter == 1) {
-                    if (it.count < MAX_AMOUNT_PART_LOADED) partsRecyclerViewAdapter.listOfParts =
-                        it.results.toMutableList()
-                            .also { user_instruction_view.setVisibility(false) }
-                    else partsRecyclerViewAdapter.clearList().also {
-                        view!!.no_results_view.setVisibility(true)
-                        user_instruction_view.setVisibility(false)
-                    }
+            if (search_brick_edit_text_id.text?.length != 0) {
+                if (it.count == 0) {
+                    view!!.no_results_view.setVisibility(true)
+                    user_instruction_view.setVisibility(false)
+                    partsRecyclerViewAdapter.clearList()
                 } else {
-                    if (it.count < MAX_AMOUNT_PART_LOADED) partsRecyclerViewAdapter.addToList(it.results.toMutableList()).also {
-                        user_instruction_view.setVisibility(
-                            false
-                        )
+                    view!!.no_results_view.setVisibility(false)
+                    if (pageCounter == 1) {
+                        if (it.count < MAX_AMOUNT_PART_LOADED) partsRecyclerViewAdapter.listOfParts =
+                            it.results.toMutableList()
+                                .also { user_instruction_view.setVisibility(false) }
+                        else partsRecyclerViewAdapter.clearList().also {
+                            view!!.no_results_view.setVisibility(true)
+                            user_instruction_view.setVisibility(false)
+                        }
+                    } else {
+                        if (it.count < MAX_AMOUNT_PART_LOADED) partsRecyclerViewAdapter.addToList(it.results.toMutableList()).also {
+                            user_instruction_view.setVisibility(
+                                false
+                            )
+                        }
                     }
+                    partsRecyclerViewAdapter.notifyDataSetChanged()
                 }
-                partsRecyclerViewAdapter.notifyDataSetChanged()
+            } else {
+                user_instruction_view.setVisibility(true)
+                view!!.no_results_view.setVisibility(false)
+                partsRecyclerViewAdapter.clearList()
             }
         })
 

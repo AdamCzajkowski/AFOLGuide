@@ -14,20 +14,19 @@
             type="com.application.afol.ui.adapters.BindingAdapter" />
     </data>
 
-    <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+    <androidx.cardview.widget.CardView
+        bindPartToUrl="@{part.partUrl}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_3dp"
         android:background="@color/cardview_dark_background">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_single_brick"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/cardview_dark_background">
 
             <ImageView
-
                 android:id="@+id/imageView"
                 bindImagerRecycler="@{part.partImgUrl}"
                 android:layout_width="135dp"
@@ -36,8 +35,8 @@
                 android:layout_marginTop="@dimen/margin_8dp"
                 android:layout_marginBottom="@dimen/margin_8dp"
                 android:contentDescription="@string/brick_image_desc"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -68,9 +67,9 @@
                 android:id="@+id/name_brick_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8dp"
                 android:text="@string/name_set_card_view"
                 android:textColor="#A6FFFFFF"
-                android:layout_marginTop="@dimen/margin_8dp"
                 android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintStart_toStartOf="@+id/brick_number_title"
                 app:layout_constraintTop_toBottomOf="@+id/brick_number_title" />
@@ -80,21 +79,19 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginBottom="@dimen/margin_8dp"
                 android:ellipsize="end"
                 android:isScrollContainer="true"
-
                 android:scrollbars="vertical"
                 android:text="@{part.name}"
                 android:textAlignment="textStart"
                 android:textColor="#A6FFFFFF"
-                android:textIsSelectable="true"
                 android:textSize="@dimen/text_size_12sp"
-                android:layout_marginBottom="@dimen/margin_8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/name_brick_title"
                 app:layout_constraintTop_toTopOf="@+id/name_brick_title" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+    </androidx.cardview.widget.CardView>
 </layout>

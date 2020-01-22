@@ -10,7 +10,6 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.application.afol.databinding.SinglePartBinding
 import com.application.afol.models.PartResult
-import kotlinx.android.synthetic.main.single_part.view.*
 
 private const val MULTIPLIER = 0.1
 
@@ -38,9 +37,6 @@ class PartsRecyclerViewAdapter : RecyclerView.Adapter<PartsRecyclerViewAdapter.V
         with(holder) {
             bindView(listOfParts[position])
             createAdapter(context)
-            itemView.imageView.setOnClickListener {
-                partSelectedURL?.invoke(listOfParts[position].partUrl)
-            }
         }
 
         if (position == itemCount - (MULTIPLIER * itemCount).toInt()) endMarker?.invoke(true)
@@ -65,14 +61,10 @@ class PartsRecyclerViewAdapter : RecyclerView.Adapter<PartsRecyclerViewAdapter.V
         fun createAdapter(context: Context) {
             val adapter = BindingAdapter
             binding.adapter = adapter
-
-            BindingAdapter.bindBLPart = { url ->
-                val openURLFromBL = Intent(Intent.ACTION_VIEW)
-                println("----------------------------> $url")
-                "https://www.bricklink.com/v2/search.page?q=0902&brand=1000&type=P&tab=A#T=A"
-                openURLFromBL.data =
-                    Uri.parse("https://www.bricklink.com/v2/search.page?q=$url&brand=1000&type=P&tab=A#T=A")
-                startActivity(context, openURLFromBL, Bundle())
+            BindingAdapter.bindPartUrl = { url ->
+                val openURL = Intent(Intent.ACTION_VIEW)
+                openURL.data = Uri.parse(url)
+                startActivity(context, openURL, Bundle())
             }
         }
     }

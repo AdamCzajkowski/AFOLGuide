@@ -13,7 +13,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
-        versionName "0.91 Beta"
+        versionName "0.92 Beta"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField('String', 'KEY_API', LegoApiKey)
     }

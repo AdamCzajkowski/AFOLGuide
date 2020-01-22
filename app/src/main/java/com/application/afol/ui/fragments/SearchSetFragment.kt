@@ -162,30 +162,36 @@ class SearchSetFragment : Fragment(), KodeinAware {
             viewLifecycleOwner,
             Observer {
                 toggleNoConnectionScreen(true)
-                with(user_instruction_view) {
-                    if (it.count == 0) {
-                        view!!.no_results_view.setVisibility(true)
-                        setVisibility(false)
-                        legoRecyclerViewAdapter.clearList()
-                    } else {
-                        view!!.no_results_view.setVisibility(false)
-                        if (pageCounter == 1) {
-                            if (it.count < MAX_VALUE_SEARCHED_ITEMS) {
-                                setVisibility(false)
-                                legoRecyclerViewAdapter.listOfLegoSet = it.results
-                            } else {
-                                view!!.no_results_view.setVisibility(true)
-                                setVisibility(false)
-                                legoRecyclerViewAdapter.clearList()
-                            }
-
+                if (view?.search_edit_text_id?.text?.length != 0) {
+                    with(user_instruction_view) {
+                        if (it.count == 0) {
+                            view!!.no_results_view.setVisibility(true)
+                            setVisibility(false)
+                            legoRecyclerViewAdapter.clearList()
                         } else {
-                            if (it.count < MAX_VALUE_SEARCHED_ITEMS) legoRecyclerViewAdapter.addToList(
-                                it.results
-                            ).also { setVisibility(false) }
+                            view!!.no_results_view.setVisibility(false)
+                            if (pageCounter == 1) {
+                                if (it.count < MAX_VALUE_SEARCHED_ITEMS) {
+                                    setVisibility(false)
+                                    legoRecyclerViewAdapter.listOfLegoSet = it.results
+                                } else {
+                                    view!!.no_results_view.setVisibility(true)
+                                    setVisibility(false)
+                                    legoRecyclerViewAdapter.clearList()
+                                }
+
+                            } else {
+                                if (it.count < MAX_VALUE_SEARCHED_ITEMS) legoRecyclerViewAdapter.addToList(
+                                    it.results
+                                ).also { setVisibility(false) }
+                            }
+                            legoRecyclerViewAdapter.notifyDataSetChanged()
                         }
-                        legoRecyclerViewAdapter.notifyDataSetChanged()
                     }
+                } else {
+                    user_instruction_view.setVisibility(true)
+                    view!!.no_results_view.setVisibility(false)
+                    legoRecyclerViewAdapter.clearList()
                 }
             }
         )

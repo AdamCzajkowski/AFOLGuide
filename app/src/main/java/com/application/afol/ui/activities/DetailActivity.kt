@@ -16,7 +16,10 @@ import com.application.afol.databinding.ActivityDetailBinding
 import com.application.afol.models.LegoSet
 import com.application.afol.ui.adapters.BindingAdapter
 import com.application.afol.ui.adapters.MOCRecyclerViewAdapter
-import com.application.afol.utility.*
+import com.application.afol.utility.doNothing
+import com.application.afol.utility.dropLastTwoChars
+import com.application.afol.utility.setVisibility
+import com.application.afol.utility.showSnackbar
 import com.application.afol.vm.detailViewModel.DetailViewModel
 import com.application.afol.vm.detailViewModel.DetailViewModelFactory
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
@@ -54,6 +57,8 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
 
     private lateinit var detailViewModel: DetailViewModel
 
+    private val listOfFavoriteLocal = mutableListOf<LegoSet>()
+
     private lateinit var mocRecyclerViewAdapter: MOCRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,39 +68,24 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
         getErrorRespond()
         getExceptionRespond()
         getSuccessRespond()
-        if (isInternetAvailable()) {
-            getMocs()
-            imageButtonFavorite.setOnClickListener {
-                if (isSetInFav) {
-                    removeFromFavorites(legoSet)
-                } else {
-                    addToFavorites(legoSet)
-                }
-                GlobalScope.launch(Dispatchers.Main) {
-                    getFavorites()
-                }
-            }
-        } else coordinatorLayout.showSnackbar(getString(R.string.no_connection))
+        getMocs()
         setUpDetailsToolbar()
         setUpDetailsCollapsingToolbar()
         bindView()
-        if (isInternetAvailable()) GlobalScope.launch(Dispatchers.Main) {
+        GlobalScope.launch(Dispatchers.Main) {
             getFavorites()
         }
         initializeRecyclerView(moc_recycler_view_id)
         parts_list_button.setOnClickListener {
             partListButtonReaction()
         }
-        /*imageButtonFavorite.setOnClickListener {
+        imageButtonFavorite.setOnClickListener {
             if (isSetInFav) {
                 removeFromFavorites(legoSet)
             } else {
                 addToFavorites(legoSet)
             }
-            GlobalScope.launch(Dispatchers.Main) {
-                getFavorites()
-            }
-        }*/
+        }
     }
 
     override fun onBackPressed() =
@@ -107,15 +97,25 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
     }
 
     private fun removeFromFavorites(legoSet: LegoSet) {
-        detailViewModel.removeFromFavorites(legoSet)
-        showSnackBarFavoriteStatus(false, legoSet)
-        isSetInFav = false
+        listOfFavoriteLocal.find { removedLegoSet ->
+            removedLegoSet.set_num == legoSet.set_num
+        }?.let {
+            listOfFavoriteLocal.remove(it)
+            detailViewModel.removeFromFavorites(it)
+            showSnackBarFavoriteStatus(false, legoSet)
+            isSetInFav = false
+        }
     }
 
     private fun addToFavorites(legoSet: LegoSet) {
-        detailViewModel.addToFavorites(legoSet)
-        showSnackBarFavoriteStatus(true, legoSet)
-        isSetInFav = true
+        if (listOfFavoriteLocal.find { addingLegoSet -> addingLegoSet.set_num == legoSet.set_num } == null) {
+            detailViewModel.addToFavorites(legoSet)
+            showSnackBarFavoriteStatus(true, legoSet)
+            isSetInFav = true
+        } else {
+            doNothing
+        }
+
     }
 
     private fun showSnackBarFavoriteStatus(status: Boolean, legoSet: LegoSet) {
@@ -135,6 +135,8 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
 
     private suspend fun getFavorites() =
         detailViewModel.getListOfFavorites().observe(this, Observer { listOfFavorites ->
+            listOfFavoriteLocal.clear()
+            listOfFavoriteLocal.addAll(listOfFavorites)
             listOfFavorites.forEach {
                 if (it.set_num == legoSet.set_num) isSetInFav = true
             }
