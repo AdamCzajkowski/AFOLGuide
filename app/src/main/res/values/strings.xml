@@ -52,4 +52,6 @@
     <string name="no_connection">No internet connection</string>
     <string name="default_text_for_no_connection">No internet connection,\n please check your device\'s settings.</string>
     <string name="no_result_text">0 results,\n please specify the search term more precisely.</string>
+    <string name="instruction_by_rebrickable">All information are from Rebrickable.com</string>
+    <string name="instruction_text_2">Search phrases must be in English</string>
 </resources>

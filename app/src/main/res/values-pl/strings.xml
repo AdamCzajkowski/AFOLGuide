@@ -44,4 +44,6 @@
     <string name="no_connection">Brak połączenia z internetem</string>
     <string name="default_text_for_no_connection">Brak połączenia z internetem,\n sprawdź swoje ustawienia telefonu.</string>
     <string name="no_result_text">0 wyszukań,\n proszę o dokładniejsze określenie frazy wyszukiwania</string>
+    <string name="instruction_by_rebrickable">Wszystkie informacje są z Rebrickable.com</string>
+    <string name="instruction_text_2">Szukane frazy musi być w języku angielskim</string>
 </resources>
