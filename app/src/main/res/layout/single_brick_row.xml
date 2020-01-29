@@ -35,18 +35,20 @@
 
             <TextView
                 android:id="@+id/sparePartsLabel"
+                bindSparePart="@{brickQuantity.spare}"
                 android:layout_width="110dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="6dp"
                 android:background="@drawable/spare_parts_label_background"
-                android:gravity="center"
-                bindSparePart="@{brickQuantity.spare}"
                 android:drawableStart="@drawable/ic_label_black_24dp"
+                android:gravity="center"
                 android:paddingStart="@dimen/margin_4dp"
-                android:textSize="@dimen/text_size_10sp"
                 android:text="@string/spare_part_label_text"
                 android:textColor="@color/cardview_dark_background"
+                android:textSize="@dimen/text_size_10sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/imageView"
                 app:layout_constraintEnd_toEndOf="@+id/imageView"
                 app:layout_constraintStart_toStartOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -178,6 +180,24 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/color_title" />
+
+            <Button
+                android:id="@+id/rebrickable_button"
+                bindButtonToUrl="@{brickDetail.partUrl}"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                android:layout_marginBottom="@dimen/margin_8dp"
+                android:background="@drawable/spare_parts_label_background"
+                android:text="@string/rebrickable_button_text"
+                android:textColor="@color/semi_burst_white"
+                android:textSize="@dimen/text_size_12sp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/bricklink_button"
+                app:layout_constraintTop_toBottomOf="@+id/color_title"
+                app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 </layout>

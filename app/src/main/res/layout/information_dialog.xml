@@ -89,6 +89,7 @@
         app:layout_constraintTop_toTopOf="@+id/contactTitle" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/terms1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_16dp"
@@ -96,9 +97,23 @@
         android:text="@string/instruction_by_rebrickable"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/contactTitle"
         app:layout_constraintTop_toBottomOf="@+id/text_instruction_info" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_16dp"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_4dp"
+        android:text="@string/terms"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/terms1" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_instruction_info"

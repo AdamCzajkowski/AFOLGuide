@@ -70,6 +70,12 @@ object BindingAdapter {
     }
 
     @JvmStatic
+    @BindingAdapter("bindButtonToUrl")
+    fun Button.bindButtonToUrl(text: String?) {
+        if (text != null) setOnClickListener { bindImageToUrl?.invoke(text) }
+    }
+
+    @JvmStatic
     @BindingAdapter("bindBrickLink")
     fun Button.bindBrickLink(url: String?) {
         if (url != null) {
