@@ -1,5 +1,6 @@
 package com.application.afol.vm.bricksListViewModel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.application.afol.models.BrickResult
@@ -16,13 +17,26 @@ class BrickListViewModel(val repository: Repository) : ViewModel() {
     private val coroutineContext: CoroutineContext get() = job + Dispatchers.Default
     private val scope = CoroutineScope(coroutineContext)
 
+    private val _isList = MutableLiveData<Boolean>()
+
+    val isList: LiveData<Boolean>
+        get() = _isList
+
     val getBricksSuccess = MutableLiveData<BrickResult>()
     val getBricksError = MutableLiveData<String>()
     val getBricksException = MutableLiveData<Exception>()
 
+    init {
+        _isList.value = true
+    }
+
     override fun onCleared() {
         super.onCleared()
         cancelJob()
+    }
+
+    fun toggleIsList() {
+        _isList.value = isList.value != true
     }
 
     fun getBricksFromSet(page: Int, setNumber: String, pageSize: Int) {

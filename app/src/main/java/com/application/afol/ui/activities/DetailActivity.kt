@@ -177,8 +177,7 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
         setSupportActionBar(lego_details_toolbar_id)
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)
-            it.setDisplayShowTitleEnabled(false)
-            it.setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp)
+            it.setDisplayShowTitleEnabled(true)
         } ?: error("supportActionBar is null")
         lego_details_collapsing_toolbar_id.title = legoSet.set_num?.dropLastTwoChars()
     }

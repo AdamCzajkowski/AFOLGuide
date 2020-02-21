@@ -4,6 +4,10 @@
         <item name="actionBarStyle">@style/Theme.AppCompat</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:navigationBarColor">@color/dark_gray</item>
+
+        <item name="colorControlNormal">@color/dodgerBlue</item>
+        <item name="colorControlActivated">@color/dodgerBlue</item>
+        <item name="colorControlHighlight">@color/dodgerBlue</item>
     </style>
 
     <style name="DetailsActivityToolbarText" parent="TextAppearance.AppCompat">
@@ -21,4 +25,5 @@
     <style name="MaterialAnimations" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowContentTransitions">true</item>
     </style>
+
 </resources>

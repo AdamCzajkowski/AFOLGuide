@@ -3,10 +3,12 @@ package com.application.afol.ui.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.afol.R
@@ -14,7 +16,6 @@ import com.application.afol.ui.adapters.BricksRecyclerViewAdapter
 import com.application.afol.utility.doNothing
 import com.application.afol.utility.isInternetAvailable
 import com.application.afol.utility.setVisibility
-import com.application.afol.utility.showSnackbar
 import com.application.afol.vm.bricksListViewModel.BrickListViewModel
 import com.application.afol.vm.bricksListViewModel.BrickListViewModelFactory
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
@@ -26,6 +27,8 @@ import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 
 private const val PAGE_SIZE = 30
+
+private const val COUNTS_COLUMNS = 3
 
 class BricksListActivity : AppCompatActivity(), KodeinAware {
 
@@ -56,7 +59,7 @@ class BricksListActivity : AppCompatActivity(), KodeinAware {
         setContentView(R.layout.activity_bricks_list)
         setViewModel()
         setUpToolbar()
-        initializeRecyclerView(bricks_recycler_view)
+        bricksRecyclerViewAdapter = BricksRecyclerViewAdapter()
         if (isInternetAvailable()) {
             group_parts.setVisibility(true)
             no_internet_information.setVisibility(false)
@@ -82,19 +85,42 @@ class BricksListActivity : AppCompatActivity(), KodeinAware {
         super.onBackPressed()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        finish()
-
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun initializeRecyclerView(recyclerView: RecyclerView) {
-        bricksRecyclerViewAdapter = BricksRecyclerViewAdapter()
-        with(recyclerView) {
-            layoutManager = LinearLayoutManager(applicationContext)
-            adapter = ScaleInAnimationAdapter(AlphaInAnimationAdapter(bricksRecyclerViewAdapter))
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.view -> {
+            brickListViewModel.toggleIsList()
+            true
+        }
+        else -> {
+            finish()
+            false
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_parts_list_view, menu)
+
+        brickListViewModel.isList.observe(this, Observer { isList ->
+            setIconViewState(menu!!, isList)
+            setLayoutManager(bricks_recycler_view, isList)
+        })
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun setLayoutManager(recyclerView: RecyclerView, isList: Boolean) = with(recyclerView) {
+        bricksRecyclerViewAdapter.isListMarker = isList
+        if (isList) {
+            layoutManager = LinearLayoutManager(applicationContext)
+        } else {
+            layoutManager = GridLayoutManager(applicationContext, COUNTS_COLUMNS)
+        }.also {
+            adapter =
+                ScaleInAnimationAdapter(AlphaInAnimationAdapter(bricksRecyclerViewAdapter))
+            bricksRecyclerViewAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun setIconViewState(menu: Menu, isList: Boolean) =
+        menu.findItem(R.id.view).setIcon(if (isList) R.drawable.ic_grid else R.drawable.ic_list)
 
     private fun setViewModel() {
         brickListViewModel = ViewModelProviders.of(this, brickListViewModelFactory)

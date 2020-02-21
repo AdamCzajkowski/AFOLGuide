@@ -163,6 +163,7 @@ class SearchSetFragment : Fragment(), KodeinAware {
             Observer {
                 toggleNoConnectionScreen(true)
                 if (view?.search_edit_text_id?.text?.length != 0) {
+
                     with(user_instruction_view) {
                         if (it.count == 0) {
                             view!!.no_results_view.setVisibility(true)

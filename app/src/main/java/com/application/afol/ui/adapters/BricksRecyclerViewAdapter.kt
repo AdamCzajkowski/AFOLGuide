@@ -7,7 +7,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat.startActivity
+import androidx.core.view.marginTop
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.application.afol.databinding.SingleBrickGridBinding
 import com.application.afol.databinding.SingleBrickRowBinding
 import com.application.afol.models.BrickResult
 import kotlinx.android.synthetic.main.single_brick_row.view.*
@@ -19,12 +22,17 @@ class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter
 
     var brickSelected: ((String) -> Unit)? = null
 
+    var isListMarker = true
+
     lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context.applicationContext)
-        val binding = SingleBrickRowBinding.inflate(inflater, parent, false)
+        val binding = if (isListMarker) {
+            SingleBrickRowBinding.inflate(inflater, parent, false)
+        } else SingleBrickGridBinding.inflate(inflater, parent, false)
         context = parent.context
+
         return ViewHolder(binding)
     }
 
@@ -49,33 +57,55 @@ class BricksRecyclerViewAdapter : RecyclerView.Adapter<BricksRecyclerViewAdapter
     fun addToList(list: MutableList<BrickResult.Result>) =
         listOfBricks.addAll(list).also { notifyItemRangeChanged(itemCount - list.size, itemCount) }
 
-    class ViewHolder(val binding: SingleBrickRowBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindView(item: BrickResult.Result) {
-            with(binding) {
-                brickColor = item.color
-                brickDetail = item.part
-                brickQuantity = item
+            if (binding is SingleBrickRowBinding) {
+                with(binding) {
+                    brickColor = item.color
+                    brickDetail = item.part
+                    brickQuantity = item
+                }
+            } else if (binding is SingleBrickGridBinding) {
+                with(binding) {
+                    brickDetail = item.part
+                    brickQuantity = item
+                }
             }
         }
 
         fun createAdapter(context: Context) {
             val adapter = BindingAdapter
-            binding.adapter = adapter
-            BindingAdapter.bindURLParse = { url ->
-                val openURL = Intent(Intent.ACTION_VIEW)
-                openURL.data = Uri.parse(url)
-                startActivity(context, openURL, Bundle())
-            }
-            BindingAdapter.bindImageToUrl = { url ->
-                val openURLFromImage = Intent(Intent.ACTION_VIEW)
-                openURLFromImage.data = Uri.parse(url)
-                startActivity(context, openURLFromImage, Bundle())
-            }
-            BindingAdapter.bindBLToIUrl = {url ->
-                val openURLFromBL = Intent(Intent.ACTION_VIEW)
-                //https://www.bricklink.com/v2/search.page?q=370526#T=A"
-                openURLFromBL.data = Uri.parse("https://www.bricklink.com/v2/search.page?q=$url#T=A")
-                startActivity(context, openURLFromBL, Bundle())
+            if (binding is SingleBrickRowBinding) {
+                binding.adapter = adapter
+                BindingAdapter.bindURLParse = { url ->
+                    val openURL = Intent(Intent.ACTION_VIEW)
+                    openURL.data = Uri.parse(url)
+                    startActivity(context, openURL, Bundle())
+                }
+                BindingAdapter.bindImageToUrl = { url ->
+                    val openURLFromImage = Intent(Intent.ACTION_VIEW)
+                    openURLFromImage.data = Uri.parse(url)
+                    startActivity(context, openURLFromImage, Bundle())
+                }
+                BindingAdapter.bindBLToIUrl = { url ->
+                    val openURLFromBL = Intent(Intent.ACTION_VIEW)
+                    //https://www.bricklink.com/v2/search.page?q=370526#T=A"
+                    openURLFromBL.data =
+                        Uri.parse("https://www.bricklink.com/v2/search.page?q=$url#T=A")
+                    startActivity(context, openURLFromBL, Bundle())
+                }
+            } else if (binding is SingleBrickGridBinding) {
+                binding.adapter = adapter
+                BindingAdapter.bindURLParse = { url ->
+                    val openURL = Intent(Intent.ACTION_VIEW)
+                    openURL.data = Uri.parse(url)
+                    startActivity(context, openURL, Bundle())
+                }
+                BindingAdapter.bindImageToUrl = { url ->
+                    val openURLFromImage = Intent(Intent.ACTION_VIEW)
+                    openURLFromImage.data = Uri.parse(url)
+                    startActivity(context, openURLFromImage, Bundle())
+                }
             }
         }
     }

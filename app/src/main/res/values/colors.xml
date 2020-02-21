@@ -8,4 +8,5 @@
     <color name="white_semi_transparent">#80FFFFFF</color>
     <color name="burst_white">#65FFFFFF</color>
     <color name="semi_burst_white">#A6FFFFFF</color>
+    <color name="dodgerBlue">#31A6FF</color>
 </resources>

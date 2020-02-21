@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="brickQuantity"
+            type="com.application.afol.models.BrickResult.Result" />
+
+        <variable
+            name="brickDetail"
+            type="com.application.afol.models.BrickResult.Result.Part" />
+
+        <variable
+            name="adapter"
+            type="com.application.afol.ui.adapters.BindingAdapter" />
+    </data>
+
+    <com.google.android.material.circularreveal.CircularRevealGridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:background="@color/cardview_dark_background">
+
+            <ImageView
+                android:id="@+id/imageView"
+                bindImagerRecycler="@{brickDetail.partImgUrl}"
+                bindImgToUrl="@{brickDetail.partUrl}"
+                android:layout_width="135dp"
+                android:layout_height="115dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/margin_32dp"
+                android:layout_marginEnd="@dimen/margin_8dp"
+                android:layout_marginBottom="@dimen/margin_8dp"
+                android:contentDescription="@string/brick_image_desc"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/sparePartsLabel"
+                bindSparePart="@{brickQuantity.spare}"
+                android:layout_width="110dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/margin_4dp"
+                android:background="@drawable/spare_parts_label_background"
+                android:drawableStart="@drawable/ic_label_black_24dp"
+                android:gravity="center"
+                android:paddingStart="@dimen/margin_4dp"
+                android:text="@string/spare_part_label_text"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="@dimen/text_size_10sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.circularreveal.CircularRevealGridLayout>
+</layout>
