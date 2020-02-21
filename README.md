@@ -4,7 +4,7 @@ This is simple app to research LEGO® sets, instuctions and bricks. All informat
 
 Screens:
 ---------------------------
-<img src="https://i.ibb.co/znn6Rb1/Screenshot-20200107-152638-AFOL-Guide.jpg" alt="Screenshot-20200107-152638-AFOL-Guide" width="200"><img src="https://i.ibb.co/r418qyJ/Screenshot-20200107-152650-AFOL-Guide.jpg" alt="Screenshot-20200107-152650-AFOL-Guide" width="200"><img src="https://i.ibb.co/5nM3940/Screenshot-20200107-152657-AFOL-Guide.jpg" alt="Screenshot-20200107-152657-AFOL-Guide" width="200"><img src="https://i.ibb.co/LQjSCnG/Screenshot-20200107-152729-AFOL-Guide.jpg" alt="Screenshot-20200107-152729-AFOL-Guide" width="200"><img src="https://i.ibb.co/DbSsCPQ/Screenshot-20200107-152737-AFOL-Guide.jpg" alt="Screenshot-20200107-152737-AFOL-Guide" width="200"><img src="https://i.ibb.co/6RQM4gj/Screenshot-20200107-152747-AFOL-Guide.jpg" alt="Screenshot-20200107-152747-AFOL-Guide" width="200"><img src="https://i.ibb.co/QfLm4fH/Screenshot-20200107-152753-AFOL-Guide.jpg" alt="Screenshot-20200107-152753-AFOL-Guide" width="200">
+<img src="https://i.ibb.co/xCbGsdk/Screenshot-1582282786.png" alt="Screenshot-20200107-152638-AFOL-Guide" width="200"><img src="https://i.ibb.co/27dw7TH/Screenshot-1582283116.png" alt="Screenshot-20200107-152650-AFOL-Guide" width="200"><img src="https://i.ibb.co/kmWGBv9/Screenshot-1582283120.png" alt="Screenshot-20200107-152657-AFOL-Guide" width="200"><img src="https://i.ibb.co/XLp9xMk/Screenshot-1582283125.png" alt="Screenshot-20200107-152729-AFOL-Guide" width="200"><img src="https://i.ibb.co/CPpbJFb/Screenshot-1582283128.png" alt="Screenshot-20200107-152737-AFOL-Guide" width="200"><img src="https://i.ibb.co/vHPMgm2/Screenshot-1582283131.png" alt="Screenshot-20200107-152747-AFOL-Guide" width="200"><img src="https://i.ibb.co/SQfmMJb/Screenshot-1582283143.png" alt="Screenshot-20200107-152753-AFOL-Guide" width="200"><img src="https://i.ibb.co/xfPnTzF/Screenshot-1582283172.png" alt="Screenshot-20200107-152753-AFOL-Guide" width="200">
 
 "Favorite" section:
 -----------------------------
@@ -28,6 +28,7 @@ By clicking "REBRICKABLE" button, user will see rebrickable site with informatio
 By clicking "INSTRUCTION" button, user will see official LEGO® site with instruction in web browser.
 By clicking "PARTS LIST" button, user will see screen with list of parts used in that model and by clicking on image of brick user will see Rebrickable site with information about that brick in web browser.
 At bottom user will be able to see alternative buildings based on that model which is detail's shown on top and by clicking on it user will see Rebrickable site with information about that MOC in web browser.
+User is able to change view between list view and grid view by clicking proper icon in right upper corner
 
 About used technology:
 -----------------------------
@@ -79,4 +80,11 @@ Changelog:
 - Changed layout of single brick in search brick
 - Changed minimum android version to 5.0
  
+ 
+ 21.02.2020: version 1.2
+- Changed logo
+- Added switch view in parts list between list view and grid view
+- Application sended to Galaxy Store
+- Changed main color to blue
+
 By Adam Czajkowski
