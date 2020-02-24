@@ -43,7 +43,6 @@ DI - Kodein
 Also:
 - Retrofit2,
 - MVVM,
-- Kodein,
 - RxJava,
 - Picasso,
 - Coroutines
