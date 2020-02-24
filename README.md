@@ -2,7 +2,7 @@
 
 This is simple app to research LEGO® sets, instuctions and bricks. All information about LEGO® are from rebrickable.com. 
 
-From Now Application is avalaible:
+From Now Application is available:
 
 <a href="https://galaxystore.samsung.com/detail/com.afol?fbclid=IwAR1mhCahVVs8dw4kdPjsnlNwXCCEGcgtisBUlGR1d5VhUtocGV3bDTfDiSo&session_id=W_c3a90baa1c64f7c35ef0c8d84c715565"><img src="https://i.ibb.co/QcKbF2R/galaxy-store-available.jpg" alt="galaxy-store-available" width="200" height="70"></a><a href="https://play.google.com/store/apps/details?id=com.afol&hl=en_US"><img src="https://i.ibb.co/yQTT4wk/google-store-available.png" alt="google-store-available" width="200" height="70"></a>
 
