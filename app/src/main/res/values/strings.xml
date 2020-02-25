@@ -55,4 +55,11 @@
     <string name="instruction_by_rebrickable">All information are downloading from Rebrickable.com</string>
     <string name="instruction_text_2">Search phrases must be in English</string>
     <string name="terms">LEGO® is a trademark of the LEGO® Group of companies which does not sponsor, authorize or endorse this app.</string>
+
+    <string name="label_desire">desire</string>
+    <string name="label_assembled">assembled</string>
+    <string name="label_unassembled">unassembled</string>
+    <string name="label_owned">owned</string>
+    <string name="label_incomplete">incomplete</string>
+    <string name="label_complete">complete</string>
 </resources>

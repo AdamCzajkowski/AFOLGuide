@@ -9,4 +9,10 @@
     <color name="burst_white">#65FFFFFF</color>
     <color name="semi_burst_white">#A6FFFFFF</color>
     <color name="dodgerBlue">#31A6FF</color>
+    <color name="green">#8BC34A</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="blue">#3F51B5</color>
+    <color name="orange">#E67F13</color>
+    <color name="red">#E60935</color>
+    <color name="purple">#AB09E6</color>
 </resources>

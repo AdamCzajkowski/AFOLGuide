@@ -14,4 +14,7 @@ interface MySetsDao {
 
     @Delete
     fun delete(legoSet: LegoSet)
+
+    @Update
+    fun update(legoSet: LegoSet)
 }

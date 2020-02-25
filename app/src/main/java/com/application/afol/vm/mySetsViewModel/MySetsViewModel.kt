@@ -1,10 +1,8 @@
 package com.application.afol.vm.mySetsViewModel
 
-import android.content.Context
-import android.net.ConnectivityManager
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.application.afol.models.Label
 import com.application.afol.models.LegoSet
 import com.application.afol.repositories.Repository
 import kotlinx.coroutines.*
@@ -20,6 +18,14 @@ class MySetsViewModel(private val repository: Repository) : ViewModel() {
         return withContext(Dispatchers.IO) {
             return@withContext repository.getFavorites()
         }
+    }
+
+    fun addLabel(legoSet: LegoSet, label: Label) = scope.launch {
+        repository.addLabel(legoSet, label)
+    }
+
+    fun removeLabel(legoSet: LegoSet, label: Label) = scope.launch {
+        repository.removeLabel(legoSet, label)
     }
 
     fun removeFromMySets(legoSet: LegoSet) = scope.launch {
