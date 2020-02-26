@@ -4,10 +4,13 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -72,6 +75,7 @@ class SearchSetFragment : Fragment(), KodeinAware {
         getErrorRespond()
         getExceptionRespond()
         GlobalScope.launch(Dispatchers.Main) { getMySets() }
+
         return view
     }
 
@@ -79,7 +83,6 @@ class SearchSetFragment : Fragment(), KodeinAware {
         initializeRecyclerView(rv_search_id)
         legoRecyclerViewAdapter.selectedItem = { singleItemClickedReaction(it) }
         addToMySetsOnAction()
-
         legoRecyclerViewAdapter.endMarker = { marker ->
             if (marker) {
                 pageCounter++.also { forceSearch?.invoke(true) }
@@ -263,7 +266,7 @@ class SearchSetFragment : Fragment(), KodeinAware {
             constraint_search_fragment.showSnackbar(legoSet.name + " " + getString(R.string.deleted_item_snack_bar_text))
         } else doNothing
     }
-
+    
     private fun addToFavorites(legoSet: LegoSet) {
         if (!isSetInFavorites(legoSet)) {
             searchLegoViewModel.addToMySets(legoSet)

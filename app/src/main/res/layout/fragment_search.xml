@@ -20,6 +20,8 @@
             android:textColorHint="@color/dodgerBlue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:imeOptions="actionDone"
             android:layout_margin="@dimen/margin_3dp"
             android:hint="@string/search_lego_set_hint_edit_text" />
     </com.google.android.material.textfield.TextInputLayout>

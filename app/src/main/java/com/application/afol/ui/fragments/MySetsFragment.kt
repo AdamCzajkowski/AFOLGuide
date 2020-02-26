@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.application.afol.R
+import com.application.afol.models.Label
 import com.application.afol.models.LegoSet
 import com.application.afol.ui.activities.DetailActivity
 import com.application.afol.ui.adapters.MySetsRecyclerViewAdapter
@@ -51,6 +52,7 @@ class MySetsFragment : Fragment(), KodeinAware {
         mySetsRecyclerViewAdapter.selectedItem = {
             singleItemClickedReaction(it)
         }
+        addLabelListener()
         removeFromMySets()
         super.onViewCreated(view, savedInstanceState)
     }
@@ -85,7 +87,56 @@ class MySetsFragment : Fragment(), KodeinAware {
         mySetsViewModel.getListOfMySets().observe(this, Observer { listOfMySets ->
             mySetsRecyclerViewAdapter.listOfLegoSet = listOfMySets
             default_my_sets_view.setVisibility(listOfMySets.isEmpty())
+            val counterValue = setupCounter(listOfMySets)
+            with(my_sets_counter_bricks_sets) {
+                text =
+                    getString(R.string.my_sets_counter, counterValue.first, counterValue.second)
+                setVisibility(listOfMySets.isEmpty().not())
+            }
         })
+    }
+
+    private fun addLabelListener() {
+        mySetsRecyclerViewAdapter.labelSelected = { legoSet ->
+            mySetsViewModel.addLabel(legoSet, Label.COMPLETE)
+        }
+    }
+
+    private fun isLabelcompatibility(legoSet: LegoSet, label: Label): Boolean {
+        when (label) {
+            Label.COMPLETE -> legoSet.listOfLabels?.find { searchedLabel ->
+                searchedLabel == Label.INCOMPLETE }?.let {
+                return false
+            } ?: return true
+            Label.INCOMPLETE -> legoSet.listOfLabels?.find { searchedLabel ->
+                searchedLabel == Label.COMPLETE }?.let {
+                return false
+            } ?: return true
+            Label.ASSEMBLED -> legoSet.listOfLabels?.find { searchedLabel ->
+                searchedLabel == Label.UNASSAMBLED }?.let {
+                return false
+            } ?: return true
+            Label.UNASSAMBLED -> legoSet.listOfLabels?.find { searchedLabel ->
+                searchedLabel == Label.ASSEMBLED }?.let {
+                return false
+            } ?: return true
+            Label.OWNED -> legoSet.listOfLabels?.find { searchedLabel ->
+                searchedLabel == Label.DESIRE }?.let {
+                return false
+            } ?: return true
+            Label.DESIRE -> legoSet.listOfLabels?.find { searchedLabel ->
+                searchedLabel == Label.OWNED }?.let {
+                return false
+            } ?: return true
+        }
+    }
+
+    private fun setupCounter(listOfSets: MutableList<LegoSet>): Pair<String, String> {
+        var summaryOfBricks = 0
+        listOfSets.forEach { set ->
+            summaryOfBricks += set.num_parts!!
+        }
+        return Pair(listOfSets.size.toString(), summaryOfBricks.toString())
     }
 
     private fun removeFromMySets() {

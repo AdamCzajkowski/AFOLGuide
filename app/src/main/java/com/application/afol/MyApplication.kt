@@ -16,6 +16,7 @@ import com.application.afol.vm.searchBrickViewModel.SearchBrickViewModel
 import com.application.afol.vm.searchBrickViewModel.SearchBrickViewModelFactory
 import com.application.afol.vm.searchViewModel.SearchLegoViewModel
 import com.application.afol.vm.searchViewModel.SearchLegoViewModelFactory
+import com.facebook.stetho.Stetho
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -30,6 +31,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MyApplication : Application(), KodeinAware {
     companion object {
         private const val BASE_URL = "https://rebrickable.com/api/v3/lego/"
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+
+        Stetho.initializeWithDefaults(this)
     }
 
     override val kodein by Kodein.lazy {

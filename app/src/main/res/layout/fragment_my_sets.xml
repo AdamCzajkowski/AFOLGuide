@@ -7,19 +7,31 @@
     android:id="@+id/constraint_favorites_fragment"
     tools:context=".ui.fragments.MySetsFragment">
 
+    <TextView
+        android:id="@+id/my_sets_counter_bricks_sets"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_8dp"
+        android:layout_marginTop="@dimen/margin_2dp"
+        android:textSize="@dimen/text_size_10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="sets: 4 bricks:5000" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_my_sets_id"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/dark_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/dark_gray"/>
+        app:layout_constraintTop_toBottomOf="@+id/my_sets_counter_bricks_sets" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
         android:id="@+id/default_my_sets_view"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

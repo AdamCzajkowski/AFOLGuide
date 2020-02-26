@@ -3,6 +3,7 @@ package com.application.afol.models
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.room.Entity
 import com.application.afol.R
 
 enum class Label(@StringRes title: Int, @DrawableRes icon: Int, @ColorRes color: Int){

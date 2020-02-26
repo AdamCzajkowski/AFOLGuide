@@ -21,7 +21,8 @@ class MySetsViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun addLabel(legoSet: LegoSet, label: Label) = scope.launch {
-        repository.addLabel(legoSet, label)
+        legoSet.listOfLabels?.find { searchedLabel ->
+            searchedLabel == label }?: repository.addLabel(legoSet, label)
     }
 
     fun removeLabel(legoSet: LegoSet, label: Label) = scope.launch {

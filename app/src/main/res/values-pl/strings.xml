@@ -47,12 +47,12 @@
     <string name="instruction_by_rebrickable">Wszystkie informacje są pobierane z Rebrickable.com</string>
     <string name="instruction_text_2">Szukane frazy muszą być w języku angielskim</string>
     <string name="terms">Klocki LEGO® i logo LEGO® są znakami towarowymi grupy LEGO®, która nie sponsoruje, nie autoryzuje ani nie popiera tej aplikacji.</string>
+    <string name="my_sets_counter">%1$s Zestawów - %2$s klocków</string>
     <string name="label_assembled">złożony</string>
     <string name="label_complete">kompletny</string>
     <string name="label_incomplete">niekompletny</string>
     <string name="label_owned">posiadany</string>
     <string name="label_unassembled">niezłożony</string>
-    <string name="label_wishlist">pragnienie</string>
     <string name="label_desire">pragnienie</string>
 
 </resources>

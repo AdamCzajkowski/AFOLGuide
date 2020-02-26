@@ -19,11 +19,11 @@ class Repository(
 
     fun removeFromFavorites(legoSet: LegoSet) = mySetsDatabase.mySetsDao().delete(legoSet)
 
-    fun addLabel(legoSet: LegoSet, label: Label) = legoSet.listOfLabels.add(label).also {
+    fun addLabel(legoSet: LegoSet, label: Label) = legoSet.listOfLabels?.add(label).also {
         mySetsDatabase.mySetsDao().update(legoSet)
     }
 
-    fun removeLabel(legoSet: LegoSet, label: Label) = legoSet.listOfLabels.forEach {
+    fun removeLabel(legoSet: LegoSet, label: Label) = legoSet.listOfLabels?.forEach {
         if (it == label) {
             legoSet.listOfLabels.remove(label)
             mySetsDatabase.mySetsDao().update(legoSet)

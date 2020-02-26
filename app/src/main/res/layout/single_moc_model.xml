@@ -94,6 +94,7 @@
                 android:text="@{moc.name}"
                 android:textAlignment="textEnd"
                 android:textColor="@color/semi_burst_white"
+                android:textIsSelectable="true"
                 android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/name_moc_title"
@@ -106,6 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_16dp"
                 android:textColor="@color/semi_burst_white"
+                android:textIsSelectable="true"
                 android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/parts_moc_title" />
@@ -120,6 +122,7 @@
                 android:text="@{moc.designerName}"
                 android:textAlignment="textEnd"
                 android:textColor="@color/semi_burst_white"
+                android:textIsSelectable="true"
                 android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/designer_moc_title"
@@ -132,6 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_16dp"
                 android:textColor="@color/semi_burst_white"
+                android:textIsSelectable="true"
                 android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/relese_year_moc_title" />

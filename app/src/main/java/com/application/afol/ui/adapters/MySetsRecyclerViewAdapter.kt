@@ -15,6 +15,8 @@ class MySetsRecyclerViewAdapter : RecyclerView.Adapter<MySetsRecyclerViewAdapter
 
     var deleteItem: ((LegoSet) -> Unit)? = null
 
+    var labelSelected: ((LegoSet) -> Unit)? = null
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(viewGroup.context.applicationContext)
         val binding = SingleFavoriteLegoSetBinding.inflate(inflater, viewGroup, false)
@@ -29,6 +31,9 @@ class MySetsRecyclerViewAdapter : RecyclerView.Adapter<MySetsRecyclerViewAdapter
             }
             itemView.delete_button.setOnClickListener {
                 deleteItem?.invoke(listOfLegoSet[position])
+            }
+            itemView.textLabelAdd.setOnClickListener {
+                labelSelected?.invoke(listOfLegoSet[position])
             }
         }
     }

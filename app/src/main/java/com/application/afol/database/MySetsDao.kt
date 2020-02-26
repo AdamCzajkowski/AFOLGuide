@@ -2,6 +2,7 @@ package com.application.afol.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.application.afol.models.Label
 import com.application.afol.models.LegoSet
 
 @Dao

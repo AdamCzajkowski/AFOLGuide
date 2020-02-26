@@ -208,7 +208,7 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
                 openMocFromUrl.data = Uri.parse(url)
                 startActivity(openMocFromUrl)
             }
-            bindInstrctionURLParse = { numberOfSet ->
+            bindInstructionURLParse = { numberOfSet ->
                 val openInstructionURL = Intent(Intent.ACTION_VIEW)
                 openInstructionURL.data = Uri.parse(startInstructionSite(numberOfSet))
                 startActivity(openInstructionURL)

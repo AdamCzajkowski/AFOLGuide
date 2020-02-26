@@ -3,12 +3,13 @@ package com.application.afol.models
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
+import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Entity
+@TypeConverters(com.application.afol.extension.EnumTypeConverter::class)
 data class LegoSet(
     @SerializedName("id")
     @PrimaryKey(autoGenerate = true)
@@ -26,11 +27,6 @@ data class LegoSet(
     @SerializedName("set_url")
     val set_url: String?,
     var isInFavorite: Boolean = false,
-    val listOfLabels: List<String> = emptyList()
+    val listOfLabels: MutableList<Label>? = null
 ) : Parcelable
 
-@TypeConverter
-fun String.toLabel() = enumValueOf<Label>(this)
-
-@TypeConverter
-fun Label.toString() = name

@@ -19,6 +19,8 @@
             android:id="@+id/search_brick_edit_text_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:imeOptions="actionDone"
             android:layout_margin="3dp"
             android:hint="@string/search_lego_part_text" />
     </com.google.android.material.textfield.TextInputLayout>

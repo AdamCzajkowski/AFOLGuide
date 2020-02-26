@@ -46,6 +46,7 @@
                 android:layout_marginEnd="@dimen/margin_8dp"
                 android:text="@{part.partNum}"
                 android:textColor="#A6FFFFFF"
+                android:textIsSelectable="true"
                 android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/brick_number_title" />
@@ -86,6 +87,7 @@
                 android:text="@{part.name}"
                 android:textAlignment="textStart"
                 android:textColor="#A6FFFFFF"
+                android:textIsSelectable="true"
                 android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

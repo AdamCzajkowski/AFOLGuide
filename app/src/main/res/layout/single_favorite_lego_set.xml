@@ -22,6 +22,73 @@
             android:background="@color/cardview_dark_background"
             tools:ignore="PrivateResource">
 
+            <TextView
+                android:id="@+id/textLabelAdd"
+                android:layout_width="80dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:layout_marginBottom="@dimen/margin_8dp"
+                android:background="@drawable/spare_parts_label_background"
+                android:backgroundTint="@color/gray"
+                android:drawableStart="@drawable/ic_add_black_24dp"
+                android:drawablePadding="@dimen/margin_3dp"
+                android:gravity="center"
+                android:text="Label"
+                app:layout_constraintBottom_toTopOf="@+id/lego_image_id"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/labelCompletable"
+                android:layout_width="80dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:layout_marginBottom="@dimen/margin_8dp"
+                android:background="@drawable/spare_parts_label_background"
+                android:drawablePadding="@dimen/margin_3dp"
+                android:gravity="center"
+                app:layout_constraintBottom_toTopOf="@+id/lego_image_id"
+                app:layout_constraintStart_toEndOf="@+id/textLabelAdd"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:backgroundTint="@color/orange"
+                tools:drawableStart="@drawable/ic_add_black_24dp"
+                tools:text="Label" />
+
+            <TextView
+                android:id="@+id/labelAssembledable"
+                android:layout_width="80dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:layout_marginBottom="@dimen/margin_8dp"
+                android:background="@drawable/spare_parts_label_background"
+                android:drawablePadding="@dimen/margin_3dp"
+                android:gravity="center"
+                app:layout_constraintBottom_toTopOf="@+id/lego_image_id"
+                app:layout_constraintStart_toEndOf="@+id/labelCompletable"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:drawableStart="@drawable/ic_add_black_24dp"
+                tools:text="Label" />
+
+
+            <TextView
+                android:id="@+id/labelOwnerable"
+                android:layout_width="80dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:layout_marginBottom="@dimen/margin_8dp"
+                android:background="@drawable/spare_parts_label_background"
+                android:drawablePadding="@dimen/margin_3dp"
+                android:gravity="center"
+                app:layout_constraintBottom_toTopOf="@+id/lego_image_id"
+                app:layout_constraintStart_toEndOf="@+id/labelAssembledable"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:drawableStart="@drawable/ic_add_black_24dp"
+                tools:text="Label" />
+
             <ImageView
                 android:id="@+id/lego_image_id"
                 style="@style/MaterialAnimations"
@@ -34,7 +101,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/textLabelAdd" />
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/delete_button"
@@ -108,6 +175,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_16dp"
                 android:textColor="#A6FFFFFF"
+                android:textIsSelectable="true"
                 android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/number_set_name_text_id" />
@@ -123,6 +191,7 @@
                 android:text="@{legoSet.name}"
                 android:textAlignment="textEnd"
                 android:textColor="#A6FFFFFF"
+                android:textIsSelectable="true"
                 android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/name_set_text_name_id"
@@ -147,6 +216,7 @@
                 android:layout_marginEnd="@dimen/margin_16dp"
                 android:layout_marginBottom="@dimen/margin_16dp"
                 android:textColor="#A6FFFFFF"
+                android:textIsSelectable="true"
                 android:textSize="@dimen/text_size_12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
