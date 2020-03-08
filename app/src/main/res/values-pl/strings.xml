@@ -54,5 +54,6 @@
     <string name="label_owned">posiadany</string>
     <string name="label_unassembled">niezłożony</string>
     <string name="label_desire">pragnienie</string>
+    <string name="select_labels">Wybierz etykiety:</string>
 
 </resources>

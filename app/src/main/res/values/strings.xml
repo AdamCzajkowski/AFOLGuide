@@ -64,4 +64,5 @@
     <string name="label_owned">owned</string>
     <string name="label_incomplete">incomplete</string>
     <string name="label_complete">complete</string>
+    <string name="select_labels">Select labels:</string>
 </resources>

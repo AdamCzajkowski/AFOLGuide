@@ -24,4 +24,5 @@
     <dimen name="collapsed_toolbar_margin_end">106dp</dimen>
     <dimen name="detail_guideline">126dp</dimen>
     <dimen name="details_image_size_56dp">56dp</dimen>
+    <dimen name="width_label_selector_dialog">175dp</dimen>
 </resources>

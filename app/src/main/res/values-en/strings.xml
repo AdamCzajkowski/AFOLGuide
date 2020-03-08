@@ -54,4 +54,5 @@
     <string name="label_owned">owned</string>
     <string name="label_unassembled">unassembled</string>
     <string name="label_desire">desire</string>
+    <string name="select_labels">Select labels:</string>
 </resources>
