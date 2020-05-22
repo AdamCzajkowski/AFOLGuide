@@ -49,31 +49,11 @@ Also:
 
 Changelog: 
 --------------------------
-16.09.2019: 
- - Updated UI to Bottom Navigation Bar
- - Removing from 'Favorites' moved to recycler and by swiping to left 
- - Fix bugs 
- - Prepare for receiving instructions for orifinal LEGO sets
-
-17.09.2019:
- - In Details of set now user can go straight to LEGO official site to download instructions
- - Fix bugs
- 
- 24.09.2019:
- - Removed unused files
- - Polish translation
- 
- 4.10.2019:
- - Add to "Favorites" from search fragment by swiping to right
- - Fix bugs
- 
- 7.01.2020:
-- Refactored all application and prepare to publish on market
-- Removed buggy searching by Theme, add/delete from local db by swiping
-- Added icon in list in searched list is set in favortites or not
-- Added removing option in list of favorite sets
-- Changed design of NavBar and toolbar
-- Fix small bugs
+21.02.2020: version 1.2
+- Changed logo
+- Added switch view in parts list between list view and grid view
+- Application sended to Galaxy Store
+- Changed main color to blue
 
 21.01.2020 : version 0.91 Beta
 - Fix translation bugs submitted by testers 
@@ -83,11 +63,31 @@ Changelog:
 - Changed layout of single brick in search brick
 - Changed minimum android version to 5.0
  
+7.01.2020:
+- Refactored all application and prepare to publish on market
+- Removed buggy searching by Theme, add/delete from local db by swiping
+- Added icon in list in searched list is set in favortites or not
+- Added removing option in list of favorite sets
+- Changed design of NavBar and toolbar
+- Fix small bugs
+
+4.10.2019:
+ - Add to "Favorites" from search fragment by swiping to right
+ - Fix bugs
+
+
+24.09.2019:
+ - Removed unused files
+ - Polish translation
+
+17.09.2019:
+ - In Details of set now user can go straight to LEGO official site to download instructions
+ - Fix bugs
  
- 21.02.2020: version 1.2
-- Changed logo
-- Added switch view in parts list between list view and grid view
-- Application sended to Galaxy Store
-- Changed main color to blue
+16.09.2019: 
+ - Updated UI to Bottom Navigation Bar
+ - Removing from 'Favorites' moved to recycler and by swiping to left 
+ - Fix bugs 
+ - Prepare for receiving instructions for orifinal LEGO sets
 
 By Adam Czajkowski
