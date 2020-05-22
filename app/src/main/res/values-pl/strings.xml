@@ -47,5 +47,10 @@
     <string name="instruction_by_rebrickable">Wszystkie informacje są pobierane z Rebrickable.com</string>
     <string name="instruction_text_2">Szukane frazy muszą być w języku angielskim</string>
     <string name="terms">Klocki LEGO® i logo LEGO® są znakami towarowymi grupy LEGO®, która nie sponsoruje, nie autoryzuje ani nie popiera tej aplikacji.</string>
+    <string name="moc_information">Obrazy alternatywnych zestawów są własnością ich projektantów.</string>
+    <string name="counter_single_set">zestaw</string>
+    <string name="counter_multiple_sets">zestawów</string>
+    <string name="counter_multiple_bricks">klocków</string>
+    <string name="counter_single_brick">klocek</string>
 
 </resources>

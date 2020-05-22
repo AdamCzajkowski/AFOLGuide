@@ -13,6 +13,7 @@ import com.application.afol.R
 import com.application.afol.models.LegoSet
 import com.application.afol.ui.activities.DetailActivity
 import com.application.afol.ui.adapters.MySetsRecyclerViewAdapter
+import com.application.afol.utility.setBrickSetCounterString
 import com.application.afol.utility.setVisibility
 import com.application.afol.utility.showSnackbar
 import com.application.afol.vm.mySetsViewModel.MySetsViewModel
@@ -48,11 +49,14 @@ class MySetsFragment : Fragment(), KodeinAware {
         initializeLegoViewModel()
         initializeRecyclerView(rv_my_sets_id)
         getAllMySetsFromDatabase()
-        mySetsRecyclerViewAdapter.selectedItem = {
-            singleItemClickedReaction(it)
-        }
+        mySetsRecyclerViewAdapter.selectedItem = { singleItemClickedReaction(it) }
         removeFromMySets()
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onResume() {
+        mySetsRecyclerViewAdapter.notifyDataSetChanged()
+        super.onResume()
     }
 
     private fun getAllMySetsFromDatabase() {
@@ -61,9 +65,13 @@ class MySetsFragment : Fragment(), KodeinAware {
         }
     }
 
-    override fun onResume() {
-        mySetsRecyclerViewAdapter.notifyDataSetChanged()
-        super.onResume()
+    private fun setupBrickSetCounter(mySets: List<LegoSet>): String {
+        val amountOfSets = mySets.size
+        var amountOfBricks = 0
+        mySets.forEach {legoSet ->
+            legoSet.num_parts?.let { amountOfBricks += it}
+        }
+        return setBrickSetCounterString(amountOfSets,amountOfBricks,requireContext())
     }
 
     private fun initializeLegoViewModel() {
@@ -85,6 +93,7 @@ class MySetsFragment : Fragment(), KodeinAware {
         mySetsViewModel.getListOfMySets().observe(this, Observer { listOfMySets ->
             mySetsRecyclerViewAdapter.listOfLegoSet = listOfMySets
             default_my_sets_view.setVisibility(listOfMySets.isEmpty())
+            textCounterBricksSets.text = setupBrickSetCounter(listOfMySets)
         })
     }
 

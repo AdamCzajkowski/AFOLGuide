@@ -20,4 +20,6 @@
     <dimen name="margin_32dp">32dp</dimen>
     <dimen name="detail_guideline">126dp</dimen>
     <dimen name="details_image_size_56dp">56dp</dimen>
+    <dimen name="margin_150dp">150dp</dimen>
+    <dimen name="small_text_size">11sp</dimen>
 </resources>
