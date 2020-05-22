@@ -49,6 +49,11 @@ Also:
 
 Changelog: 
 --------------------------
+22.05.2020 version 1.3
+- Added alternatives builds images
+- Added coutner of sets and bricks saved in favourites sets,
+- Minor changes to improve readablilty of code
+
 21.02.2020: version 1.2
 - Changed logo
 - Added switch view in parts list between list view and grid view
