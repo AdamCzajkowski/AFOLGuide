@@ -55,4 +55,9 @@
     <string name="instruction_by_rebrickable">All information are downloading from Rebrickable.com</string>
     <string name="instruction_text_2">Search phrases must be in English</string>
     <string name="terms">LEGO® is a trademark of the LEGO® Group of companies which does not sponsor, authorize or endorse this app.</string>
+    <string name="moc_information">Alternatives builds images are owned by their designers.</string>
+    <string name="counter_single_set">set</string>
+    <string name="counter_multiple_sets">sets</string>
+    <string name="counter_multiple_bricks">bricks</string>
+    <string name="counter_single_brick">brick</string>
 </resources>
