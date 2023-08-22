@@ -47,7 +47,7 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
 
     override val kodein: Kodein by kodein()
 
-    private val legoSet: LegoSet by lazy { intent.getParcelableExtra<LegoSet>(LEGO_SET) }
+    private val legoSet: LegoSet by lazy { intent.getParcelableExtra<LegoSet>(LEGO_SET) ?: LegoSet() }
 
     private val detailViewModelFactory: DetailViewModelFactory by instance()
 
@@ -91,7 +91,8 @@ class DetailActivity : AppCompatActivity(), KodeinAware {
     override fun onBackPressed() =
         finish().also { super.onBackPressed() }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         finish()
         return super.onOptionsItemSelected(item)
     }

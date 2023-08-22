@@ -11,18 +11,18 @@ import kotlinx.android.parcel.Parcelize
 data class LegoSet(
     @SerializedName("id")
     @PrimaryKey(autoGenerate = true)
-    val id: Int?,
+    val id: Int? = null,
     @SerializedName("set_num")
-    val set_num: String?,
+    val set_num: String? = null,
     @SerializedName("name")
-    val name: String?,
+    val name: String? = null,
     @SerializedName("year")
-    val year: Int?,
+    val year: Int? = null,
     @SerializedName("num_parts")
-    val num_parts: Int?,
+    val num_parts: Int? = null,
     @SerializedName("set_img_url")
-    val set_img_url: String?,
+    val set_img_url: String? = null,
     @SerializedName("set_url")
-    val set_url: String?,
+    val set_url: String? = null,
     var isInFavorite: Boolean = false
 ) : Parcelable

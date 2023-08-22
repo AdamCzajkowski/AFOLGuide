@@ -7,12 +7,13 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    //noinspection GradleCompatible
+    compileSdkVersion 33
     defaultConfig {
         applicationId "com.afol"
         minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 10
+        targetSdkVersion 34
+        versionCode 11
         versionName "1.3.0"
         resConfigs "en", "pl"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

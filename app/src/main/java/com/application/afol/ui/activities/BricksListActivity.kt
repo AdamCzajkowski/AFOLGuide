@@ -44,7 +44,7 @@ class BricksListActivity : AppCompatActivity(), KodeinAware {
 
     override val kodein: Kodein by kodein()
 
-    private val legoSetNumber: String by lazy { intent.getStringExtra(LEGO_SET_NUMBER) }
+    private val legoSetNumber: String by lazy { intent.getStringExtra(LEGO_SET_NUMBER).toString() }
 
     private val brickListViewModelFactory: BrickListViewModelFactory by instance()
 
